@@ -6,10 +6,10 @@ Sou um Arquiteto e Designer Computacional apaixonado por inovação, tecnologia 
 
 ## 🛠️ Tecnologias & Ferramentas
 
-- **Linguagens de Programação:** Python, Grasshopper
-- **Modelagem 3D:** Rhino, Blender
-- **Design Paramétrico:** Grasshopper, Dynamo
-- **Design & Edição:** Adobe Photoshop, Illustrator, Premiere Pro
+- **Programação:** Python, Grasshopper, HTML, CSS, jAVA e jAVA SCRIPT, C#
+- **Modelagem 3D:** Rhino 3D
+- **Design Paramétrico:** Grasshopper
+- **Design & Edição:** Adobe Suite
 - **Ferramentas de Prototipagem:** Figma, Sketch
 
 ## 🚀 O que eu faço
@@ -18,6 +18,7 @@ Sou um Arquiteto e Designer Computacional apaixonado por inovação, tecnologia 
 - 🧩 Desenvolvimento de projetos usando técnicas de design generativo
 - 🛠️ Criação de soluções personalizadas para fabricação digital
 - 🎨 Desenvolvimento de interfaces UX/UI
+- 👾 Desenvolvimento de plataformas Web
 
 ## 🔗 Conecte-se comigo
 
@@ -31,20 +32,4 @@ Sou um Arquiteto e Designer Computacional apaixonado por inovação, tecnologia 
     <a href="https://www.youtube.com/@bocavivapodcast" target="_blank">
         <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
     </a>
-</p>
-
-## 📊 Minhas Estatísticas no GitHub
-
-<p align="center">
-    <img src="https://github-readme-stats.vercel.app/api?raiklira&show_icons=true&theme=radical" alt="Raik Lira's GitHub stats">
-</p>
-
-<p align="center">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=seu-usuario-aqui&layout=compact&theme=radical" alt="Top Langs">
-</p>
-
-## 🐍 Animação da Cobrinha
-
-<p align="center">
-    <img src="https://github.com/raiklira/raiklira/blob/output/github-contribution-grid-snake.svg" alt="Snake animation">
 </p>
