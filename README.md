@@ -36,7 +36,7 @@ Sou um Arquiteto e Designer Computacional apaixonado por inovação, tecnologia 
 ## 📊 Minhas Estatísticas no GitHub
 
 <p align="center">
-    <img src="https://github-readme-stats.vercel.app/api?username=seu-usuario-aqui&show_icons=true&theme=radical" alt="Raik Lira's GitHub stats">
+    <img src="https://github-readme-stats.vercel.app/api?raiklira&show_icons=true&theme=radical" alt="Raik Lira's GitHub stats">
 </p>
 
 <p align="center">
