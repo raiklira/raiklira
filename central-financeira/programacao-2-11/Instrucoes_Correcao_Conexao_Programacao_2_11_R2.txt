@@ -1,0 +1,124 @@
+CENTRAL FINANCEIRA — CORREÇÃO DA CONEXÃO DA PROGRAMAÇÃO 2.11
+Revisão do guia: P211-CONEXAO-R2 • 03/11/2026 • substitui a R1
+
+ERRO IDENTIFICADO
+ReferenceError: p211Base_getInteressesSnapshot_ is not defined
+O gerador declarou a função p211Base_getInteressesSnapshot sem o sublinhado
+final, mas o módulo chama p211Base_getInteressesSnapshot_.
+O erro é do gerador fornecido, não dos dados que você preencheu.
+
+O QUE A AVALIAÇÃO DA R1 ENCONTROU
+Foram analisados o guia HTML, estas instruções e o Manifest de referência.
+O Código.gs completo não foi enviado. Por isso, cálculos, fórmulas e a
+planilha não foram avaliados.
+
+Lógica e integração
+- A causa de fundo é o gerador não conferir se cada função chamada foi
+  declarada. A R1 corrigia só um nome. A R2 confere todas as chamadas a
+  funções privadas (nome_) e todas as chamadas google.script.run da interface.
+- Sem o "_", a função-base ficava pública: podia ser chamada pelo navegador
+  via google.script.run e aparecia no menu Executar. A correção também fecha
+  essa exposição.
+- O verificarProgramacaoFinanceira não percorria as funções-base. A R2 inclui
+  um verificador de integração opcional, que só faz leitura (ver abaixo).
+
+Funcionamento da ferramenta
+- A R1 bloqueava por engano quando o nome antigo aparecia num comentário.
+  A R2 ignora comentários, textos e expressões regulares.
+- A R1 aceitava um único arquivo. Se a função estivesse em outro .gs, dava um
+  falso "ausente". A R2 aceita os outros arquivos do projeto, só para consulta.
+- A R1 exigia a chamada exata (month, scope) e não via referências sem
+  parênteses, como callbacks. A R2 verifica o vínculo, e não a grafia.
+- A R1 não detectava funções ou constantes declaradas duas vezes em arquivos
+  diferentes. A R2 detecta.
+- O botão de baixar podia falhar em navegadores mais antigos. Isso foi corrigido.
+
+Design
+- O HTML tinha 4 passos e o TXT tinha 7. Os dois agora usam os mesmos 6 passos.
+- Foram acrescentados botões de copiar nos trechos de código, modo escuro,
+  foco visível no teclado e uma lista de conferência para cada passo, que fica
+  só na memória da página.
+- O diagnóstico aparece numa lista, com a gravidade e a linha de cada item.
+
+CAMINHO PRINCIPAL — ALTERAR UM CARACTERE NO CÓDIGO ATUAL
+1. Guarde uma cópia local do Código.gs completo que está instalado.
+2. No editor, procure (Ctrl+F):
+     function p211Base_getInteressesSnapshot(
+   Acrescente _ entre o nome e o parêntese:
+     function p211Base_getInteressesSnapshot_(
+   Mantenha os parâmetros e todo o corpo da função.
+   Não altere a chamada p211Base_getInteressesSnapshot_(...).
+   Se o projeto tiver mais de um arquivo .gs, procure nos outros também.
+3. Salve. Execute verificarSistemaFinanceiro (não FIN_PROGRAMACAO_MENSAL).
+   Procure VERIFICACAO_FINANCEIRO com ok: true.
+4. Execute verificarProgramacaoFinanceira. Procure PROGRAMACAO_FINANCEIRA com
+   ok: true e programacao: 2.11. Se instalou o verificador novo, execute também
+   verificarIntegracaoFinanceira e procure INTEGRACAO_FINANCEIRO com ok: true.
+   Se alguma verificação falhar, não publique.
+5. Implantar > Gerenciar implantações > implantação atual > lápis >
+   Versão: Nova versão > Implantar. Mantenha as permissões atuais.
+6. Feche as abas antigas e abra o mesmo endereço /exec.
+   A base pode continuar como 2.10.2 e a programação como 2.11.
+
+ALTERNATIVA — DIAGNÓSTICO E CORREÇÃO PELO HTML
+Use no lugar da edição manual, e não junto com ela.
+Abra Corrigir_Conexao_Programacao_2_11_R2.html no navegador e vá à seção
+"Diagnóstico e correção automática".
+- Cole o Código.gs instalado ou selecione uma cópia em TXT ou GS.
+- Opcional: selecione os outros arquivos .gs e .html do projeto. Eles servem
+  só para consulta e não são alterados.
+- Clique em "Diagnosticar e corrigir".
+A página compila a sintaxe sem executar o código e não usa a rede.
+Ela só corrige sozinha um tipo de caso: a chamada termina em "_", existe uma
+única declaração com o mesmo nome sem o "_", e esse nome antigo não aparece em
+nenhum outro lugar do código. Qualquer outro problema aparece no diagnóstico e
+bloqueia a geração do código.
+Se o resultado for gerado, copie ou baixe o código COMPLETO e substitua todo o
+Código.gs. Depois siga os passos 3 a 6.
+
+VERIFICADOR DE INTEGRAÇÃO (OPCIONAL, SÓ LEITURA)
+É a verificação que faltava: ela percorre todas as funções do projeto, em
+todos os arquivos, e lista cada chamada a uma função privada que não existe.
+Não abre a planilha, não grava dados e não cria acionadores.
+Para instalar: Arquivos > + > Script, com o nome VerificadorIntegracao. Copie o
+código da seção "Verificador de integração" do HTML. Não cole no Código.gs.
+Se funcoesAnalisadas for 0, o resultado não vale como aprovação.
+
+MANIFEST
+Para esta correção, não é preciso alterar o Manifest.
+Diferença entre a R1 e a R2 do JSON de referência:
+- acrescentado "webapp": { executeAs: USER_DEPLOYING, access: MYSELF }.
+  Esse bloco registra como o /exec é publicado e restringe o acesso a você.
+  ATENÇÃO: se hoje outras pessoas acessam o aplicativo, adotar MYSELF corta esse
+  acesso na próxima versão. Compare com o seu antes de copiar.
+- timeZone America/Recife, V8, registro de erros e Drive API v3 continuam
+  iguais.
+Não substitua o Manifest inteiro pelo modelo: seu projeto pode ter campos que
+o modelo não tem.
+Recomendado depois, numa revisão separada: em Visão geral do projeto, veja os
+escopos OAuth. Se aparecer acesso a todo o Drive e o código só criar e ler os
+próprios arquivos, avalie trocar por drive.file.
+
+ESCOPO E LIMITES
+A ferramenta R2 foi testada localmente com códigos fictícios: o erro original,
+o nome antigo citado num comentário, a função declarada em outro arquivo, uma
+declaração duplicada, google.script.run chamando uma função privada, uma função
+ausente e um callback que usa o nome antigo. O verificador de integração foi
+testado num navegador. A sua cópia instalada não foi acessada, e nenhuma
+planilha foi lida ou gravada.
+Esta correção não resolve um ReadTimeout independente nem valida o OCR real.
+Se o ReadTimeout voltar, revise no Código.gs:
+- leitura em bloco com getValues(), em vez de célula por célula em laços;
+- snapshot do mês guardado em CacheService por alguns minutos;
+- LockService nas gravações.
+Essas orientações só podem ser confirmadas com o código completo.
+
+SE HOUVER OUTRO ERRO
+Não publique. Envie apenas a mensagem final do verificador e a linha de
+VERIFICACAO_FINANCEIRO ou INTEGRACAO_FINANCEIRO. Não envie faturas, saldos ou
+identificadores privados.
+
+REFERÊNCIAS OFICIAIS
+https://developers.google.com/apps-script/concepts/deployments
+https://developers.google.com/apps-script/guides/html/reference/run
+https://developers.google.com/apps-script/manifest
