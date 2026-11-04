@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <title>Conexão Programação 2.11</title>
 <style>
-:root{color-scheme:light;--ink:#173b43;--teal:#246f6d;--teal-ink:#fff;--muted:#587178;--line:#d8e4e5;--paper:#f4f8f7;--card:#fff;--code:#eef5f4;--head:#173b43;--head-ink:#dbe9e8;--head-kicker:#aad0cc;--warn-bg:#fff4e8;--warn-ink:#754319;--warn-line:#c4894b;--good-bg:#edf6f1;--good-line:#246f6d;--err-bg:#fff0e9;--err-ink:#8a3021;--err-line:#c0533a;--focus:#9c5c00;--mark-bg:#ffe08a;--mark-ink:#3d2a00;--mark-line:#b88a00}
+:root{color-scheme:light;--ink:#173b43;--teal:#246f6d;--teal-ink:#fff;--muted:#587178;--line:#d8e4e5;--paper:#f4f8f7;--card:#fff;--code:#eef5f4;--head:#173b43;--head-ink:#dbe9e8;--head-kicker:#aad0cc;--warn-bg:#fff4e8;--warn-ink:#754319;--warn-line:#c4894b;--good-bg:#edf6f1;--good-line:#246f6d;--err-bg:#fff0e9;--err-ink:#8a3021;--err-line:#c0533a;--focus:#9c5c00;--mark-bg:#ffe08a;--mark-ink:#3d2a00;--mark-line:#8a6400}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--ink:#dbe9e8;--teal:#4fb3ad;--teal-ink:#0f2a30;--muted:#9ab4b8;--line:#2c4a52;--paper:#0f2328;--card:#15303a;--code:#0f2a30;--head:#0b1b1f;--head-ink:#c9dedd;--head-kicker:#7fbab5;--warn-bg:#3a2a17;--warn-ink:#f1c995;--warn-line:#c4894b;--good-bg:#173a33;--good-line:#4fb3ad;--err-bg:#3d1f19;--err-ink:#ffb4a3;--err-line:#e07a63;--focus:#e0a33a;--mark-bg:#5c4500;--mark-ink:#ffe7a3;--mark-line:#e0b23a}}
 :root[data-theme="dark"]{color-scheme:dark;--ink:#dbe9e8;--teal:#4fb3ad;--teal-ink:#0f2a30;--muted:#9ab4b8;--line:#2c4a52;--paper:#0f2328;--card:#15303a;--code:#0f2a30;--head:#0b1b1f;--head-ink:#c9dedd;--head-kicker:#7fbab5;--warn-bg:#3a2a17;--warn-ink:#f1c995;--warn-line:#c4894b;--good-bg:#173a33;--good-line:#4fb3ad;--err-bg:#3d1f19;--err-ink:#ffb4a3;--err-line:#e07a63;--focus:#e0a33a;--mark-bg:#5c4500;--mark-ink:#ffe7a3;--mark-line:#e0b23a}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
@@ -21,12 +21,13 @@ section{padding:27px 29px;background:var(--card);border:1px solid var(--line);bo
 h2{font-size:23px;line-height:1.3;margin:0 0 14px}h3{font-size:18px;margin:22px 0 8px}
 p{margin:10px 0 16px}
 code{background:var(--code);border-radius:4px;padding:2px 5px;overflow-wrap:break-word;font-size:.87em}
+code.name{overflow-wrap:normal}
 pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;white-space:pre;font-size:14px;line-height:1.5;margin:0;max-width:100%}
 pre code{padding:0;background:none;font-size:inherit}
 .snippet{position:relative;margin:8px 0 6px}
 .snippet .copy{position:absolute;top:8px;right:8px;min-height:34px;padding:4px 12px;font-size:13px}
 .snippet pre{padding-right:96px}
-.snippet.big pre{font-size:15.5px}
+.snippet.big pre{font-size:15.5px;white-space:pre-wrap}
 .snippet.tall pre{max-height:420px;font-size:13px}
 .snipstatus{font-size:13px;color:var(--muted);min-height:1.2em;margin:0 0 12px}
 mark.add{background:var(--mark-bg);color:var(--mark-ink);outline:2px solid var(--mark-line);border-radius:3px;padding:0 2px}
@@ -48,7 +49,12 @@ li.step{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;margin:22
 li.step p{margin:0 0 10px}
 label.check{display:flex;gap:8px;align-items:center;font-weight:500;margin:6px 0 0;font-size:14px;color:var(--muted)}
 .progress{display:block;font-size:14px;color:var(--muted);margin-top:4px}
-fieldset{border:1px solid var(--line);border-radius:12px;padding:6px 16px 14px;margin:16px 0}
+fieldset{border:1px solid var(--line);border-radius:12px;padding:6px 16px 14px;margin:16px 0;min-width:0}
+#sourceInfo,#extraInfo,#report,#outputInfo,label.check,.box{overflow-wrap:anywhere}
+.filelist{list-style:none;padding:0;margin:4px 0 8px}
+.filelist li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px;padding:4px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.filelist .fname{min-width:0}
+button.link{background:none;border:0;color:var(--teal);text-decoration:underline;padding:2px 6px;min-height:28px;font-size:14px}
 legend{font-weight:700;padding:0 6px}
 label{display:block;font-weight:600;margin-top:14px;margin-bottom:8px}
 textarea{width:100%;height:200px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;padding:13px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:var(--card);resize:vertical}
@@ -56,7 +62,7 @@ textarea::placeholder{color:var(--muted);opacity:1}
 input[type=file]{width:100%;background:var(--paper);color:var(--ink);padding:14px;border:1px solid var(--line);border-radius:8px;font:inherit}
 button{font:600 15px system-ui,sans-serif;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:var(--teal-ink);border-radius:9px;padding:12px 18px;min-height:46px}
 button.secondary{background:transparent;color:var(--teal)}
-button:disabled{opacity:.55;cursor:progress}
+button:disabled,button[aria-disabled="true"]{opacity:.55;cursor:progress}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .buttons{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
 .status{padding:12px 15px;border-radius:8px;background:var(--code);white-space:pre-wrap;overflow-wrap:anywhere}
@@ -82,7 +88,7 @@ footer{font-size:13px;color:var(--muted)}
 @media(max-width:640px){
   header{padding:28px 16px}.container{padding:18px 12px 40px}section{padding:20px 16px}h2{font-size:21px}
   li.step{grid-template-columns:26px minmax(0,1fr);gap:9px}.num{width:25px;height:25px;line-height:25px}
-  .buttons button{width:100%}.snippet pre{padding-right:14px;padding-top:48px}
+  .buttons button{width:100%}.snippet pre{padding-right:14px;padding-top:48px}.snippet.nocopy pre{padding-top:14px}
   table.stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
   table.stack tr{border:1px solid var(--line);border-radius:10px;margin:10px 0;padding:4px 0}
@@ -91,9 +97,9 @@ footer{font-size:13px;color:var(--muted)}
   td code{white-space:normal;overflow-wrap:break-word}
 }
 </style></head><body>
-<header><small>Central Financeira · P211-CONEXAO-R3 · 04/11/2026</small>
+<header><small>Central Financeira · P211-CONEXAO-R4 · 04/11/2026</small>
 <h1>Corrigir a conexão da Programação 2.11</h1>
-<p>Guia para o erro <code>p211Base_<wbr>getInteressesSnapshot_ is not defined</code>. A correção é acrescentar um caractere numa linha. Esta versão (R3) substitui os guias R1 e R2.</p>
+<p>Guia para o erro <code>p211Base_<wbr>getInteressesSnapshot_ is not defined</code>. A correção é acrescentar um caractere numa linha. Esta versão (R4) substitui os guias R1, R2 e R3.</p>
 <nav class="toc" aria-label="Seções"><a href="#inicio">Antes de começar</a><a href="#manual">Correção manual</a><a href="#automatica">Correção automática</a><a href="#verificador">Verificador opcional</a><a href="#manifest">Manifest</a><a href="#mudancas">O que mudou</a><a href="#limites">Limites</a></nav>
 </header>
 <main class="container">
@@ -101,7 +107,7 @@ footer{font-size:13px;color:var(--muted)}
 <section id="inicio"><h2>Antes de começar</h2>
 <p>O gerador da Programação 2.11 declarou a função <code>p211Base_<wbr>getInteressesSnapshot</code> sem o sublinhado final, mas o código chama <code>p211Base_<wbr>getInteressesSnapshot_</code>, com o sublinhado. O erro veio do gerador, não dos dados que você preencheu.</p>
 <p>A correção é acrescentar <strong>um</strong> <code>_</code> na declaração. Ela não muda lançamentos, impostos, permissões, fórmulas, cálculos, telas nem o Manifest, e não ativa acionadores.</p>
-<div class="box info"><strong>Já aplicou a correção da R1 ou da R2?</strong>Siga os passos mesmo assim. O passo 2 mostra como reconhecer uma correção já feita e como conferir se ficou algum ponto com o nome antigo.</div>
+<div class="box info"><strong>Já aplicou a correção da R1, da R2 ou da R3?</strong>Siga os passos mesmo assim. O passo 2 mostra como reconhecer uma correção já feita e como conferir se ficou algum ponto com o nome antigo. Se a lista de arquivos do projeto tiver um <code>VerificadorIntegracao</code> (criado pela R2 ou pela R3), apague-o antes de publicar: menu de três pontos ao lado do nome → Excluir.</div>
 </section>
 
 <section id="manual"><h2>Correção manual no editor</h2>
@@ -112,28 +118,33 @@ footer{font-size:13px;color:var(--muted)}
 <p>Confira se o arquivo termina com a última linha do código. O botão Salvar do editor não faz esta cópia: ele só grava o projeto na sua conta. Não crie a cópia como outro arquivo dentro do projeto.</p>
 <label class="check"><input type="checkbox" class="stepbox"> Passo 1: cópia guardada no computador</label></div></li>
 <li class="step"><div class="num">2</div><div>
-<p><strong>Procure o nome e acrescente o <code>_</code>.</strong> Clique em qualquer linha do código (o cursor deve piscar dentro dele) e aperte <kbd>Ctrl+F</kbd> (no Mac, <kbd>⌘F</kbd>). Uma caixa de busca aparece no alto, à direita da área de código. Se abrir a busca do navegador, feche-a, clique dentro do código e tente de novo. Procure este nome, sem o parêntese:</p>
-<div class="snippet big"><pre><code>p211Base_getInteressesSnapshot</code></pre><button class="copy secondary" type="button" aria-label="Copiar o nome a procurar">Copiar</button></div><p class="snipstatus" role="status"></p>
-<p>Use as setas da caixa de busca para passar por todos os resultados. Em cada um, veja o que vem logo depois do nome:</p>
+<p><strong>Procure o nome em todos os arquivos e só depois acrescente o sublinhado (<code>_</code>).</strong> Clique em qualquer linha do código (o cursor deve piscar dentro dele) e aperte <kbd>Ctrl+F</kbd> (no Mac, <kbd>⌘F</kbd>). Uma caixa de busca aparece no alto, à direita da área de código. Se abrir a busca do navegador, feche-a, clique dentro do código e tente de novo. Procure este nome, sem o parêntese:</p>
+<div class="snippet big"><pre><code>p211Base_<wbr>getInteresses<wbr>Snapshot</code></pre><button class="copy secondary" type="button" aria-label="Copiar o nome a procurar">Copiar</button></div><p class="snipstatus" role="status"></p>
+<p>Use as setas da caixa de busca para passar por todos os resultados, primeiro no <code>Código.gs</code> e depois em cada arquivo <code>.gs</code> e <code>.html</code> do projeto (lista de arquivos, à esquerda). <strong>Por enquanto, só olhe: não altere nada.</strong> Em cada resultado, veja o que vem logo depois do nome:</p>
 <ul class="cases">
-<li><code>function p211Base_<wbr>getInteressesSnapshot(</code><br>É a declaração que precisa do <code>_</code>. Clique logo antes do parêntese e digite <code>_</code>. Deve ficar assim (o caractere novo está destacado):<div class="snippet big"><pre><code>function p211Base_getInteressesSnapshot<mark class="add">_</mark>(</code></pre></div>Não mexa nos parâmetros nem no corpo da função.</li>
-<li><code>function p211Base_<wbr>getInteressesSnapshot_(</code><br>A correção já foi feita, por exemplo pela R1. Não acrescente outro <code>_</code>.</li>
-<li><code>p211Base_<wbr>getInteressesSnapshot_(</code> em outro ponto<br>É a chamada correta. Não altere.</li>
-<li>O nome <strong>sem</strong> <code>_</code> em qualquer outro ponto: seguido de <code>)</code>, <code>,</code> ou <code>.</code>, entre aspas, ou depois de <code>google.script.run.</code><br><strong>Pare.</strong> Não altere nada e veja o quadro “Atenção” no fim desta seção.</li>
+<li><code>function p211Base_<wbr>getInteresses<wbr>Snapshot(</code><br>É a declaração que precisa do sublinhado. Anote em que arquivo ela está; o sublinhado é digitado no fim deste passo.</li>
+<li><code>function p211Base_<wbr>getInteresses<wbr>Snapshot_(</code><br>A correção já foi feita, por exemplo pela R1. Não acrescente outro <code>_</code>. Confira os outros resultados: com a declaração já corrigida, um ponto de código num <code>.gs</code> que ainda use o nome <strong>sem</strong> <code>_</code> (uma chamada, <code>typeof</code>, <code>globalThis.</code> ou o nome passado como valor) está quebrado e também recebe o <code>_</code>, no fim deste passo. Se o nome estiver sozinho entre chaves, como <code>{&nbsp;p211Base_<wbr>getInteresses<wbr>Snapshot&nbsp;}</code>, escreva <code>p211Base_<wbr>getInteresses<wbr>Snapshot: p211Base_<wbr>getInteresses<wbr>Snapshot_</code>. Se ele aparecer entre aspas, num <code>.html</code> ou depois de <code>google.script.run.</code>, pare.</li>
+<li><code>p211Base_<wbr>getInteresses<wbr>Snapshot_(</code> em outro ponto<br>É a chamada correta. Não altere.</li>
+<li>Com a declaração ainda <strong>sem</strong> <code>_</code>: o nome sem <code>_</code> em qualquer outro ponto de código (seguido de <code>)</code>, <code>,</code> ou <code>.</code>, numa chamada, sozinho entre aspas, ou depois de <code>google.script.run.</code>)<br><strong>Pare.</strong> Não altere nada e veja o quadro “Atenção” no fim desta seção.</li>
+<li>O nome dentro de um comentário (depois de <code>//</code> ou entre <code>/*</code> e <code>*/</code>) ou no meio de uma frase de mensagem (por exemplo, em <code>console.log</code>, <code>Logger.log</code> ou num texto de erro), sem <code>(</code> logo depois<br>Não impede a correção. Não precisa mudar.</li>
 </ul>
-<p>Repita a busca em cada arquivo <code>.gs</code> e <code>.html</code> do projeto (lista de arquivos, à esquerda). Depois abra a página <strong>Acionadores</strong> (ícone de relógio, na barra à esquerda) e confira se a coluna Função não mostra esse nome. Se mostrar, pare.</p>
-<p>Se a busca não achar nada no <code>Código.gs</code>, confira se o cursor está dentro do código e se não foram copiados espaços junto com o nome. Se ainda assim não achar, procure nos outros arquivos <code>.gs</code>. Se não achar em nenhum, pare.</p>
+<p>Depois abra a página <strong>Acionadores</strong> (ícone de relógio, na barra à esquerda) e confira se a coluna Função mostra o nome sem o <code>_</code>. Se mostrar, pare.</p>
+<p><strong>Agora, só se nenhum resultado mandou parar:</strong> volte ao Editor (ícone <code>&lt;&nbsp;&gt;</code>, na barra à esquerda) e abra o arquivo da declaração. Clique logo antes do parêntese de <code>function p211Base_<wbr>getInteresses<wbr>Snapshot(</code> e digite o sublinhado (<code>_</code>). Deve ficar assim (o caractere novo está destacado):</p>
+<div class="snippet big nocopy"><pre><code>function p211Base_<wbr>getInteresses<wbr>Snapshot<mark class="add">_</mark>(</code></pre></div>
+<p>Não mude mais nada nessa linha nem no resto do código. Se a declaração já tinha o <code>_</code>, acrescente-o só nos pontos de código indicados acima.</p>
+<p>Se você já tinha digitado o <code>_</code> e algum resultado mandou parar, desfaça com <kbd>Ctrl+Z</kbd> (no Mac, <kbd>⌘Z</kbd>) até a linha voltar a ser o que era. Se já tinha salvado, salve de novo depois de desfazer.</p>
+<p>Se a busca não achar nada no <code>Código.gs</code>, confira se o cursor está dentro do código e se só o nome foi copiado, sem espaços nem quebra de linha (na caixa de busca, o nome deve ocupar uma linha só). Se ainda assim não achar, procure nos outros arquivos <code>.gs</code>. Se não achar em nenhum, pare.</p>
 <label class="check"><input type="checkbox" class="stepbox"> Passo 2: declaração corrigida, ou já estava correta</label></div></li>
 <li class="step"><div class="num">3</div><div>
-<p><strong>Salve e rode o verificador principal.</strong> Salve o projeto com <kbd>Ctrl+S</kbd> (no Mac, <kbd>⌘S</kbd>) ou pelo ícone de disquete. Na lista de funções ao lado do botão Executar, escolha <code>verificar<wbr>Sistema<wbr>Financeiro</code> e clique em Executar. O resultado aparece no Registro de execução, abaixo do código.</p>
+<p><strong>Salve e rode o verificador principal.</strong> Se você estiver em outra página (como Acionadores), volte ao Editor (ícone <code>&lt;&nbsp;&gt;</code>, na barra à esquerda) e abra o <code>Código.gs</code>. Salve o projeto com <kbd>Ctrl+S</kbd> (no Mac, <kbd>⌘S</kbd>) ou pelo ícone de disquete. Na lista de funções ao lado do botão Executar, escolha <code>verificar<wbr>Sistema<wbr>Financeiro</code> e clique em Executar. Se ela não aparecer na lista, abra o arquivo <code>.gs</code> onde ela está. O resultado aparece no Registro de execução, abaixo do código.</p>
 <p>Procure <code>VERIFICACAO_FINANCEIRO</code> com <code>ok: true</code>. Esse verificador percorre <code>get<wbr>Navigation<wbr>Snapshot</code>, o caminho onde o erro apareceu.</p>
 <label class="check"><input type="checkbox" class="stepbox"> Passo 3: VERIFICACAO_FINANCEIRO com ok: true</label></div></li>
 <li class="step"><div class="num">4</div><div>
 <p><strong>Rode o verificador da programação.</strong> Do mesmo jeito, execute <code>verificar<wbr>Programacao<wbr>Financeira</code> e procure <code>PROGRAMACAO_FINANCEIRA</code> com <code>ok: true</code> e <code>programacao: "2.11"</code>. Não execute <code>FIN_PROGRAMACAO_MENSAL</code> pelo editor.</p>
-<p>Se quiser uma conferência extra, use o <a href="#verificador">verificador opcional</a> agora e apague o arquivo dele antes do passo 5.</p>
+<p>Se quiser uma conferência extra, use o <a href="#verificador">verificador opcional</a> agora e apague o arquivo dele antes de publicar (passo 5).</p>
 <label class="check"><input type="checkbox" class="stepbox"> Passo 4: PROGRAMACAO_FINANCEIRA com ok: true</label></div></li>
 <li class="step"><div class="num">5</div><div>
-<p><strong>Publique uma nova versão na implantação que você já usa.</strong> Clique em Implantar → Gerenciar implantações. Não use “Nova implantação”: ela cria outro endereço.</p>
+<p><strong>Publique uma nova versão na implantação que você já usa.</strong> Antes, confira a lista de arquivos: se houver um <code>VerificadorIntegracao</code>, apague-o (menu de três pontos ao lado do nome → Excluir). Depois clique em Implantar → Gerenciar implantações. Não use “Nova implantação”: ela cria outro endereço.</p>
 <p>Na lista à esquerda, clique em cada implantação ativa até achar aquela cujo URL do app da Web é o endereço <code>/exec</code> que você usa. Anote o número da versão que aparece nela: ele serve para desfazer, se for preciso. Clique no lápis (Editar), escolha “Nova versão” no campo Versão e clique em Implantar. Não mude “Executar como” nem “Quem pode acessar”.</p>
 <label class="check"><input type="checkbox" class="stepbox"> Passo 5: nova versão implantada</label></div></li>
 <li class="step"><div class="num">6</div><div>
@@ -144,19 +155,21 @@ footer{font-size:13px;color:var(--muted)}
 <div class="box alert" role="note"><strong>Atenção: pare se algo sair diferente do esperado</strong>
 <ul>
 <li>Não apague a planilha, não crie outro projeto, não reimporte faturas e não cole funções novas no <code>Código.gs</code>.</li>
-<li>Pare e não publique se: o nome aparecer sem <code>_</code> fora da declaração (passo 2); a declaração não for encontrada; um acionador usar o nome; ou um verificador não der <code>ok: true</code>.</li>
-<li>Para pedir ajuda, envie só a mensagem de erro e as linhas <code>VERIFICACAO_FINANCEIRO</code> e <code>PROGRAMACAO_FINANCEIRA</code> (e as duas linhas do verificador opcional, se usar). Não envie faturas, saldos nem identificadores privados.</li>
+<li>Pare e não publique se: no passo 2, algum resultado mandar parar; a declaração não for encontrada; um acionador usar o nome sem o <code>_</code>; ou um dos verificadores dos passos 3 e 4 não der <code>ok: true</code>. Para o verificador opcional, leia antes “Como ler o resultado”: um item em problemas pode ser alarme falso.</li>
+<li>Se você já tinha digitado o <code>_</code> quando precisou parar, desfaça com <kbd>Ctrl+Z</kbd> (no Mac, <kbd>⌘Z</kbd>) até a linha voltar a ser o que era; se já tinha salvado, salve de novo.</li>
+<li>Para pedir ajuda, envie só: a mensagem de erro; as linhas <code>VERIFICACAO_FINANCEIRO</code> e <code>PROGRAMACAO_FINANCEIRA</code>; e, se usou, as duas linhas do verificador opcional ou o texto do botão “Copiar relatório” da correção automática. O relatório e as linhas do verificador opcional só têm nomes de funções e números de linha. A mensagem de erro e as linhas dos verificadores do <code>Código.gs</code> vêm do seu código: leia antes de enviar e apague valores e nomes de contas ou de faturas, se aparecerem. Envie para quem está ajudando você com a Central Financeira, por exemplo na conversa em que você recebeu este guia.</li>
 </ul></div>
 </section>
 
 <section id="automatica"><h2>Correção automática (opcional)</h2>
-<p>É uma alternativa ao passo 2: não é preciso fazer os dois. A ferramenta lê o código com o <strong>acorn</strong>, um leitor de JavaScript incluído nesta página, e não executa nada. Ela confere:</p>
+<p>Ela substitui só a <strong>edição</strong> do passo 2 (acrescentar o <code>_</code> na declaração). A busca do nome antigo nos arquivos que você não enviar e na página Acionadores continua necessária. A ferramenta lê o código com o <strong>acorn</strong>, um leitor de JavaScript incluído nesta página, e não executa nada. Nos arquivos enviados, ela confere:</p>
 <ul>
-<li>se alguma função chamada com <code>_</code> só existe sem o <code>_</code>;</li>
-<li>se o nome antigo aparece em mais algum ponto dos arquivos enviados, inclusive entre aspas, nos trechos <code>&lt;? ?&gt;</code> e nos <code>.html</code>;</li>
-<li>outras ligações: funções usadas e não encontradas, chamadas <code>google.script.run</code> da tela e trechos <code>&lt;? ?&gt;</code>.</li>
+<li>se a função chamada com <code>_</code> só existe sem o <code>_</code>, e se a declaração e a chamada estão nos arquivos enviados;</li>
+<li>se o nome antigo aparece em mais algum ponto, inclusive entre aspas (menus e acionadores), nos trechos <code>&lt;? ?&gt;</code> e nos <code>.html</code>. Comentários e mensagens de texto não contam;</li>
+<li>no servidor (<code>.gs</code> e trechos <code>&lt;? ?&gt;</code>): nomes usados e não encontrados;</li>
+<li>na tela (<code>.html</code>): chamadas <code>google.script.run</code> (funções privadas ou não encontradas) e funções chamadas, ou com nome terminado em <code>_</code>, que não estão nos <code>.html</code> enviados.</li>
 </ul>
-<p>Ela só gera código quando a correção é segura nos arquivos enviados. Problemas encontrados fora desta correção aparecem como aviso e não impedem a correção.</p>
+<p>Ela só gera código quando a correção é segura nos arquivos enviados. Problemas fora desta correção aparecem como aviso e não impedem a correção nem a publicação. Nomes que vêm de bibliotecas ou de arquivos não enviados aparecem em “Para conferir”.</p>
 <div class="box info"><strong>Nada sai do seu computador.</strong>A página não tem permissão de rede. O código fica só na memória e é apagado quando você fecha a página ou sai dela.</div>
 <details class="tool" id="ferramenta"><summary>Abrir a ferramenta</summary>
 <fieldset><legend>1. Código.gs (obrigatório)</legend>
@@ -165,10 +178,11 @@ footer{font-size:13px;color:var(--muted)}
 <p id="sourceInfo" class="small" aria-live="polite">Nenhum código fornecido.</p>
 </fieldset>
 <fieldset><legend>2. Outros arquivos do projeto (opcional; não inclua o Código.gs)</legend>
-<p class="small">Para conferir também os outros arquivos, copie cada um do editor para um arquivo de texto com o mesmo nome e a mesma terminação, por exemplo <code>Interesses.gs</code> ou <code>Index.html</code> (também serve <code>Index.html.txt</code>). Eles só são lidos; nada neles é alterado.</p>
+<p class="small">Para conferir também os outros arquivos, copie cada um do editor para um arquivo de texto em UTF-8, com o mesmo nome e a mesma terminação, por exemplo <code>Interesses.gs</code> ou <code>Index.html</code> (também serve <code>Index.html.txt</code>). Escolha vários de uma vez (<kbd>Ctrl</kbd>+clique; no Mac, <kbd>⌘</kbd>+clique) ou um de cada vez: cada escolha soma à lista. Eles só são lidos; nada neles é alterado.</p>
 <label for="extraFiles">Escolher os arquivos</label><input id="extraFiles" type="file" multiple accept=".txt,.gs,.js,.html,.htm,text/plain,text/html">
 <p id="extraInfo" class="small" aria-live="polite">Nenhum arquivo adicional.</p>
-<button id="clearExtras" type="button" class="secondary" hidden>Remover os arquivos adicionais</button>
+<ul id="extraList" class="filelist" hidden></ul>
+<button id="clearExtras" type="button" class="secondary" hidden>Remover todos os arquivos adicionais</button>
 </fieldset>
 <div class="buttons"><button id="generate" type="button">Diagnosticar e corrigir</button><button id="clear" type="button" class="secondary">Limpar tudo</button></div>
 <div id="status" class="status" role="status" aria-live="polite"></div>
@@ -186,241 +200,327 @@ footer{font-size:13px;color:var(--muted)}
 </section>
 
 <section id="verificador"><h2>Verificador de integração (opcional)</h2>
-<p>Uma conferência extra, feita dentro do Apps Script. Ele lê o código das funções do projeto e lista cada nome terminado em <code>_</code> que é usado mas não existe, além de nomes antigos que ficaram depois de uma correção. Ele só faz leitura: não abre a planilha, não grava dados e não cria acionadores.</p>
-<p><strong>O que ele não lê:</strong> arquivos <code>.html</code>, chamadas <code>google.script.run</code> e o corpo de funções criadas com <code>const</code>, <code>let</code> ou <code>class</code> (essas ele só consulta para saber se existem). Para conferir a tela, use a correção automática com os arquivos <code>.html</code>.</p>
+<p>Uma conferência extra, feita dentro do Apps Script. Ele lê o texto das funções do projeto e lista cada nome terminado em <code>_</code> que é usado mas não existe, além de sobras do nome antigo desta correção. Ele só faz leitura: não executa o código do projeto, não abre a planilha, não grava dados e não cria acionadores.</p>
+<p><strong>O que ele não lê:</strong> arquivos <code>.html</code>; chamadas <code>google.script.run</code>; o corpo de funções criadas com <code>const</code>, <code>let</code> ou <code>class</code> (essas ele só consulta para saber se existem); funções que só existem dentro de outra função ou de um módulo; objetos criados com <code>const</code>, <code>let</code> ou <code>Object.create</code>; e código fora de funções, como listas de menus guardadas em <code>var</code>. Para conferir a tela, use a correção automática com os arquivos <code>.html</code>.</p>
 <ol>
 <li>No editor, clique em Arquivos → <strong>+</strong> → Script e dê o nome <code>VerificadorIntegracao</code>.</li>
 <li>O arquivo novo vem com um exemplo (<code>function myFunction() { }</code>). Clique dentro dele e apague tudo: <kbd>Ctrl+A</kbd> e Delete (no Mac, <kbd>⌘A</kbd> e Delete).</li>
 <li>Copie o código abaixo (botão Copiar), cole no arquivo vazio e salve.</li>
 <li>Com esse arquivo aberto, escolha <code>verificar<wbr>Integracao<wbr>Financeira</code> na lista ao lado de Executar e clique em Executar. Se o nome não aparecer na lista, o código foi colado dentro do exemplo: apague tudo e cole de novo.</li>
 <li>Leia o Registro de execução, abaixo do código (veja como interpretar logo depois do código).</li>
-<li><strong>Apague o arquivo <code>VerificadorIntegracao</code> antes do passo 5</strong>: menu de três pontos ao lado do nome → Excluir. A função dele tem nome público e, se o arquivo ficar, vai junto na versão publicada.</li>
+<li><strong>Apague o arquivo <code>VerificadorIntegracao</code> antes de publicar (passo 5 da correção manual)</strong>: menu de três pontos ao lado do nome → Excluir. A função dele tem nome público e, se o arquivo ficar, vai junto na versão publicada.</li>
 </ol>
 <div class="snippet tall"><pre><code id="verifierCode">/**
- * Central Financeira · verificador de integração R3 (somente leitura).
+ * Central Financeira · verificador de integração R4 (somente leitura).
  * Execute verificarIntegracaoFinanceira pelo editor. Depois, APAGUE este arquivo antes de publicar.
- * Não abre a planilha, não grava dados, não cria acionadores.
+ * Não abre a planilha, não grava dados, não cria acionadores e não executa o código do projeto: só lê o texto das funções.
  */
 function verificarIntegracaoFinanceira() {
-  var g = globalThis;
-  var PALAVRAS = {};
-  ('break case catch class const continue debugger default delete do else export extends finally for function if import in instanceof new return super switch this throw try typeof var void while with yield let static await of async get set true false null undefined arguments').split(' ').forEach(function (p) { PALAVRAS[p] = true; });
-  var ANTES_DE_REGEX = { 'return': 1, 'typeof': 1, 'case': 1, 'do': 1, 'else': 1, 'in': 1, 'of': 1, 'instanceof': 1, 'new': 1, 'delete': 1, 'void': 1, 'throw': 1, 'yield': 1, 'await': 1 };
-  var INICIO_ID = /[\p{ID_Start}$_]/u, PARTE_ID = /[\p{ID_Continue}$‌‍]/u, NATIVO = /\{\s*\[native code\]\s*\}\s*$/;
-  function temProp(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+  try {
+    return executar();
+  } catch (e) {
+    var falha = { tipo: 'INTEGRACAO_FINANCEIRO', ok: null, erro: String(e &amp;&amp; e.message || e) };
+    console.log('INTEGRACAO_FINANCEIRO: o verificador não conseguiu terminar (' + falha.erro + '). Isso não indica erro no aplicativo: siga os passos 3 e 4 e, se quiser, envie esta linha.');
+    console.log(JSON.stringify(falha));
+    return falha;
+  }
 
-  /* Separa o código de comentários, textos e expressões regulares. */
-  function tokenizar(src) {
-    var t = [], textos = [], i = 0, n = src.length, pilha = [], prof = 0, quebra = false;
-    function ultimo() { return t.length ? t[t.length - 1] : null; }
-    function add(tok) { tok.nl = quebra; quebra = false; t.push(tok); }
-    function regexPermitida() {
-      var p = ultimo();
-      if (!p) return true;
-      if (p.t === 'id') return !!ANTES_DE_REGEX[p.v] &amp;&amp; !p.ponto;
-      if (p.t !== 'p') return false;
-      return p.v !== ')' &amp;&amp; p.v !== ']' &amp;&amp; p.v !== '++' &amp;&amp; p.v !== '--';
-    }
-    function lerModelo() {
-      var ini = i;
-      while (i &lt; n) {
-        var c = src[i];
-        if (c === '\\') { i += 2; continue; }
-        if (c === '`') { textos.push(src.slice(ini, i)); i++; add({ t: 'str' }); return; }
-        if (c === '$' &amp;&amp; src[i + 1] === '{') { i += 2; pilha.push(prof); prof++; add({ t: 'p', v: '${' }); return; }
-        i++;
-      }
-    }
-    while (i &lt; n) {
-      var c = src[i], d = src[i + 1];
-      if (c === '\n') { quebra = true; i++; continue; }
-      if (/\s/.test(c)) { i++; continue; }
-      if (c === '/' &amp;&amp; d === '/') { while (i &lt; n &amp;&amp; src[i] !== '\n') i++; continue; }
-      if (c === '/' &amp;&amp; d === '*') { var e = src.indexOf('*/', i + 2); if (e &lt; 0) e = n; if (src.slice(i, e).indexOf('\n') &gt;= 0) quebra = true; i = e + 2; continue; }
-      if (c === '"' || c === "'") {
-        var j = i + 1, s = '';
-        while (j &lt; n &amp;&amp; src[j] !== c &amp;&amp; src[j] !== '\n') { if (src[j] === '\\') { s += src[j + 1] || ''; j += 2; continue; } s += src[j]; j++; }
-        textos.push(s); add({ t: 'str', v: s }); i = j + 1; continue;
-      }
-      if (c === '`') { i++; lerModelo(); continue; }
-      if (c === '}' &amp;&amp; pilha.length &amp;&amp; pilha[pilha.length - 1] === prof - 1) { prof--; pilha.pop(); i++; lerModelo(); continue; }
-      if (c === '/' &amp;&amp; regexPermitida()) {
-        var k = i + 1, classe = false;
-        while (k &lt; n &amp;&amp; src[k] !== '\n') { if (src[k] === '\\') { k += 2; continue; } if (src[k] === '[') classe = true; else if (src[k] === ']') classe = false; else if (src[k] === '/' &amp;&amp; !classe) break; k++; }
-        i = k + 1; while (i &lt; n &amp;&amp; PARTE_ID.test(src[i])) i++;
-        add({ t: 're' }); continue;
-      }
-      if (INICIO_ID.test(c)) {
-        var a = i; i++;
-        while (i &lt; n &amp;&amp; PARTE_ID.test(src[i])) i++;
+  function executar() {
+    var g = globalThis;
+    var ALVO = 'p211Base_getInteressesSnapshot', PROPRIA = 'verificarIntegracaoFinanceira';
+    function novo() { return Object.create(null); }
+    var PALAVRAS = novo();
+    ('break case catch class const continue debugger default delete do else export extends finally for function if import in instanceof new return super switch this throw try typeof var void while with yield let static await of async get set true false null undefined arguments').split(' ').forEach(function (p) { PALAVRAS[p] = true; });
+    var ANTES_DE_REGEX = novo();
+    ('return typeof case do else in of instanceof new delete void throw yield await').split(' ').forEach(function (p) { ANTES_DE_REGEX[p] = true; });
+    var INICIO_ID = /[\p{ID_Start}$_]/u, PARTE_ID = /[\p{ID_Continue}$‌‍]/u, NATIVO = /\{\s*\[native code\]\s*\}\s*$/;
+    function temProp(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+
+    /* Separa o código de comentários, textos e expressões regulares. */
+    function tokenizar(src) {
+      var t = [], textos = [], i = 0, n = src.length, pilha = [], prof = 0, quebra = false;
+      function ultimo() { return t.length ? t[t.length - 1] : null; }
+      function add(tok) { tok.nl = quebra; quebra = false; t.push(tok); }
+      function regexPermitida() {
         var p = ultimo();
-        add({ t: 'id', v: src.slice(a, i), ponto: !!(p &amp;&amp; p.t === 'p' &amp;&amp; (p.v === '.' || p.v === '?.')) });
-        continue;
+        if (!p) return true;
+        if (p.t === 'id') return !!ANTES_DE_REGEX[p.v] &amp;&amp; !p.ponto;
+        if (p.t !== 'p') return false;
+        if (p.v === ')') return !!p.depoisDeCondicao;
+        return p.v !== ']' &amp;&amp; p.v !== '}$' &amp;&amp; p.v !== '++' &amp;&amp; p.v !== '--';
       }
-      if (/[0-9]/.test(c) || (c === '.' &amp;&amp; /[0-9]/.test(d))) { i++; while (i &lt; n &amp;&amp; /[\w.]/.test(src[i])) i++; add({ t: 'num' }); continue; }
-      var tres = src.substr(i, 3), dois = src.substr(i, 2);
-      if (['...', '===', '!==', '**=', '&lt;&lt;=', '&gt;&gt;=', '&gt;&gt;&gt;', '&amp;&amp;=', '||=', '??='].indexOf(tres) &gt;= 0) { add({ t: 'p', v: tres }); i += 3; continue; }
-      if (['=&gt;', '?.', '++', '--', '&amp;&amp;', '||', '??', '==', '!=', '&lt;=', '&gt;=', '+=', '-=', '*=', '/=', '%=', '**', '&lt;&lt;', '&gt;&gt;', '&amp;=', '|=', '^='].indexOf(dois) &gt;= 0 &amp;&amp; !(dois === '?.' &amp;&amp; /[0-9]/.test(src[i + 2] || ''))) { add({ t: 'p', v: dois }); i += 2; continue; }
-      if (c === '{') prof++; else if (c === '}') prof--;
-      add({ t: 'p', v: c }); i++;
-    }
-    return { t: t, textos: textos };
-  }
-
-  function analisarFonte(src) {
-    var r = tokenizar(src), t = r.t, locais = {}, usos = [], refs = {}, guardados = {};
-    function eh(k, v) { return t[k] &amp;&amp; t[k].t === 'p' &amp;&amp; t[k].v === v; }
-    function par(k, abre, fecha, passo) { var d = 0; for (var x = k; x &gt;= 0 &amp;&amp; x &lt; t.length; x += passo) { if (eh(x, abre)) d++; else if (eh(x, fecha)) { d--; if (d === 0) return x; } } return -1; }
-    function nomesDoPadrao(a, b) {
-      for (var x = a; x &lt;= b; x++) {
-        if (t[x].t !== 'id' || PALAVRAS[t[x].v] || t[x].ponto) continue;
-        if (eh(x + 1, ':') &amp;&amp; (eh(x - 1, '{') || eh(x - 1, ','))) continue;
-        locais[t[x].v] = true;
-      }
-    }
-    function declaracao(k) {
-      var x = k + 1;
-      while (x &lt; t.length) {
-        if (t[x].t === 'id' &amp;&amp; !PALAVRAS[t[x].v]) { locais[t[x].v] = true; x++; }
-        else if (eh(x, '{') || eh(x, '[')) { var f = par(x, t[x].v, t[x].v === '{' ? '}' : ']', 1); if (f &lt; 0) return; nomesDoPadrao(x, f); x = f + 1; }
-        else return;
-        var d = 0;
-        for (; x &lt; t.length; x++) {
-          var tk = t[x];
-          if (tk.t === 'p' &amp;&amp; (tk.v === '(' || tk.v === '[' || tk.v === '{' || tk.v === '${')) d++;
-          else if (tk.t === 'p' &amp;&amp; (tk.v === ')' || tk.v === ']' || tk.v === '}')) { d--; if (d &lt; 0) return; }
-          else if (d === 0 &amp;&amp; tk.t === 'p' &amp;&amp; tk.v === ';') return;
-          else if (d === 0 &amp;&amp; tk.t === 'p' &amp;&amp; tk.v === ',') { x++; break; }
-          else if (d === 0 &amp;&amp; tk.nl &amp;&amp; x &gt; k + 1 &amp;&amp; (tk.t === 'id' || tk.t === 'num' || tk.t === 'str') &amp;&amp; !(t[x - 1].t === 'p' &amp;&amp; t[x - 1].v !== ')' &amp;&amp; t[x - 1].v !== ']' &amp;&amp; t[x - 1].v !== '}')) return;
+      function lerModelo() {
+        var ini = i;
+        while (i &lt; n) {
+          var c = src[i];
+          if (c === '\\') { i += 2; continue; }
+          if (c === '`') { textos.push(src.slice(ini, i)); i++; add({ t: 'str' }); return; }
+          if (c === '$' &amp;&amp; src[i + 1] === '{') { i += 2; pilha.push(prof); prof++; add({ t: 'p', v: '${' }); return; }
+          i++;
         }
-        if (x &gt;= t.length) return;
       }
-    }
-    for (var k = 0; k &lt; t.length; k++) {
-      var tk = t[k];
-      if (tk.t !== 'id' || tk.ponto) continue;
-      if (tk.v === 'function') {
-        var x = k + 1; if (eh(x, '*')) x++;
-        if (t[x] &amp;&amp; t[x].t === 'id') { locais[t[x].v] = true; x++; }
-        if (eh(x, '(')) { var f = par(x, '(', ')', 1); if (f &gt; 0) nomesDoPadrao(x, f); }
-        continue;
+      var parens = [];
+      while (i &lt; n) {
+        var c = src[i], d = src[i + 1];
+        if (c === '\n') { quebra = true; i++; continue; }
+        if (/\s/.test(c)) { i++; continue; }
+        if (c === '/' &amp;&amp; d === '/') { while (i &lt; n &amp;&amp; src[i] !== '\n') i++; continue; }
+        if (c === '/' &amp;&amp; d === '*') { var e = src.indexOf('*/', i + 2); if (e &lt; 0) e = n; if (src.slice(i, e).indexOf('\n') &gt;= 0) quebra = true; i = e + 2; continue; }
+        if (c === '"' || c === "'") {
+          var j = i + 1, s = '';
+          while (j &lt; n &amp;&amp; src[j] !== c &amp;&amp; src[j] !== '\n') { if (src[j] === '\\') { s += src[j + 1] || ''; j += 2; continue; } s += src[j]; j++; }
+          textos.push(s); add({ t: 'str', v: s }); i = j + 1; continue;
+        }
+        if (c === '`') { i++; lerModelo(); continue; }
+        /* O } que fecha um ${ vira o símbolo próprio }$, para a contagem de chaves não se perder. */
+        if (c === '}' &amp;&amp; pilha.length &amp;&amp; pilha[pilha.length - 1] === prof - 1) { prof--; pilha.pop(); i++; add({ t: 'p', v: '}$' }); lerModelo(); continue; }
+        if (c === '/' &amp;&amp; regexPermitida()) {
+          var k = i + 1, classe = false;
+          while (k &lt; n &amp;&amp; src[k] !== '\n') { if (src[k] === '\\') { k += 2; continue; } if (src[k] === '[') classe = true; else if (src[k] === ']') classe = false; else if (src[k] === '/' &amp;&amp; !classe) break; k++; }
+          i = k + 1; while (i &lt; n &amp;&amp; PARTE_ID.test(src[i])) i++;
+          add({ t: 're' }); continue;
+        }
+        if (INICIO_ID.test(c)) {
+          var a = i; i++;
+          while (i &lt; n &amp;&amp; PARTE_ID.test(src[i])) i++;
+          var p = ultimo();
+          add({ t: 'id', v: src.slice(a, i), ponto: !!(p &amp;&amp; p.t === 'p' &amp;&amp; (p.v === '.' || p.v === '?.')) });
+          continue;
+        }
+        if (/[0-9]/.test(c) || (c === '.' &amp;&amp; /[0-9]/.test(d))) { i++; while (i &lt; n &amp;&amp; /[\w.]/.test(src[i])) i++; add({ t: 'num' }); continue; }
+        var tres = src.substr(i, 3), dois = src.substr(i, 2);
+        if (['...', '===', '!==', '**=', '&lt;&lt;=', '&gt;&gt;=', '&gt;&gt;&gt;', '&amp;&amp;=', '||=', '??='].indexOf(tres) &gt;= 0) { add({ t: 'p', v: tres }); i += 3; continue; }
+        if (['=&gt;', '?.', '++', '--', '&amp;&amp;', '||', '??', '==', '!=', '&lt;=', '&gt;=', '+=', '-=', '*=', '/=', '%=', '**', '&lt;&lt;', '&gt;&gt;', '&amp;=', '|=', '^='].indexOf(dois) &gt;= 0 &amp;&amp; !(dois === '?.' &amp;&amp; /[0-9]/.test(src[i + 2] || ''))) { add({ t: 'p', v: dois }); i += 2; continue; }
+        if (c === '{') prof++; else if (c === '}') prof--;
+        /* Depois de if (...), while (...) e for (...), uma / começa expressão regular. */
+        if (c === '(') { var antes = ultimo(); parens.push(!!(antes &amp;&amp; antes.t === 'id' &amp;&amp; !antes.ponto &amp;&amp; /^(if|while|for|with)$/.test(antes.v))); add({ t: 'p', v: c }); i++; continue; }
+        if (c === ')') { var cond = parens.length ? parens.pop() : false; add({ t: 'p', v: c, depoisDeCondicao: cond }); i++; continue; }
+        add({ t: 'p', v: c }); i++;
       }
-      if (tk.v === 'class' &amp;&amp; t[k + 1] &amp;&amp; t[k + 1].t === 'id' &amp;&amp; !PALAVRAS[t[k + 1].v]) { locais[t[k + 1].v] = true; continue; }
-      if (tk.v === 'catch' &amp;&amp; eh(k + 1, '(')) { var fc = par(k + 1, '(', ')', 1); if (fc &gt; 0) nomesDoPadrao(k + 1, fc); continue; }
-      if (tk.v === 'var' || tk.v === 'let' || tk.v === 'const') { declaracao(k); continue; }
+      return { t: t, textos: textos };
     }
-    for (var m = 0; m &lt; t.length; m++) {
-      if (!eh(m, '=&gt;')) continue;
-      if (eh(m - 1, ')')) { var ab = par(m - 1, ')', '(', -1); if (ab &gt;= 0) nomesDoPadrao(ab, m - 1); }
-      else if (t[m - 1] &amp;&amp; t[m - 1].t === 'id') locais[t[m - 1].v] = true;
-    }
-    for (var q = 0; q &lt; t.length; q++) {
-      var tq = t[q];
-      if (tq.t !== 'id' || tq.ponto || PALAVRAS[tq.v]) continue;
-      var ant = t[q - 1];
-      if (ant &amp;&amp; ant.t === 'id' &amp;&amp; (ant.v === 'function' || ant.v === 'class')) continue;
-      if (eh(q + 1, ':') &amp;&amp; (eh(q - 1, '{') || eh(q - 1, ','))) continue;
-      if (eh(q + 1, '(')) {
-        var fp = par(q + 1, '(', ')', 1);
-        var antOk = !ant || eh(q - 1, '{') || eh(q - 1, ',') || eh(q - 1, '}') || eh(q - 1, ';') || eh(q - 1, '*') || (ant.t === 'id' &amp;&amp; /^(get|set|static|async)$/.test(ant.v));
-        if (fp &gt; 0 &amp;&amp; eh(fp + 1, '{') &amp;&amp; antOk) { nomesDoPadrao(q + 1, fp); continue; }
-      }
-      if (ant &amp;&amp; ant.t === 'id' &amp;&amp; ant.v === 'typeof') { guardados[tq.v] = true; continue; }
-      refs[tq.v] = true;
-      if (/_$/.test(tq.v)) usos.push(tq.v);
-    }
-    return { locais: locais, usos: usos, refs: refs, guardados: guardados, textos: r.textos };
-  }
 
-  var nomes = [];
-  try { nomes = Object.getOwnPropertyNames(g); } catch (e) { nomes = []; }
-  var fontes = {};
-  function fonteDe(f) { try { var s = Function.prototype.toString.call(f); return NATIVO.test(s) ? null : s; } catch (e) { return null; } }
-  nomes.forEach(function (n) {
-    var v; try { v = g[n]; } catch (e) { return; }
-    if (typeof v === 'function') { var s = fonteDe(v); if (s) fontes[n] = s; return; }
-    if (!v || typeof v !== 'object') return;
-    var proto; try { proto = Object.getPrototypeOf(v); } catch (e) { return; }
-    if (proto !== Object.prototype) return;
-    var chaves; try { chaves = Object.getOwnPropertyNames(v); } catch (e) { return; }
-    chaves.forEach(function (c) { var f; try { f = v[c]; } catch (e) { return; } if (typeof f === 'function') { var s2 = fonteDe(f); if (s2) fontes[n + '.' + c] = s2; } });
-  });
-  function existe(nome) {
-    if (temProp(fontes, nome)) return true;
-    try { if (nome in g) return true; } catch (e) { /* segue */ }
-    try { return (0, eval)('typeof ' + nome) !== 'undefined'; } catch (e) { return null; }
-  }
-  function ehDoProjeto(nome) { return temProp(fontes, nome); }
+    function analisarFonte(src) {
+      var r = tokenizar(src), t = r.t, locais = novo(), usos = [], refs = novo(), guardados = novo();
+      function eh(k, v) { return t[k] &amp;&amp; t[k].t === 'p' &amp;&amp; t[k].v === v; }
+      function idEm(k, v) { return t[k] &amp;&amp; t[k].t === 'id' &amp;&amp; !t[k].ponto &amp;&amp; t[k].v === v; }
+      function abre(tk) { return tk.t === 'p' &amp;&amp; (tk.v === '(' || tk.v === '[' || tk.v === '{' || tk.v === '${'); }
+      function fecha(tk) { return tk.t === 'p' &amp;&amp; (tk.v === ')' || tk.v === ']' || tk.v === '}' || tk.v === '}$'); }
+      function par(k, ab, fe, passo) { var d = 0; for (var x = k; x &gt;= 0 &amp;&amp; x &lt; t.length; x += passo) { if (eh(x, ab)) d++; else if (eh(x, fe)) { d--; if (d === 0) return x; } } return -1; }
+      /* Nomes criados por parâmetros e desestruturação. O que vem depois de = (valor padrão) é uso, não nome novo. */
+      function nomesDoPadrao(a, b) {
+        var d = 0, pulandoAte = -1;
+        for (var x = a; x &lt;= b; x++) {
+          var tk = t[x];
+          if (abre(tk)) { d++; continue; }
+          if (fecha(tk)) { d--; if (pulandoAte &gt;= 0 &amp;&amp; d &lt; pulandoAte) pulandoAte = -1; continue; }
+          if (pulandoAte &gt;= 0) { if (d === pulandoAte &amp;&amp; tk.t === 'p' &amp;&amp; tk.v === ',') pulandoAte = -1; continue; }
+          if (tk.t === 'p' &amp;&amp; tk.v === '=') { pulandoAte = d; continue; }
+          if (tk.t !== 'id' || PALAVRAS[tk.v] || tk.ponto) continue;
+          if (eh(x + 1, ':') &amp;&amp; (eh(x - 1, '{') || eh(x - 1, ','))) continue;
+          locais[tk.v] = true;
+        }
+      }
+      function declaracao(k) {
+        var x = k + 1;
+        while (x &lt; t.length) {
+          if (t[x].t === 'id' &amp;&amp; !PALAVRAS[t[x].v]) { locais[t[x].v] = true; x++; }
+          else if (eh(x, '{') || eh(x, '[')) { var f = par(x, t[x].v, t[x].v === '{' ? '}' : ']', 1); if (f &lt; 0) return; nomesDoPadrao(x, f); x = f + 1; }
+          else return;
+          var d = 0;
+          for (; x &lt; t.length; x++) {
+            var tk = t[x];
+            if (abre(tk)) d++;
+            else if (fecha(tk)) { d--; if (d &lt; 0) return; }
+            else if (d === 0 &amp;&amp; tk.t === 'p' &amp;&amp; tk.v === ';') return;
+            else if (d === 0 &amp;&amp; tk.t === 'p' &amp;&amp; tk.v === ',') { x++; break; }
+            else if (d === 0 &amp;&amp; tk.nl &amp;&amp; x &gt; k + 1 &amp;&amp; (tk.t === 'id' || tk.t === 'num' || tk.t === 'str') &amp;&amp; !(t[x - 1].t === 'p' &amp;&amp; t[x - 1].v !== ')' &amp;&amp; t[x - 1].v !== ']' &amp;&amp; t[x - 1].v !== '}')) return;
+          }
+          if (x &gt;= t.length) return;
+        }
+      }
+      /* Campos de classe (total_ = 0; #cache_ = 1): ficam no nível de cima do corpo da classe. */
+      var noCorpoDaClasse = [], pilha = [], classePendente = -1;
+      for (var y = 0; y &lt; t.length; y++) {
+        var ty = t[y];
+        noCorpoDaClasse[y] = pilha.length &gt; 0 &amp;&amp; pilha[pilha.length - 1] === 'classe';
+        if (ty.t === 'id' &amp;&amp; !ty.ponto &amp;&amp; ty.v === 'class' &amp;&amp; !eh(y + 1, ':')) { classePendente = 0; continue; }
+        if (classePendente === 0 &amp;&amp; ty.t === 'p' &amp;&amp; /^(:|,|;|=|\)|\]|\}|\}\$)$/.test(ty.v)) classePendente = -1;
+        if (abre(ty)) {
+          if (classePendente === 0 &amp;&amp; ty.v === '{') { pilha.push('classe'); classePendente = -1; }
+          else { pilha.push('outro'); if (classePendente &gt;= 0) classePendente++; }
+          continue;
+        }
+        if (fecha(ty)) { pilha.pop(); if (classePendente &gt; 0) classePendente--; }
+      }
+      for (var k = 0; k &lt; t.length; k++) {
+        var tk = t[k];
+        if (tk.t !== 'id' || tk.ponto) continue;
+        if (tk.v === 'function') {
+          var x = k + 1; if (eh(x, '*')) x++;
+          if (t[x] &amp;&amp; t[x].t === 'id') { locais[t[x].v] = true; x++; }
+          if (eh(x, '(')) { var f = par(x, '(', ')', 1); if (f &gt; 0) nomesDoPadrao(x, f); }
+          continue;
+        }
+        if (tk.v === 'class' &amp;&amp; t[k + 1] &amp;&amp; t[k + 1].t === 'id' &amp;&amp; !PALAVRAS[t[k + 1].v]) { locais[t[k + 1].v] = true; continue; }
+        if (tk.v === 'catch' &amp;&amp; eh(k + 1, '(')) { var fc = par(k + 1, '(', ')', 1); if (fc &gt; 0) nomesDoPadrao(k + 1, fc); continue; }
+        if (tk.v === 'var' || tk.v === 'let' || tk.v === 'const') { declaracao(k); continue; }
+      }
+      for (var m = 0; m &lt; t.length; m++) {
+        if (!eh(m, '=&gt;')) continue;
+        if (eh(m - 1, ')')) { var ab = par(m - 1, ')', '(', -1); if (ab &gt;= 0) nomesDoPadrao(ab, m - 1); }
+        else if (t[m - 1] &amp;&amp; t[m - 1].t === 'id') locais[t[m - 1].v] = true;
+      }
+      for (var q = 0; q &lt; t.length; q++) {
+        var tq = t[q];
+        if (tq.t !== 'id' || tq.ponto || PALAVRAS[tq.v]) continue;
+        var ant = t[q - 1];
+        if (ant &amp;&amp; ant.t === 'id' &amp;&amp; (ant.v === 'function' || ant.v === 'class' || ant.v === 'break' || ant.v === 'continue')) continue;
+        if (eh(q - 1, '#')) continue;
+        if (eh(q + 1, ':') &amp;&amp; (eh(q - 1, '{') || eh(q - 1, ','))) continue;
+        /* Rótulo de laço (saida_: for ...). */
+        if (eh(q + 1, ':') &amp;&amp; (eh(q - 1, ';') || eh(q - 1, '}'))) continue;
+        if (noCorpoDaClasse[q] &amp;&amp; !eh(q + 1, '(') &amp;&amp; (eh(q + 1, '=') || eh(q + 1, ';') || eh(q + 1, '}') || idEm(q - 1, 'static'))) continue;
+        if (eh(q + 1, '(')) {
+          var fp = par(q + 1, '(', ')', 1);
+          var antOk = !ant || eh(q - 1, '{') || eh(q - 1, ',') || eh(q - 1, '}') || eh(q - 1, ';') || eh(q - 1, '*') || (ant.t === 'id' &amp;&amp; /^(get|set|static|async)$/.test(ant.v));
+          if (fp &gt; 0 &amp;&amp; eh(fp + 1, '{') &amp;&amp; antOk) { nomesDoPadrao(q + 1, fp); continue; }
+        }
+        /* typeof nome, typeof (nome): teste de existência. typeof nome(...) é chamada. */
+        var testado = (idEm(q - 1, 'typeof') &amp;&amp; !eh(q + 1, '(')) || (eh(q - 1, '(') &amp;&amp; idEm(q - 2, 'typeof') &amp;&amp; eh(q + 1, ')'));
+        if (testado) { guardados[tq.v] = true; continue; }
+        refs[tq.v] = true;
+        if (/_$/.test(tq.v)) usos.push(tq.v);
+      }
+      return { locais: locais, usos: usos, refs: refs, guardados: guardados, textos: r.textos };
+    }
 
-  var analisadas = 0, usosPorNome = {}, refsPorNome = {}, textosPorValor = {}, avisos = [], problemas = [];
-  Object.keys(fontes).forEach(function (fn) {
-    var a;
-    try { a = analisarFonte(fontes[fn]); } catch (e) { avisos.push({ nome: fn, motivo: 'O código desta função não pôde ser lido.' }); return; }
-    analisadas++;
-    a.usos.forEach(function (u) {
-      if (a.locais[u]) return;
-      var e = usosPorNome[u] || (usosPorNome[u] = { em: [], guardado: false });
-      if (e.em.indexOf(fn) &lt; 0) e.em.push(fn);
-      if (a.guardados[u]) e.guardado = true;
+    /* Lista as funções do projeto sem executar nada: lê os descritores, não os valores (getters não rodam). */
+    var nomes = [];
+    try { nomes = Object.getOwnPropertyNames(g); } catch (e) { nomes = []; }
+    var fontes = novo(), vistos = [];
+    function fonteDe(f) { try { var s = Function.prototype.toString.call(f); return NATIVO.test(s) ? null : s; } catch (e) { return null; } }
+    function descritor(o, k) { try { return Object.getOwnPropertyDescriptor(o, k) || null; } catch (e) { return null; } }
+    function objetoSimples(v) {
+      if (!v || typeof v !== 'object' || Array.isArray(v)) return false;
+      var p; try { p = Object.getPrototypeOf(v); } catch (e) { return false; }
+      return p === Object.prototype || p === null;
+    }
+    function guardar(nome, f, deObjeto) { var s = fonteDe(f); if (s) fontes[nome] = { src: s, deObjeto: deObjeto }; }
+    function lerAcessores(nome, d) { if (d.get) guardar(nome + ' (get)', d.get, true); if (d.set) guardar(nome + ' (set)', d.set, true); }
+    function lerObjeto(prefixo, v, nivel) {
+      if (nivel &gt; 4 || vistos.indexOf(v) &gt;= 0) return;
+      vistos.push(v);
+      var chaves; try { chaves = Object.getOwnPropertyNames(v); } catch (e) { return; }
+      chaves.forEach(function (c) {
+        var d = descritor(v, c), nome = prefixo + '.' + c;
+        if (!d) return;
+        lerAcessores(nome, d);
+        if (!('value' in d)) return;
+        if (typeof d.value === 'function') guardar(nome, d.value, true);
+        else if (objetoSimples(d.value)) lerObjeto(nome, d.value, nivel + 1);
+      });
+    }
+    nomes.forEach(function (n) {
+      if (n === PROPRIA) return;
+      var d = descritor(g, n);
+      if (!d) return;
+      lerAcessores(n, d);
+      if (!('value' in d)) return;
+      if (typeof d.value === 'function') guardar(n, d.value, false);
+      else if (objetoSimples(d.value)) lerObjeto(n, d.value, 1);
     });
-    Object.keys(a.refs).forEach(function (n) { if (!a.locais[n]) { var l = refsPorNome[n] || (refsPorNome[n] = []); if (l.indexOf(fn) &lt; 0) l.push(fn); } });
-    a.textos.forEach(function (s) { if (/^[\p{ID_Start}$_][\p{ID_Continue}$]*$/u.test(s)) { var l = textosPorValor[s] || (textosPorValor[s] = []); if (l.indexOf(fn) &lt; 0) l.push(fn); } });
-  });
-
-  Object.keys(usosPorNome).sort().forEach(function (nome) {
-    var info = usosPorNome[nome], ex = existe(nome);
-    if (ex === true) return;
-    var item = { nome: nome, usadoEm: info.em };
-    if (ex === null) { item.motivo = 'Não foi possível confirmar se este nome existe. Confira com Ctrl+F.'; avisos.push(item); return; }
-    if (info.guardado) { item.motivo = 'Só é usado junto com um teste typeof. Se o uso só acontece quando a função existe, não é erro.'; avisos.push(item); return; }
-    var base = nome.replace(/_+$/, '');
-    if (base &amp;&amp; ehDoProjeto(base)) {
-      var outros = (refsPorNome[base] || []).concat((textosPorValor[base] || []).map(function (f) { return f + ' (entre aspas)'; }));
-      item.sugestao = outros.length
-        ? 'Existe "' + base + '" sem o _, mas esse nome também é usado em: ' + outros.join(', ') + '. Não renomeie; envie esta saída.'
-        : 'Existe "' + base + '" sem o _. Procure "' + base + '" com Ctrl+F (no Mac, ⌘F) em todos os arquivos .gs e .html e veja a página Acionadores. Se ele só aparecer na própria declaração, acrescente o _ nela.';
-    } else {
-      item.sugestao = 'Nenhuma função com esse nome foi encontrada.';
+    var evalFunciona = false;
+    try { evalFunciona = (0, eval)('1') === 1; } catch (e) { evalFunciona = false; }
+    /* Nome existe no escopo global? Lê o nome sem chamar nada; let sem valor também conta. */
+    function existe(nome) {
+      if (temProp(fontes, nome) &amp;&amp; !fontes[nome].deObjeto) return true;
+      try { if (nome in g) return true; } catch (e) { /* segue */ }
+      if (!evalFunciona) return null;
+      try { (0, eval)(nome); return true; } catch (e) { return (e instanceof ReferenceError) ? false : null; }
     }
-    problemas.push(item);
-  });
-  Object.keys(fontes).forEach(function (fn) {
-    if (fn.indexOf('.') &gt;= 0 || !/_$/.test(fn)) return;
-    var base = fn.replace(/_+$/, '');
-    if (!base || existe(base) !== false) return;
-    var usos = refsPorNome[base] || [], textos = textosPorValor[base] || [];
-    if (usos.length) problemas.push({ nome: base, usadoEm: usos, sugestao: 'A função se chama "' + fn + '", mas estes pontos ainda usam o nome antigo "' + base + '". Acrescente o _ também neles (só em arquivos .gs).' });
-    if (textos.length) avisos.push({ nome: base, usadoEm: textos, motivo: 'O nome antigo aparece entre aspas. Se for um menu ou acionador, ele deixou de funcionar. Não altere; envie esta saída.' });
-  });
+    function ehDoProjeto(nome) { return temProp(fontes, nome) &amp;&amp; !fontes[nome].deObjeto; }
 
-  if (!analisadas) avisos.push({ nome: '-', motivo: 'Nenhuma função foi listada; o verificador não conseguiu avaliar o projeto.' });
-  var ok = analisadas &gt; 0 &amp;&amp; problemas.length === 0;
-  var resultado = {
-    tipo: 'INTEGRACAO_FINANCEIRO', ok: ok, funcoesAnalisadas: analisadas, problemas: problemas, avisos: avisos,
-    limites: 'Lê funções declaradas com function e funções dentro de objetos criados com var. Não lê arquivos .html, chamadas google.script.run, nem o corpo de funções criadas com const, let ou class.'
-  };
-  console.log('INTEGRACAO_FINANCEIRO ok: ' + ok + ' · funções analisadas: ' + analisadas + ' · problemas: ' + problemas.length + ' · avisos: ' + avisos.length);
-  console.log(JSON.stringify(resultado));
-  return resultado;
+    var analisadas = 0, usosPorNome = novo(), refsPorNome = novo(), testesPorNome = novo(), textosPorValor = novo(), abreviados = novo(), avisos = [], problemas = [];
+    function anotar(mapa, nome, fn) { var l = mapa[nome] || (mapa[nome] = []); if (l.indexOf(fn) &lt; 0) l.push(fn); }
+    var RE_ABREVIADO = new RegExp('[{,]\\s*' + ALVO + '\\s*[,}]');
+    Object.keys(fontes).forEach(function (fn) {
+      var a, info = fontes[fn];
+      try { a = analisarFonte(info.src); } catch (e) { avisos.push({ nome: fn, motivo: 'O código desta função não pôde ser lido.' }); return; }
+      analisadas++;
+      a.usos.forEach(function (u) {
+        if (a.locais[u]) return;
+        var e = usosPorNome[u] || (usosPorNome[u] = { em: [], semTeste: [], soEmObjetos: true });
+        if (e.em.indexOf(fn) &lt; 0) e.em.push(fn);
+        if (!a.guardados[u] &amp;&amp; e.semTeste.indexOf(fn) &lt; 0) e.semTeste.push(fn);
+        if (!info.deObjeto) e.soEmObjetos = false;
+      });
+      Object.keys(a.refs).forEach(function (n) { if (!a.locais[n]) anotar(refsPorNome, n, fn); });
+      Object.keys(a.guardados).forEach(function (n) { if (!a.locais[n]) anotar(testesPorNome, n, fn); });
+      a.textos.forEach(function (s) { if (/^[\p{ID_Start}$_][\p{ID_Continue}$]*$/u.test(s)) anotar(textosPorValor, s, fn); });
+      if (RE_ABREVIADO.test(info.src)) abreviados[fn] = true;
+    });
+
+    Object.keys(usosPorNome).sort().forEach(function (nome) {
+      var info = usosPorNome[nome], ex = existe(nome);
+      if (ex === true) return;
+      var item = { nome: nome, usadoEm: info.em };
+      var base = nome.replace(/_+$/, ''), dica = '';
+      if (base &amp;&amp; ehDoProjeto(base)) {
+        var outros = (refsPorNome[base] || []).concat((testesPorNome[base] || []).map(function (f) { return f + ' (typeof)'; })).concat((textosPorValor[base] || []).map(function (f) { return f + ' (entre aspas)'; }));
+        dica = outros.length
+          ? 'Existe "' + base + '" sem o _, mas esse nome também é usado em: ' + outros.join(', ') + '. Não renomeie; envie esta saída.'
+          : 'Existe "' + base + '" sem o _. Procure "' + base + '" com Ctrl+F (no Mac, ⌘F) em todos os arquivos .gs e .html e veja a página Acionadores. Se ele só aparecer na própria declaração, acrescente o _ nela.';
+      }
+      if (ex === null) { item.motivo = 'Não foi possível confirmar se este nome existe. Confira com Ctrl+F.' + (dica ? ' ' + dica : ''); avisos.push(item); return; }
+      if (!info.semTeste.length) { item.motivo = 'Só é usado em funções que também testam "typeof ' + nome + '". Se o uso só acontece quando a função existe, não é erro.' + (dica ? ' ' + dica : ''); avisos.push(item); return; }
+      if (!dica &amp;&amp; info.soEmObjetos) { item.motivo = 'Só aparece em funções guardadas dentro de objetos. Pode ser um nome interno do próprio módulo (criado dentro dele), que o verificador não enxerga. Confira com Ctrl+F antes de alterar qualquer coisa.'; avisos.push(item); return; }
+      item.usadoEm = info.semTeste;
+      item.sugestao = dica || 'Nenhuma função com esse nome foi encontrada.';
+      problemas.push(item);
+    });
+
+    /* Sobras do nome antigo desta correção, depois que a função ganhou o _. */
+    if (ehDoProjeto(ALVO + '_') &amp;&amp; existe(ALVO) === false) {
+      var usosAntigos = (refsPorNome[ALVO] || []).concat((testesPorNome[ALVO] || []).filter(function (f) { return (refsPorNome[ALVO] || []).indexOf(f) &lt; 0; }).map(function (f) { return f + ' (typeof)'; }));
+      var textosAntigos = textosPorValor[ALVO] || [];
+      var abreviado = usosAntigos.some(function (f) { return abreviados[f.replace(/ \(typeof\)$/, '')]; });
+      if (usosAntigos.length) problemas.push({ nome: ALVO, usadoEm: usosAntigos, sugestao: 'A função se chama "' + ALVO + '_", mas estes pontos ainda usam o nome antigo, sem o _. Nesses arquivos .gs, acrescente o _ também neles (é a mesma correção de um caractere).' + (abreviado ? ' Se o nome estiver sozinho entre chaves, como { ' + ALVO + ' }, escreva ' + ALVO + ': ' + ALVO + '_ para não mudar o nome da chave.' : '') + ' Depois salve e repita os passos 3 e 4.' });
+      if (textosAntigos.length) problemas.push({ nome: ALVO, usadoEm: textosAntigos.map(function (f) { return f + ' (entre aspas)'; }), sugestao: 'O nome antigo aparece sozinho entre aspas. Se for um item de menu, um acionador ou uma rota, ele deixou de funcionar quando a função ganhou o _. Não altere; envie esta saída.' });
+    }
+
+    if (!evalFunciona) avisos.push({ nome: '-', motivo: 'O verificador não conseguiu testar nomes criados com let, const ou class. Os itens acima podem estar incompletos.' });
+    if (!analisadas) avisos.push({ nome: '-', motivo: 'Nenhuma função do projeto foi listada. Confira se este arquivo foi criado no projeto certo.' });
+    var ok = analisadas &gt; 0 &amp;&amp; problemas.length === 0;
+    var resultado = {
+      tipo: 'INTEGRACAO_FINANCEIRO', ok: ok, funcoesAnalisadas: analisadas, problemas: problemas, avisos: avisos,
+      limites: 'Lê funções declaradas com function e funções guardadas em objetos criados com var (até 4 níveis), inclusive get e set. Não lê arquivos .html, chamadas google.script.run, o corpo de funções criadas com const, let ou class, funções que só existem dentro de outra função ou de um módulo, objetos criados com const, let ou Object.create, nem código fora de funções.'
+    };
+    console.log('INTEGRACAO_FINANCEIRO ok: ' + ok + ' · funções analisadas: ' + analisadas + ' · problemas: ' + problemas.length + ' · avisos: ' + avisos.length);
+    console.log(JSON.stringify(resultado));
+    return resultado;
+  }
 }</code></pre><button class="copy secondary" type="button" aria-label="Copiar o código do verificador">Copiar</button></div><p class="snipstatus" role="status"></p>
 <h3>Como ler o resultado</h3>
 <ul>
-<li>A primeira linha resume: <code>INTEGRACAO_FINANCEIRO ok: true</code> quer dizer que nada foi encontrado nas partes que ele lê.</li>
-<li><strong>problemas</strong>: provável erro real. Siga a sugestão de cada item. Se a sugestão disser “Não renomeie”, não altere nada e envie a saída.</li>
-<li><strong>avisos</strong>: podem não ser erro (por exemplo, um nome usado só depois de um teste <code>typeof</code>). Confira, mas sozinhos eles não impedem a publicação.</li>
-<li>Se <code>funcoesAnalisadas</code> for 0, o resultado não vale como aprovação.</li>
+<li>A primeira linha resume: <code>INTEGRACAO_FINANCEIRO ok: true</code> quer dizer que não há itens em <strong>problemas</strong> nas partes que ele lê. Leia também os avisos.</li>
+<li><strong>problemas</strong>: provável erro real, mas pode ser alarme falso quando o nome é criado dentro de outra função ou de um módulo. Antes de deixar de publicar, procure o nome com <kbd>Ctrl+F</kbd> (no Mac, <kbd>⌘F</kbd>) em todos os arquivos <code>.gs</code>: se ele estiver declarado (com <code>function</code>, <code>const</code>, <code>let</code> ou dentro do mesmo módulo), não altere nada e envie a saída. Se não estiver, siga a sugestão do item. Se a sugestão disser “Não renomeie”, não altere nada e envie a saída.</li>
+<li>Se você mudar o código por causa de uma sugestão, salve, repita os passos 3 e 4 e rode o verificador de novo antes de publicar.</li>
+<li><strong>avisos</strong>: podem não ser erro (por exemplo, um nome usado só depois de um teste <code>typeof</code>, ou um nome interno de um módulo). Leia cada um; sozinhos eles não impedem a publicação.</li>
+<li>Se <code>funcoesAnalisadas</code> for 0, ou muito menor que o número de funções do seu projeto, o resultado não vale como aprovação. Confira se o arquivo foi criado no projeto certo.</li>
+<li>Se ele não conseguir terminar, escreve uma linha dizendo isso. Não indica erro no aplicativo e, sozinho, não impede a publicação: valem os verificadores dos passos 3 e 4.</li>
 <li>Para pedir ajuda, envie as duas linhas que ele escreve: a que começa com <code>INTEGRACAO_FINANCEIRO</code> e a que começa com <code>{"tipo"</code>. Elas só têm nomes de funções.</li>
 </ul>
 </section>
 
 <section id="manifest"><h2>Manifest (appsscript.json)</h2>
 <p><strong>Para esta correção, não é preciso alterar o Manifest.</strong> Ele é o arquivo <code>appsscript.json</code> do projeto, com o fuso horário, os serviços avançados e as configurações do app da Web. No editor, ele fica oculto: para vê-lo, clique em Configurações do projeto (ícone de engrenagem, à esquerda) e marque “Mostrar arquivo de manifesto appsscript.json no editor”.</p>
-<p>O arquivo <code>appsscript_<wbr>referencia_<wbr>correcao_<wbr>2_11_r3.json</code> serve só para comparar. Não substitua o seu por ele: o seu pode ter campos que o modelo não tem.</p>
-<table class="stack"><thead><tr><th scope="col">Campo</th><th scope="col">Modelo R1</th><th scope="col">Modelo R3</th><th scope="col">Para quê</th></tr></thead><tbody>
-<tr><td data-label="Campo"><code>timeZone</code></td><td data-label="Modelo R1">America/Recife</td><td data-label="Modelo R3">igual</td><td data-label="Para quê">Datas de fechamento e vencimento no fuso certo.</td></tr>
-<tr><td data-label="Campo">Drive (serviço avançado v3)</td><td data-label="Modelo R1">ativado</td><td data-label="Modelo R3">igual</td><td data-label="Para quê">Usado na leitura (OCR) das faturas.</td></tr>
-<tr><td data-label="Campo"><code>webapp</code></td><td data-label="Modelo R1">ausente, de propósito (modelo mínimo)</td><td data-label="Modelo R3"><code>USER_DEPLOYING</code> e <code>MYSELF</code></td><td data-label="Para quê">Só referência. Quem acessa o aplicativo é definido em Implantar → Gerenciar implantações, no campo “Quem pode acessar”.</td></tr>
-<tr><td data-label="Campo"><code>oauthScopes</code></td><td data-label="Modelo R1">ausente</td><td data-label="Modelo R3">ausente</td><td data-label="Para quê">Fixar permissões sem ver o código completo pode quebrar o aplicativo.</td></tr>
+<p>O arquivo <code>appsscript_<wbr>referencia_<wbr>correcao_<wbr>2_11_r4.json</code> serve só para comparar. Não substitua o seu por ele: o seu pode ter campos que o modelo não tem.</p>
+<table class="stack"><thead><tr><th scope="col">Campo</th><th scope="col">Modelo R1</th><th scope="col">Modelo R4</th><th scope="col">Para quê</th></tr></thead><tbody>
+<tr><td data-label="Campo"><code>timeZone</code></td><td data-label="Modelo R1">America/Recife</td><td data-label="Modelo R4">igual</td><td data-label="Para quê">Datas de fechamento e vencimento no fuso certo.</td></tr>
+<tr><td data-label="Campo">Drive (serviço avançado v3)</td><td data-label="Modelo R1">ativado</td><td data-label="Modelo R4">igual</td><td data-label="Para quê">Usado na leitura (OCR) das faturas.</td></tr>
+<tr><td data-label="Campo"><code>webapp</code></td><td data-label="Modelo R1">ausente, de propósito (modelo mínimo)</td><td data-label="Modelo R4"><code>USER_DEPLOYING</code> e <code>MYSELF</code></td><td data-label="Para quê">Só referência. Quem acessa o aplicativo é definido em Implantar → Gerenciar implantações, no campo “Quem pode acessar”.</td></tr>
+<tr><td data-label="Campo"><code>oauthScopes</code></td><td data-label="Modelo R1">ausente</td><td data-label="Modelo R4">ausente</td><td data-label="Para quê">Fixar permissões sem ver o código completo pode quebrar o aplicativo.</td></tr>
 </tbody></table>
 <div class="box alert"><strong>Não copie o bloco webapp se outras pessoas usam o aplicativo.</strong>Com <code>"access": "MYSELF"</code>, só você consegue abri-lo a partir da próxima versão. Para ver o acesso atual sem abrir o Manifest: Implantar → Gerenciar implantações → campo “Quem pode acessar”.</div>
 <p>O bloco, exatamente como está no JSON (se for usá-lo, ponha uma vírgula entre ele e o campo vizinho):</p>
@@ -432,47 +532,90 @@ function verificarIntegracaoFinanceira() {
 </section>
 
 <section id="mudancas"><h2>O que esta revisão corrige</h2>
-<p>Uma auditoria com revisores independentes conferiu a R1 (o guia anterior) e a R2 (a primeira revisão). Cada problema foi reproduzido antes de entrar na lista: 27 na R1 e 68 na R2. A R3 corrige os 68 da R2 e os 27 da R1, nos pontos que continuam valendo.</p>
+<p>Uma auditoria com revisores independentes conferiu a R1 (o guia anterior), a R2 e a R3. Cada problema foi reproduzido antes de entrar na lista: 27 na R1 e 69 na R2. Na R3, 37 desses pontos tinham ficado incompletos e havia 33 problemas novos. A R4 trata esses 70 pontos. O que só pode ser confirmado no Apps Script real está descrito em “Escopo e limites” e nos limites do verificador.</p>
 <ul>
-<li><strong>Ferramenta automática:</strong> usa um leitor de JavaScript de verdade (acorn) em vez de padrões de texto. Isso elimina os alarmes falsos com comentários, textos, expressões regulares, métodos, parâmetros e nomes com acento.</li>
-<li><strong>Segurança da correção:</strong> antes de corrigir, ela procura o nome antigo em todos os arquivos enviados, inclusive entre aspas (menus e acionadores), nos trechos <code>&lt;? ?&gt;</code> e nos <code>.html</code>. Se ele aparecer em outro ponto, nada é gerado.</li>
-<li><strong>Mensagens honestas:</strong> problemas fora desta correção aparecem como aviso e não bloqueiam; a página não afirma mais que não há outros erros. Cada bloqueio diz o próximo passo.</li>
-<li><strong>Funcionamento:</strong> exige o pacote 2.11 completo; avisa quando o código já está certo, sem pedir para substituir nada; recusa arquivos em ANSI em vez de estragar os acentos; lê 6 milhões de caracteres em poucos segundos, mostrando que está trabalhando.</li>
-<li><strong>Passo a passo:</strong> ensina a fazer a cópia de segurança, a reconhecer uma correção já feita, a procurar o nome antigo em todos os arquivos e acionadores, a escolher a implantação certa e a desfazer a publicação. HTML e TXT seguem os mesmos 6 passos.</li>
-<li><strong>Verificador opcional:</strong> separa código de comentários e textos, reconhece parâmetros, métodos e funções criadas com <code>const</code>, divide o resultado em problemas e avisos e não manda renomear quando o nome antigo é usado em outro lugar.</li>
-<li><strong>Acessibilidade e leitura:</strong> passos em lista numerada, resultado anunciado pelo leitor de tela, contorno de foco com contraste, modo escuro completo, trechos de código maiores, nomes que não se partem no meio e tabela legível no celular.</li>
+<li><strong>Segurança da correção:</strong> a ferramenta confere o nome antigo também nos trechos <code>&lt;? ?&gt;</code> que ficam dentro de comentários (o servidor os executa) e, com a declaração já corrigida, faz a mesma busca completa que faz antes da correção. Ela só diz que o nome está correto quando acha a declaração com <code>_</code>.</li>
+<li><strong>Menos alarmes falsos:</strong> mensagens de texto, blocos <code>&lt;script&gt;</code> desativados, <code>window.nome = …</code> e trechos <code>&lt;?!= … ; ?&gt;</code> não geram mais bloqueio nem problema. Avisos de “nome antigo” valem só para esta correção.</li>
+<li><strong>Resultado coerente:</strong> com o código já corrigido, problemas sem relação com esta correção não mandam mais “não publicar”. O quadro final lembra de procurar o nome nos arquivos não enviados e na página Acionadores.</li>
+<li><strong>Funcionamento:</strong> linhas do relatório contadas como no editor, inclusive dentro de textos longos; páginas com muitos blocos <code>&lt;script&gt;</code> lidas em poucos segundos; outros arquivos somados a cada escolha, com remoção um por um; um arquivo recusado não descarta os outros.</li>
+<li><strong>Passo a passo:</strong> o passo 2 manda procurar em todos os arquivos e nos Acionadores antes de digitar o sublinhado, explica como desfazer e como tratar sobras do nome antigo; o passo 3 manda voltar ao Editor; quem já usou a R2 é lembrado de apagar o <code>VerificadorIntegracao</code>.</li>
+<li><strong>Verificador opcional:</strong> não executa getters, não se conta, lê objetos dentro de objetos e valores padrão, entende módulos, <code>typeof(nome)</code>, rótulos e campos de classe, e o guia explica como reconhecer um alarme falso.</li>
+<li><strong>Acessibilidade e leitura:</strong> foco do teclado mantido no resultado, o <code>_</code> destacado visível no celular, nomes que só quebram em pontos seguros e nada que faça a página rolar para o lado a 320 px.</li>
 </ul>
-<details class="list"><summary>Problemas encontrados na R1 (27)</summary>
+<details class="list"><summary>Pontos da auditoria da R3 (70), tratados nesta versão</summary>
 <ol>
-<li>A correção automática diz “Corrigido” mesmo quando o nome antigo continua em uso sem parênteses (lista.map(nome), nome.call(...), typeof nome, nome entre aspas). O código entregue quebra em outro ponto.</li>
-<li>O caminho manual não manda procurar outros usos do nome antigo, caso que o próprio modo automático bloqueia.</li>
-<li>Se a declaração já tem o “_”, a ferramenta diz “já está corrigido” sem procurar chamadas quebradas.</li>
-<li>Arquivo salvo em ANSI perde os acentos (viram “�”), e a página diz que o resto ficou idêntico.</li>
-<li>Escolher de novo o mesmo arquivo, depois de alterado, não recarrega o código.</li>
-<li>Com o código já correto, a página diz que não há nada a mudar, mas mostra “Seu código completo corrigido” e manda substituir o Código.gs.</li>
-<li>O passo 1 pede uma cópia de segurança sem dizer como nem onde.</li>
-<li>Um comentário que cita o nome antigo seguido de “(” faz a ferramenta recusar a correção.</li>
-<li>As proibições e a ordem de parar ficam numa caixa verde (cor de “tudo certo”); o laranja de alerta foi usado no pedido de desculpas.</li>
-<li>Os mesmos passos têm numeração diferente (4 no HTML, 7 no TXT), e “passos 3 e 4” / “passos 4 a 7” não batem.</li>
-<li>A publicação não diz qual implantação editar nem avisa para evitar “Nova implantação”, e não ensina a desfazer.</li>
-<li>Só cita Ctrl+F; no Mac o atalho é ⌘F.</li>
-<li>A ferramenta diz “função ausente” quando a declaração está num formato incomum (async function, algo antes na mesma linha, quebra de linha depois de function).</li>
-<li>O limite de 6 MB é medido em bytes no arquivo e em caracteres no texto colado: o mesmo código é recusado como arquivo e aceito colado.</li>
-<li>A versão da base exibida pode sair errada (lida de um comentário) ou “não identificada”.</li>
-<li>Erro de sintaxe aparece sem motivo nem linha; num navegador antigo, código válido é chamado de “incompleto”.</li>
-<li>O nome de arquivo na tela pode não ser o do código que será corrigido (arquivo recusado ou depois de Voltar).</li>
-<li>Ao voltar à página, aparece “Corrigido” com a caixa vazia, e Copiar e Baixar não fazem nada.</li>
-<li>Código perto de 6 milhões de caracteres congela a página por 4 a 7 segundos sem aviso; um segundo clique repete tudo.</li>
-<li>O aviso sobre módulos “ok” não diz onde esse “ok” aparece e se confunde com o “ok: true” do passo 3.</li>
-<li>Ao bloquear, a ferramenta não diz o próximo passo (copiar de novo, usar o caminho manual ou parar).</li>
-<li>Termos técnicos sem explicação; não diz que “Manifest” é o appsscript.json nem o que fazer com o JSON (o “não substitua” só está no TXT).</li>
-<li>Os trechos do passo 2 saem em letra miúda (12 px; 10,4 px no celular) e o “_” que muda não é destacado.</li>
-<li>No celular, nomes de funções quebram no meio, às vezes logo antes do “_”.</li>
-<li>A área de resultado fica oculta quando vazia; o leitor de tela pode não anunciar o resultado.</li>
-<li>A correção automática não é um título; quem navega por títulos com leitor de tela passa direto por ela.</li>
-<li>Os passos não são uma lista numerada para leitores de tela.</li>
+<li>Quem usava a correção automática era orientado a pular o passo 2, e o quadro final não pedia a busca do nome nos arquivos não enviados e na página Acionadores.</li>
+<li>Nos trechos &lt;? ?&gt; e no &lt;script&gt; das telas, uma função ausente passada sem parênteses (como callback) não era apontada.</li>
+<li>Um trecho &lt;? ?&gt; dentro de um comentário // ou /* */ do &lt;script&gt; era ignorado, embora o servidor o execute; e um trecho com ponto e vírgula no fim desligava a conferência dos outros trechos do arquivo.</li>
+<li>Uma tela que reaproveita google.script.run (função que devolve a cadeia, seta, const { run } = google.script ou variável de outro &lt;script&gt;) ficava sem conferência.</li>
+<li>Com a R1 já aplicada, um menu ou acionador com o nome antigo entre aspas recebia a caixa verde.</li>
+<li>Na tela, uma função que só existe no servidor usada como callback ou num onclick não era apontada, e uma página podia usar função de outra página que ela não inclui.</li>
+<li>Quando só o Código.gs era enviado, a mensagem de sucesso não pedia a busca nos outros arquivos e na página Acionadores.</li>
+<li>Depois da correção manual, globalThis.nome(...), this.nome(...) e typeof nome com o nome antigo passavam sem aviso.</li>
+<li>O nome antigo numa mensagem de texto (console.log, Logger.log, throw new Error) ainda bloqueava a correção, com um motivo falso.</li>
+<li>Um &lt;script&gt; desativado dentro de &lt;!-- --&gt; ainda era lido como código ativo.</li>
+<li>Dois blocos &lt;script&gt; da mesma página com o mesmo const não eram apontados, e uma função de um .html não enviado era dada como “só do servidor”.</li>
+<li>Uma cópia de segurança do Código.gs com outro nome e conteúdo um pouco diferente gerava problemas falsos.</li>
+<li>A página prometia conferir mais do que conferia (nomes sem parênteses no servidor e funções da tela).</li>
+<li>O verificador opcional parava com erro quando alguma função tinha o texto “constructor”, “__proto__” ou “toString”.</li>
+<li>Com a chamada com _ num arquivo não enviado, a página dizia que o nome estava correto.</li>
+<li>Os títulos das listas não acompanhavam o resultado (“não impedem a correção” quando nada foi gerado).</li>
+<li>A falha interna da conferência final aparecia sem próximo passo, e o quadro “Atenção” não citava o relatório.</li>
+<li>Em navegadores um pouco antigos, escolher um arquivo falhava sem mensagem e a página analisava o código anterior.</li>
+<li>Um arquivo salvo com quebras de linha do Windows era medido com um caractere a mais por linha.</li>
+<li>Perto do limite, o mesmo código era recusado como arquivo e aceito quando colado.</li>
+<li>Clicar em “Diagnosticar e corrigir” enquanto o arquivo ainda era lido usava o texto anterior.</li>
+<li>Um segundo clique durante a análise ainda repetia tudo.</li>
+<li>Alguns bloqueios ainda não diziam o próximo passo nem a quem enviar o relatório.</li>
+<li>O verificador opcional não lia objetos dentro de objetos e reprovava módulos e variáveis let sem valor.</li>
+<li>A nova conferência de outros usos derrubava o verificador opcional com textos como “constructor”.</li>
+<li>O guia mandava parar diante de qualquer problema do verificador opcional, sem dizer que pode ser alarme falso.</li>
+<li>O verificador opcional não reconhecia typeof com parênteses, como typeof(nome_).</li>
+<li>Quem instalou o VerificadorIntegracao pela R2 não era lembrado de apagá-lo antes de publicar.</li>
+<li>O passo 2 mandava digitar o _ antes de procurar o nome nos outros arquivos e nos Acionadores, e não mandava desfazer quando era preciso parar.</li>
+<li>No TXT, três cliques no nome copiavam também a quebra de linha, e a busca não achava nada.</li>
+<li>Depois da correção manual, um menu ou acionador com o nome antigo entre aspas ainda recebia confirmação falsa.</li>
+<li>Ainda restava a frase técnica “Não mexa nos parâmetros nem no corpo da função”.</li>
+<li>O guia não avisava que um problema do verificador opcional pode ser alarme falso, e a frase sobre os testes prometia mais do que eles mostravam.</li>
+<li>No celular, o quadro “Deve ficar assim” escondia o _ destacado e tinha uma faixa vazia; o contorno do destaque tinha pouco contraste.</li>
+<li>A 320 px, os nomes do passo 2 ainda se partiam logo antes do “_(”, e os quadros cortavam o fim do nome.</li>
+<li>O passo 2 mostrava o símbolo _ sozinho, sem dizer que se chama sublinhado, e o destaque sumia no celular.</li>
+<li>A 320 px, o nome no passo 2 ainda se partia logo antes do _.</li>
+<li>Um trecho &lt;? ?&gt; com o nome antigo dentro de um comentário do &lt;script&gt; deixava a correção quebrar a página.</li>
+<li>Com a correção da R1 ou da R2 já aplicada, a ferramenta dizia “Nenhuma alteração necessária” com o nome antigo ainda em uso (globalThis, this, entre aspas na tela, .html ilegível).</li>
+<li>&lt;?!= include('Stylesheet'); ?&gt;, com ponto e vírgula, fazia a ferramenta ignorar todos os trechos &lt;? ?&gt; do arquivo.</li>
+<li>Uma função da tela criada com window.nome = ... ou num arquivo incluído não enviado virava “problema provável”.</li>
+<li>Um &lt;script&gt; inteiro dentro de um comentário HTML continuava sendo conferido e gerava “problema” falso.</li>
+<li>O relatório apontava linhas erradas para chamadas dentro de textos longos e para código com o caractere U+2028.</li>
+<li>Um .html com muitos blocos &lt;script&gt; deixava a análise lenta, de vários segundos a mais de meio minuto.</li>
+<li>O aviso “nome antigo entre aspas” aparecia para nomes que nunca foram renomeados e dizia “Não altere”.</li>
+<li>A sugestão “Acrescente o _ também neles” do verificador podia estragar código que funciona em módulos.</li>
+<li>No verificador, um teste typeof numa função rebaixava a aviso as chamadas sem teste em outras funções.</li>
+<li>O verificador dava ok: true em objetos dentro de objetos, getters e valores padrão de parâmetros, que o guia dizia ler.</li>
+<li>Módulos (IIFE ou fábrica) com nomes internos terminados em _ davam ok: false em código que funciona.</li>
+<li>O verificador avisava “nome antigo” para funções que nunca foram renomeadas, às vezes apontando a si mesmo.</li>
+<li>O verificador contava a si mesmo, e “funcoesAnalisadas” nunca chegava a 0.</li>
+<li>O verificador executava getters ao listar as funções, apesar de prometer que só fazia leitura.</li>
+<li>Rótulos de laço, campos de classe, campos privados (#) e templates com ${} geravam “problema” falso no verificador.</li>
+<li>A página dizia “o nome está correto” mesmo com a declaração ainda sem o _.</li>
+<li>Um arquivo extra em ANSI recebia a orientação de ser colado na caixa do Código.gs.</li>
+<li>Com os mesmos avisos, o código já corrigido recebia “Não publique ainda” e o corrigido pela página, “siga os passos 3 a 6”.</li>
+<li>Com o nome antigo entre aspas, a caixa verde dizia “nenhum problema provável” e mandava publicar.</li>
+<li>No celular, o exemplo do passo 2 escondia o _ destacado e tinha uma faixa vazia no alto.</li>
+<li>A 320 px, o resultado partia nomes no meio, e nomes de arquivo longos faziam a página rolar para o lado.</li>
+<li>Pelo teclado, o foco sumia ao usar “Diagnosticar e corrigir” e “Remover os arquivos adicionais”.</li>
+<li>Escolher os outros arquivos um de cada vez descartava a escolha anterior sem aviso.</li>
+<li>Um único arquivo extra em ANSI fazia a página descartar todos os outros.</li>
+<li>O nome antigo numa mensagem de texto bloqueava os dois caminhos, com um motivo falso.</li>
+<li>Com o código já corrigido, um problema sem relação com a correção fazia a página mandar não publicar.</li>
+<li>A ferramenta dizia “O nome está correto” sem ter achado a declaração com _.</li>
+<li>O passo 2 terminava na página Acionadores, o passo 3 não mandava voltar ao Editor, e o _ era digitado antes de terminar a busca.</li>
+<li>O guia dizia que “ok: true” do verificador significava que nada foi encontrado, mas ele dava ok: true com aviso de menu quebrado.</li>
+<li>Sobra do nome antigo depois da R1: o passo 2 mandava parar, e a ferramenta e o verificador mandavam acrescentar o _.</li>
+<li>O TXT garantia que as linhas dos verificadores do Código.gs só têm nomes de funções, e o HTML não citava o relatório.</li>
+<li>A contagem da R2 dizia 68 problemas; a auditoria confirmou 69, e um item ficou fora da lista.</li>
 </ol></details>
-<details class="list"><summary>Problemas encontrados na R2 (68), todos corrigidos nesta versão</summary>
+<details class="list"><summary>Problemas encontrados na R2 (69)</summary>
 <ol>
 <li>O diagnóstico não via uma chamada logo após “if (” ou dentro de outra chamada, e dizia que não havia erro.</li>
 <li>A correção se dizia segura, mas podia quebrar menu, acionador ou arquivo que usasse o nome antigo entre aspas.</li>
@@ -542,14 +685,45 @@ function verificarIntegracaoFinanceira() {
 <li>No celular, nomes de funções saíam partidos no meio.</li>
 <li>Não mandava apagar o exemplo do arquivo novo antes de colar o verificador.</li>
 <li>No TXT, o trecho a procurar começava com espaços; copiado assim, a busca falhava.</li>
+<li>O passo 2 não dizia para clicar dentro do código antes do Ctrl+F; a busca do navegador podia abrir e não achar a função.</li>
+</ol></details>
+<details class="list"><summary>Problemas encontrados na R1 (27)</summary>
+<ol>
+<li>A correção automática diz “Corrigido” mesmo quando o nome antigo continua em uso sem parênteses (lista.map(nome), nome.call(...), typeof nome, nome entre aspas). O código entregue quebra em outro ponto.</li>
+<li>O caminho manual não manda procurar outros usos do nome antigo, caso que o próprio modo automático bloqueia.</li>
+<li>Se a declaração já tem o “_”, a ferramenta diz “já está corrigido” sem procurar chamadas quebradas.</li>
+<li>Arquivo salvo em ANSI perde os acentos (viram “�”), e a página diz que o resto ficou idêntico.</li>
+<li>Escolher de novo o mesmo arquivo, depois de alterado, não recarrega o código.</li>
+<li>Com o código já correto, a página diz que não há nada a mudar, mas mostra “Seu código completo corrigido” e manda substituir o Código.gs.</li>
+<li>O passo 1 pede uma cópia de segurança sem dizer como nem onde.</li>
+<li>Um comentário que cita o nome antigo seguido de “(” faz a ferramenta recusar a correção.</li>
+<li>As proibições e a ordem de parar ficam numa caixa verde (cor de “tudo certo”); o laranja de alerta foi usado no pedido de desculpas.</li>
+<li>Os mesmos passos têm numeração diferente (4 no HTML, 7 no TXT), e “passos 3 e 4” / “passos 4 a 7” não batem.</li>
+<li>A publicação não diz qual implantação editar nem avisa para evitar “Nova implantação”, e não ensina a desfazer.</li>
+<li>Só cita Ctrl+F; no Mac o atalho é ⌘F.</li>
+<li>A ferramenta diz “função ausente” quando a declaração está num formato incomum (async function, algo antes na mesma linha, quebra de linha depois de function).</li>
+<li>O limite de 6 MB é medido em bytes no arquivo e em caracteres no texto colado: o mesmo código é recusado como arquivo e aceito colado.</li>
+<li>A versão da base exibida pode sair errada (lida de um comentário) ou “não identificada”.</li>
+<li>Erro de sintaxe aparece sem motivo nem linha; num navegador antigo, código válido é chamado de “incompleto”.</li>
+<li>O nome de arquivo na tela pode não ser o do código que será corrigido (arquivo recusado ou depois de Voltar).</li>
+<li>Ao voltar à página, aparece “Corrigido” com a caixa vazia, e Copiar e Baixar não fazem nada.</li>
+<li>Código perto de 6 milhões de caracteres congela a página por 4 a 7 segundos sem aviso; um segundo clique repete tudo.</li>
+<li>O aviso sobre módulos “ok” não diz onde esse “ok” aparece e se confunde com o “ok: true” do passo 3.</li>
+<li>Ao bloquear, a ferramenta não diz o próximo passo (copiar de novo, usar o caminho manual ou parar).</li>
+<li>Termos técnicos sem explicação; não diz que “Manifest” é o appsscript.json nem o que fazer com o JSON (o “não substitua” só está no TXT).</li>
+<li>Os trechos do passo 2 saem em letra miúda (12 px; 10,4 px no celular) e o “_” que muda não é destacado.</li>
+<li>No celular, nomes de funções quebram no meio, às vezes logo antes do “_”.</li>
+<li>A área de resultado fica oculta quando vazia; o leitor de tela pode não anunciar o resultado.</li>
+<li>A correção automática não é um título; quem navega por títulos com leitor de tela passa direto por ela.</li>
+<li>Os passos não são uma lista numerada para leitores de tela.</li>
 </ol></details>
 </section>
 
 <section id="limites"><h2>Escopo e limites</h2>
 <ul>
-<li>O <code>Código.gs</code> real não foi visto. A ferramenta foi testada com 48 casos fictícios (todos os da auditoria e arquivos de até 6 milhões de caracteres) e o verificador, com 18. O verificador foi testado num ambiente que imita o Apps Script (Node.js), não no próprio Apps Script.</li>
+<li>O <code>Código.gs</code> real não foi visto. A ferramenta foi testada com 87 casos fictícios (baseados nos problemas apontados pela auditoria, mais arquivos de até 6 milhões de caracteres), a página com 55 conferências num navegador Chromium e o verificador com 37 casos. O verificador foi testado num ambiente que imita o Apps Script (Node.js), não no próprio Apps Script.</li>
 <li>A ferramenta confere só os arquivos enviados. Nomes usados em arquivos não enviados, menus e acionadores criados fora do código não são vistos. Por isso o passo 2 pede a busca em todos os arquivos e na página Acionadores.</li>
-<li>Os itens “para conferir” podem ser alarmes falsos. Os “problemas prováveis” têm mais chance de ser erros reais, mas também devem ser confirmados.</li>
+<li>Os itens “para conferir” podem ser alarmes falsos. Os “problemas prováveis” da ferramenta e os “problemas” do verificador opcional têm mais chance de ser erros reais, mas também devem ser confirmados.</li>
 <li>Esta correção não resolve um <code>ReadTimeout</code> (tempo esgotado) independente nem valida a leitura (OCR) real das faturas. Se o ReadTimeout voltar, os pontos a revisar no <code>Código.gs</code> são: leitura em bloco com <code>getValues()</code>, cache do mês com <code>CacheService</code> e <code>LockService</code> nas gravações. Isso só pode ser confirmado com o código completo.</li>
 <li>A página precisa de um navegador atual (Chrome, Edge, Firefox ou Safari recentes). Num navegador antigo, ela avisa e a correção manual continua valendo.</li>
 </ul>
@@ -6842,20 +7016,22 @@ THE SOFTWARE.
 
 }));
 </script>
-<script id="analyzer">/* Central Financeira · P211-CONEXAO-R3 · análise local.
+<script id="analyzer">/* Central Financeira · P211-CONEXAO-R4 · análise local.
    Lê o código com o acorn (leitor de JavaScript incluído nesta página), não executa nada e não usa rede. */
 (function (root) {
   'use strict';
   var acorn = root.acorn;
   var MAX_CHARS = 6000000;
+  var TARGET = 'p211Base_getInteressesSnapshot', TARGET_ = TARGET + '_';
   var MARKERS = ['INICIO_PROGRAMACAO_FINANCEIRA_2_11', 'FIM_PROGRAMACAO_PACOTE_2_11'];
   var RUN_MODIFIERS = new Set(['withSuccessHandler', 'withFailureHandler', 'withUserObject']);
+  var MESSAGE_METHODS = new Set(['log', 'info', 'warn', 'error', 'debug', 'trace', 'alert', 'msgBox', 'toast', 'inputBox', 'prompt', 'confirm']);
   var ES_GLOBALS = new Set(('Object Function Array Number parseFloat parseInt Infinity NaN undefined Boolean String Symbol Date Promise RegExp Error AggregateError EvalError RangeError ReferenceError SyntaxError TypeError URIError globalThis JSON Math Intl ArrayBuffer SharedArrayBuffer Atomics Uint8Array Int8Array Uint16Array Int16Array Uint32Array Int32Array Float32Array Float64Array Uint8ClampedArray BigUint64Array BigInt64Array DataView Map BigInt Set WeakMap WeakSet WeakRef FinalizationRegistry Proxy Reflect decodeURI decodeURIComponent encodeURI encodeURIComponent escape unescape eval isFinite isNaN console arguments Iterator').split(' '));
   var GAS_GLOBALS = new Set(('SpreadsheetApp DriveApp DocumentApp SlidesApp FormApp GmailApp CalendarApp ContactsApp MailApp UrlFetchApp Utilities Logger Session PropertiesService CacheService LockService ScriptApp HtmlService ContentService CardService Charts Jdbc XmlService Browser Maps LanguageApp GroupsApp SitesApp ConferenceDataService DataStudioApp LookerStudioApp Blob BlobSource Drive Sheets Docs Slides Gmail Calendar Tasks People Forms BigQuery Analytics AnalyticsAdmin AnalyticsData AdminDirectory AdminReports AdminLicenseManager AdminGroupsSettings Classroom DriveActivity DriveLabels YouTube YouTubeAnalytics Chat CloudIdentityGroups Mirror').split(' '));
   var BROWSER_GLOBALS = new Set(('window document google navigator location history screen alert confirm prompt print setTimeout clearTimeout setInterval clearInterval requestAnimationFrame cancelAnimationFrame queueMicrotask structuredClone fetch localStorage sessionStorage indexedDB event self top parent frames opener Element HTMLElement Node NodeList Event CustomEvent KeyboardEvent MouseEvent FormData URL URLSearchParams Blob File FileReader Image Option Audio getComputedStyle matchMedia atob btoa performance crypto MutationObserver IntersectionObserver ResizeObserver TextEncoder TextDecoder AbortController DOMParser XMLSerializer XMLHttpRequest Headers Request Response Worker Notification $ jQuery').split(' '));
-  try { if (typeof window !== 'undefined') Object.getOwnPropertyNames(window).forEach(function (n) { BROWSER_GLOBALS.add(n); }); } catch (e) { /* lista fixa basta */ }
+  try { if (typeof window !== 'undefined') Object.getOwnPropertyNames(window).forEach(function (n) { BROWSER_GLOBALS.add(n); }); } catch (e) { /* a lista fixa basta */ }
 
-  function own(map, key) { return Object.prototype.hasOwnProperty.call(map, key); }
+  /* ---------- utilidades ---------- */
   function lineStarts(text) { var a = [0]; for (var i = 0; i < text.length; i++) if (text.charCodeAt(i) === 10) a.push(i + 1); return a; }
   function lineAt(starts, pos) { var lo = 0, hi = starts.length - 1; while (lo < hi) { var mid = (lo + hi + 1) >> 1; if (starts[mid] <= pos) lo = mid; else hi = mid - 1; } return lo + 1; }
   function blankKeepLines(s) { return s.replace(/[^\n\r]/g, ' '); }
@@ -6870,40 +7046,116 @@ THE SOFTWARE.
     }
     return out;
   }
-  /* Trechos [início, fim) que não se sobrepõem; busca binária. */
-  function sortRanges(ranges) { return ranges.slice().sort(function (a, b) { return a[0] - b[0]; }); }
+  /* Trechos [início, fim) ordenados; busca binária. Trechos aninhados são achatados antes. */
+  function sortRanges(ranges) {
+    var s = ranges.slice().sort(function (a, b) { return a[0] - b[0]; }), out = [];
+    s.forEach(function (r) { var last = out[out.length - 1]; if (last && r[0] <= last[1]) { if (r[1] > last[1]) last[1] = r[1]; } else out.push([r[0], r[1]]); });
+    return out;
+  }
   function inRanges(ranges, pos) {
     var lo = 0, hi = ranges.length - 1, hit = -1;
     while (lo <= hi) { var mid = (lo + hi) >> 1; if (ranges[mid][0] <= pos) { hit = mid; lo = mid + 1; } else hi = mid - 1; }
     return hit >= 0 && pos < ranges[hit][1];
   }
-  function normalizeName(name) { return String(name || '').trim(); }
+  function blankRanges(text, ranges) {
+    if (!ranges.length) return text;
+    var arr = text.split('');
+    ranges.forEach(function (r) { for (var k = r[0]; k < r[1] && k < arr.length; k++) if (arr[k] !== '\n' && arr[k] !== '\r') arr[k] = ' '; });
+    return arr.join('');
+  }
+  function nfc(s) { try { return String(s || '').normalize('NFC').trim(); } catch (e) { return String(s || '').trim(); } }
   function classify(name, text) {
-    var n = normalizeName(name).toLowerCase().replace(/\.txt$/, '');
+    var n = nfc(name).toLowerCase().replace(/\.txt$/, '');
     if (/\.(gs|js)$/.test(n)) return 'gs';
     if (/\.html?$/.test(n)) return 'html';
     return /^\s*</.test(text) ? 'html' : 'gs';
   }
-  function isPrimaryName(name) { return /^c[oó]digo\.(gs|js)(\.txt)?$/i.test(normalizeName(name)); }
+  function baseName(name) { return nfc(name).replace(/\.txt$/i, '').replace(/\.(gs|js|html?)$/i, ''); }
+  function isPrimaryName(name) { return /^c[oó]digo\.(gs|js)(\.txt)?$/i.test(nfc(name)); }
   function sameText(a, b) { return a.replace(/\r\n?/g, '\n').replace(/\s+$/, '') === b.replace(/\r\n?/g, '\n').replace(/\s+$/, ''); }
+  function watchedName(n) { return /_$/.test(n) || /^p2\d\d/i.test(n) || /^(fin|FIN)[A-Z_]/.test(n); }
 
-  function parseJs(code, scriptlet, module) {
+  function parseJs(code, opts) {
+    opts = opts || {};
     var comments = [];
     try {
       var ast = acorn.parse(code, {
-        ecmaVersion: 'latest', sourceType: module ? 'module' : 'script', locations: true, allowHashBang: true,
-        allowReturnOutsideFunction: !!scriptlet, allowAwaitOutsideFunction: !!scriptlet,
+        ecmaVersion: 'latest', sourceType: opts.module ? 'module' : 'script', locations: true, allowHashBang: true,
+        allowReturnOutsideFunction: !!opts.loose, allowAwaitOutsideFunction: !!opts.loose,
         onComment: function (block, text, start, end) { comments.push([start, end]); }
       });
       return { ast: ast, comments: comments, error: null };
     } catch (e) {
-      return { ast: null, comments: comments, error: { message: String(e && e.message || e).replace(/\s*\(\d+:\d+\)\s*$/, ''), line: e && e.loc ? e.loc.line : null, column: e && e.loc ? e.loc.column + 1 : null } };
+      return { ast: null, comments: comments, error: { message: String(e && e.message || e).replace(/\s*\(\d+:\d+\)\s*$/, ''), pos: e && typeof e.pos === 'number' ? e.pos : null, line: e && e.loc ? e.loc.line : null, column: e && e.loc ? e.loc.column + 1 : null } };
     }
   }
+  /* Linha e coluna como o editor do Apps Script mostra: só a quebra de linha comum conta (U+2028 e U+2029 não). */
+  function fileError(err, starts, offset) {
+    if (!err) return err;
+    if (typeof err.pos !== 'number') return err;
+    var pos = err.pos + (offset || 0), line = lineAt(starts, pos);
+    return { message: err.message, pos: pos, line: line, column: pos - starts[line - 1] + 1 };
+  }
+  /* Posição no arquivo de cada caractere de um texto entre aspas ou crases (o valor já sem as barras de escape). */
+  function cookedMap(raw) {
+    var map = [], i = 0;
+    while (i < raw.length) {
+      var c = raw[i];
+      if (c !== '\\') { map.push(i); i++; continue; }
+      var n = raw[i + 1], at = i;
+      if (n === '\r') { i += raw[i + 2] === '\n' ? 3 : 2; continue; }
+      if (n === '\n' || n === ' ' || n === ' ') { i += 2; continue; }
+      if (n === 'x') { map.push(at); i += 4; continue; }
+      if (n === 'u') {
+        if (raw[i + 2] === '{') { var close = raw.indexOf('}', i + 3), cp = parseInt(raw.slice(i + 3, close), 16); map.push(at); if (cp > 0xFFFF) map.push(at); i = close === -1 ? raw.length : close + 1; continue; }
+        map.push(at); i += 6; continue;
+      }
+      if (n >= '0' && n <= '7') { var j = i + 2; while (j < i + 4 && raw[j] >= '0' && raw[j] <= '7') j++; map.push(at); i = j; continue; }
+      map.push(at); i += 2;
+    }
+    return map;
+  }
+  /* &quot; e companhia: devolve o texto sem as entidades e como voltar à posição original. */
+  function htmlUnescapeMap(s) {
+    var out = '', marks = [], last = 0, m, re = /&(quot|#0*39|apos|lt|gt|amp);/g, VAL = { quot: '"', apos: "'", lt: '<', gt: '>', amp: '&' };
+    while ((m = re.exec(s))) {
+      out += s.slice(last, m.index);
+      marks.push([out.length, m.index]);
+      out += VAL[m[1]] || "'";
+      last = m.index + m[0].length;
+      marks.push([out.length, last]);
+    }
+    out += s.slice(last);
+    return {
+      text: out,
+      back: function (i) {
+        var lo = 0, hi = marks.length - 1, hit = -1;
+        while (lo <= hi) { var mid = (lo + hi) >> 1; if (marks[mid][0] <= i) { hit = mid; lo = mid + 1; } else hi = mid - 1; }
+        return hit < 0 ? i : marks[hit][1] + (i - marks[hit][0]);
+      }
+    };
+  }
+  function topNameList(text) {
+    var p = parseJs(text, {});
+    if (p.error) return null;
+    var names = [];
+    p.ast.body.forEach(function (st) {
+      if ((st.type === 'FunctionDeclaration' || st.type === 'ClassDeclaration') && st.id) names.push(st.id.name.replace(/_+$/, ''));
+      else if (st.type === 'VariableDeclaration') st.declarations.forEach(function (d) { if (d.id.type === 'Identifier') names.push(d.id.name.replace(/_+$/, '')); });
+    });
+    return names;
+  }
+  function looksLikeCopy(a, b) {
+    if (!a || !b || a.length < 3 || b.length < 3) return false;
+    var sa = new Set(a), common = 0;
+    b.forEach(function (n) { if (sa.has(n)) common++; });
+    return common / Math.max(a.length, b.length) >= 0.8;
+  }
 
-  /* google.script.run escrito dentro de um texto (HTML montado no .gs ou atributo onclick). */
+  /* ---------- google.script.run escrito em texto (fallback) ---------- */
   var ID_RE_SRC = '[\\p{ID_Start}$_][\\p{ID_Continue}$\\u200c\\u200d]*';
   var CHAIN_STEP = new RegExp('^\\s*\\.\\s*(' + ID_RE_SRC + ')\\s*\\(', 'u');
+  var RUN_TEXT = /google\s*\.\s*script\s*\.\s*run\b/;
   function skipBalanced(text, j) {
     var depth = 1, q = null;
     while (j < text.length) {
@@ -6934,10 +7186,18 @@ THE SOFTWARE.
     return res;
   }
 
-  /* Análise de escopo: quem declara cada nome e quais nomes ficam sem declaração. */
+  /* ---------- escopo, chamadas e textos de um programa ---------- */
   function analyzeProgram(ast, ctx) {
+    ctx = ctx || {};
+    var shared = ctx.shared || null;
+    /* P: posição no arquivo de uma posição do trecho lido; L: linha no arquivo, contada como no editor. */
+    var off = ctx.offset || 0;
+    var P = ctx.mapPos || function (x) { return x + off; };
+    function L(node) { return ctx.starts ? lineAt(ctx.starts, P(node.start)) : node.loc.start.line; }
+    var globalWrites = [];
     var rootScope = { parent: null, fn: true, names: Object.create(null) };
-    var topDecls = new Map(), refs = [], aliases = Object.create(null), strings = [];
+    var topDecls = new Map(), refs = [], strings = [], refNames = new Set();
+    var runBases = [], consumed = new Set(), msgDepth = 0, fnNames = [];
     function S(parent, fn) { return { parent: parent, fn: !!fn, names: Object.create(null) }; }
     function fnScope(s) { while (!s.fn) s = s.parent; return s; }
     function declare(s, id, kind) {
@@ -6945,10 +7205,70 @@ THE SOFTWARE.
       if (s === rootScope) {
         var arr = topDecls.get(id.name);
         if (!arr) topDecls.set(id.name, arr = []);
-        arr.push({ kind: kind, start: id.start, line: id.loc.start.line });
+        arr.push({ kind: kind, start: P(id.start), line: L(id) });
       }
     }
-    function ref(id, cur, called, guarded, write) { refs.push({ name: id.name, scope: cur, called: called, guarded: guarded, write: write, line: id.loc.start.line, start: id.start }); }
+    function ref(id, cur, called, guarded, write) { refNames.add(id.name); refs.push({ name: id.name, scope: cur, called: called, guarded: guarded, write: write, line: L(id), start: P(id.start) }); }
+    function unwrap(n) { return n && n.type === 'ChainExpression' ? n.expression : n; }
+    function isRunBase(n) { n = unwrap(n); return !!n && n.type === 'MemberExpression' && !n.computed && n.property.name === 'run' && isGoogleScript(n.object); }
+    function isGoogleScript(n) { n = unwrap(n); return !!n && n.type === 'MemberExpression' && !n.computed && n.property.name === 'script' && n.object.type === 'Identifier' && n.object.name === 'google'; }
+    function chainRoot(n) {
+      for (var guard = 0; guard < 50 && n; guard++) {
+        n = unwrap(n);
+        if (isRunBase(n)) return { kind: 'base', node: n };
+        if (n.type === 'CallExpression') {
+          var c = unwrap(n.callee);
+          if (c.type === 'MemberExpression' && !c.computed && RUN_MODIFIERS.has(c.property.name)) { n = c.object; continue; }
+          if (c.type === 'Identifier') return { kind: 'fn', name: c.name };
+          return null;
+        }
+        if (n.type === 'Identifier') return { kind: 'alias', name: n.name };
+        return null;
+      }
+      return null;
+    }
+    function knownChain(rootInfo) {
+      if (!rootInfo) return false;
+      if (rootInfo.kind === 'base') return true;
+      if (!shared) return false;
+      return rootInfo.kind === 'alias' ? shared.aliases[rootInfo.name] === true : shared.fnAliases[rootInfo.name] === true;
+    }
+    function consume(rootInfo) { if (rootInfo && rootInfo.kind === 'base') consumed.add(rootInfo.node.start); }
+    function checkRun(call) {
+      if (!shared) return;
+      var c = unwrap(call.callee);
+      if (c.type !== 'MemberExpression' || c.computed || RUN_MODIFIERS.has(c.property.name)) return;
+      var info = chainRoot(c.object);
+      if (!info) return;
+      if (knownChain(info)) { consume(info); if (ctx.onRun) ctx.onRun(c.property.name, L(c.property)); }
+      else if (info.kind !== 'base') shared.pending.push({ kind: info.kind, name: info.name, target: c.property.name, file: ctx.file, line: L(c.property), embedded: !!ctx.embedded });
+    }
+    function registerAlias(name, init) {
+      if (!shared || !init) return;
+      var info = chainRoot(init);
+      if (knownChain(info)) { consume(info); shared.aliases[name] = true; }
+    }
+    function func(n, cur, name) {
+      var s = cur;
+      if (n.type === 'FunctionExpression' && n.id) { s = S(cur, false); declare(s, n.id, 'fnexpr'); }
+      var fs = S(s, true);
+      if (n.type !== 'ArrowFunctionExpression') fs.names.arguments = true;
+      n.params.forEach(function (p) { bindPattern(p, fs, 'param', fs); });
+      fnNames.push(name || (n.id && n.id.name) || null);
+      if (n.body.type === 'BlockStatement') n.body.body.forEach(function (st) { visit(st, fs); });
+      else {
+        if (shared && name && knownChain(chainRoot(n.body))) { consume(chainRoot(n.body)); shared.fnAliases[name] = true; }
+        visit(n.body, fs);
+      }
+      fnNames.pop();
+    }
+    function klass(n, cur) {
+      if (n.superClass) visit(n.superClass, cur);
+      n.body.body.forEach(function (el) {
+        if (el.type === 'MethodDefinition' || el.type === 'PropertyDefinition') { if (el.computed) visit(el.key, cur); if (el.value) visit(el.value, S(cur, true)); }
+        else visit(el, cur);
+      });
+    }
     function bindPattern(p, s, kind, cur) {
       if (!p) return;
       switch (p.type) {
@@ -6970,38 +7290,15 @@ THE SOFTWARE.
         default: visit(p, cur);
       }
     }
-    function isRunChain(n) {
-      if (!n) return false;
-      if (n.type === 'ChainExpression') n = n.expression;
-      if (n.type === 'MemberExpression' && !n.computed && n.property.name === 'run' && n.object.type === 'MemberExpression' && !n.object.computed && n.object.property.name === 'script' && n.object.object.type === 'Identifier' && n.object.object.name === 'google') return true;
-      if (n.type === 'CallExpression') { var c = n.callee.type === 'ChainExpression' ? n.callee.expression : n.callee; if (c.type === 'MemberExpression' && !c.computed && RUN_MODIFIERS.has(c.property.name) && isRunChain(c.object)) return true; }
-      if (n.type === 'Identifier' && aliases[n.name] === true) return true;
-      return false;
-    }
-    function checkRun(call) {
-      var c = call.callee.type === 'ChainExpression' ? call.callee.expression : call.callee;
-      if (c.type !== 'MemberExpression' || c.computed || RUN_MODIFIERS.has(c.property.name)) return;
-      if (isRunChain(c.object) && ctx.onRun) ctx.onRun(c.property.name, c.property.loc.start.line, c.property.start);
-    }
-    function func(n, cur) {
-      var s = cur;
-      if (n.type === 'FunctionExpression' && n.id) { s = S(cur, false); declare(s, n.id, 'fnexpr'); }
-      var fs = S(s, true);
-      if (n.type !== 'ArrowFunctionExpression') fs.names.arguments = true;
-      n.params.forEach(function (p) { bindPattern(p, fs, 'param', fs); });
-      if (n.body.type === 'BlockStatement') n.body.body.forEach(function (st) { visit(st, fs); });
-      else visit(n.body, fs);
-    }
-    function klass(n, cur) {
-      if (n.superClass) visit(n.superClass, cur);
-      n.body.body.forEach(function (el) {
-        if (el.type === 'MethodDefinition' || el.type === 'PropertyDefinition') { if (el.computed) visit(el.key, cur); if (el.value) visit(el.value, S(cur, true)); }
-        else visit(el, cur);
-      });
+    function isMessageCall(n) {
+      var c = unwrap(n.callee);
+      if (n.type === 'NewExpression') return c.type === 'Identifier' && /Error$/.test(c.name);
+      if (c.type === 'MemberExpression' && !c.computed && MESSAGE_METHODS.has(c.property.name)) return true;
+      return c.type === 'Identifier' && (c.name === 'alert' || c.name === 'confirm' || c.name === 'prompt');
     }
     function onString(value, node) {
-      strings.push({ value: value, start: node.start, end: node.end, line: node.loc.start.line });
-      if (ctx.onString) ctx.onString(value, node);
+      strings.push({ value: value, start: P(node.start), end: P(node.end), line: L(node), message: msgDepth > 0 });
+      if (ctx.onString) ctx.onString(value, P(node.start), P(node.end), node.type === 'TemplateElement', msgDepth > 0);
     }
     function visit(n, cur) {
       if (!n || typeof n.type !== 'string') return;
@@ -7011,22 +7308,29 @@ THE SOFTWARE.
         case 'StaticBlock': { var sb = S(cur, true); n.body.forEach(function (x) { visit(x, sb); }); return; }
         case 'FunctionDeclaration':
           if (n.id) { declare(fnScope(cur), n.id, 'function'); if (!cur.fn) cur.names[n.id.name] = true; }
-          func(n, cur); return;
-        case 'FunctionExpression': case 'ArrowFunctionExpression': func(n, cur); return;
+          func(n, cur, n.id && n.id.name); return;
+        case 'FunctionExpression': case 'ArrowFunctionExpression': func(n, cur, null); return;
         case 'ClassDeclaration': if (n.id) declare(cur, n.id, 'class'); klass(n, cur); return;
         case 'ClassExpression': { var cs = cur; if (n.id) { cs = S(cur, false); declare(cs, n.id, 'classexpr'); } klass(n, cs); return; }
         case 'VariableDeclaration': {
           var target = n.kind === 'var' ? fnScope(cur) : cur;
           n.declarations.forEach(function (d) {
             bindPattern(d.id, target, n.kind, cur);
-            if (d.init) {
-              visit(d.init, cur);
-              if (d.id.type === 'Identifier' && isRunChain(d.init)) aliases[d.id.name] = true;
-              if (cur === rootScope && d.id.type === 'Identifier' && ctx.onTopInit) ctx.onTopInit(d.id.name, d.init);
+            if (!d.init) return;
+            if (d.id.type === 'ObjectPattern' && shared && isGoogleScript(d.init)) {
+              d.id.properties.forEach(function (pr) { if (pr.type === 'Property' && !pr.computed && pr.key.type === 'Identifier' && pr.key.name === 'run' && pr.value.type === 'Identifier') shared.aliases[pr.value.name] = true; });
             }
+            if (d.id.type === 'Identifier' && (d.init.type === 'ArrowFunctionExpression' || d.init.type === 'FunctionExpression')) func(d.init, cur, d.id.name);
+            else visit(d.init, cur);
+            if (d.id.type === 'Identifier') registerAlias(d.id.name, d.init);
+            if (cur === rootScope && d.id.type === 'Identifier' && ctx.onTopInit) ctx.onTopInit(d.id.name, d.init);
           });
           return;
         }
+        case 'ReturnStatement':
+          if (n.argument && shared) { var fname = fnNames[fnNames.length - 1]; var ri = chainRoot(n.argument); if (fname && knownChain(ri)) { consume(ri); shared.fnAliases[fname] = true; } }
+          visit(n.argument, cur); return;
+        case 'ThrowStatement': msgDepth++; visit(n.argument, cur); msgDepth--; return;
         case 'ForStatement': { var f = S(cur, false); visit(n.init, f); visit(n.test, f); visit(n.update, f); visit(n.body, f); return; }
         case 'ForInStatement': case 'ForOfStatement': { var fi = S(cur, false); if (n.left.type === 'VariableDeclaration') visit(n.left, fi); else assignTarget(n.left, fi); visit(n.right, fi); visit(n.body, fi); return; }
         case 'CatchClause': { var cc = S(cur, false); if (n.param) bindPattern(n.param, cc, 'catch', cc); visit(n.body, cc); return; }
@@ -7035,20 +7339,32 @@ THE SOFTWARE.
         case 'BreakStatement': case 'ContinueStatement': case 'EmptyStatement': case 'DebuggerStatement': case 'ThisExpression': case 'Super': case 'MetaProperty': case 'PrivateIdentifier': return;
         case 'Identifier': ref(n, cur, false, false, false); return;
         case 'MemberExpression':
+          if (isRunBase(n)) runBases.push({ start: n.start, line: L(n) });
           visit(n.object, cur);
-          if (n.computed) { visit(n.property, cur); if (isRunChain(n.object) && ctx.onRunUnknown) ctx.onRunUnknown(n.loc.start.line); }
+          if (n.computed) visit(n.property, cur);
           return;
-        case 'CallExpression': case 'NewExpression':
+        case 'CallExpression': case 'NewExpression': {
+          var msg = isMessageCall(n);
           if (n.callee.type === 'Identifier') ref(n.callee, cur, true, false, false); else visit(n.callee, cur);
-          if (n.type === 'CallExpression') checkRun(n);
+          if (n.type === 'CallExpression') {
+            checkRun(n);
+            if (ctx.onCallWithString && n.callee.type === 'Identifier' && n.arguments.length >= 1 && n.arguments[0].type === 'Literal' && typeof n.arguments[0].value === 'string') ctx.onCallWithString(n.callee.name, n.arguments[0].value);
+          }
+          if (msg) msgDepth++;
           n.arguments.forEach(function (a) { visit(a, cur); });
+          if (msg) msgDepth--;
           return;
+        }
         case 'UnaryExpression':
           if (n.operator === 'typeof' && n.argument.type === 'Identifier') { ref(n.argument, cur, false, true, false); return; }
           visit(n.argument, cur); return;
         case 'AssignmentExpression':
+          if (n.operator === '=' && n.left.type === 'MemberExpression' && n.left.object.type === 'Identifier' && /^(window|globalThis|self)$/.test(n.left.object.name)) {
+            var gp = n.left.property, gname = !n.left.computed && gp.type === 'Identifier' ? gp.name : (n.left.computed && gp.type === 'Literal' && typeof gp.value === 'string' ? gp.value : null);
+            if (gname) globalWrites.push(gname);
+          }
           assignTarget(n.left, cur); visit(n.right, cur);
-          if (n.left.type === 'Identifier' && isRunChain(n.right)) aliases[n.left.name] = true;
+          if (n.left.type === 'Identifier') registerAlias(n.left.name, n.right);
           return;
         case 'UpdateExpression': assignTarget(n.argument, cur); return;
         case 'Property': if (n.computed) visit(n.key, cur); visit(n.value, cur); return;
@@ -7068,144 +7384,230 @@ THE SOFTWARE.
     }
     visit(ast, rootScope);
     function resolved(r) { for (var s = r.scope; s; s = s.parent) if (s.names[r.name] === true) return true; return false; }
-    var unresolved = refs.filter(function (r) { return !resolved(r); });
-    return { topDecls: topDecls, unresolved: unresolved, strings: strings, refCount: refs.length };
+    return {
+      topDecls: topDecls, strings: strings, refNames: refNames, globalWrites: globalWrites,
+      unresolved: refs.filter(function (r) { return !resolved(r); }),
+      runUnconsumed: runBases.filter(function (b) { return !consumed.has(b.start); })
+    };
   }
 
-  var SCRIPT_RE = /\x3cscript\b([^>]*)>([\s\S]*?)\x3c\/script\s*>/gi;
+  /* ---------- trechos <? ?> do HtmlService ---------- */
   var SCRIPTLET_RE = /\x3c\?(!=|=)?([\s\S]*?)\?>/g;
-  var HTML_COMMENT_RE = /\x3c!--[\s\S]*?--\x3e/g;
-
-  function scriptletProgram(text) {
-    var out = blankKeepLines(text).split(''), ranges = [], m;
+  function scriptletSegments(text) {
+    var segs = [], m;
     SCRIPTLET_RE.lastIndex = 0;
     while ((m = SCRIPTLET_RE.exec(text))) {
-      var start = m.index, end = start + m[0].length, kind = m[1] || '', openLen = 2 + kind.length;
-      ranges.push([start, end]);
-      for (var k = start + openLen; k < end - 2; k++) out[k] = text[k];
-      if (kind) { out[start + openLen - 2] = ';'; out[start + openLen - 1] = '('; out[end - 2] = ')'; out[end - 1] = ';'; }
-      else { out[start] = ';'; out[end - 1] = ';'; }
+      var start = m.index, end = start + m[0].length, kind = m[1] || '';
+      segs.push({ start: start, end: end, kind: kind, codeStart: start + 2 + kind.length, codeEnd: end - 2 });
     }
-    return { code: out.join(''), ranges: ranges };
+    return segs;
   }
-  function scriptBlocks(text) {
-    var blocks = [], m;
-    SCRIPT_RE.lastIndex = 0;
-    while ((m = SCRIPT_RE.exec(text))) {
-      var attrs = m[1] || '';
-      var bodyStart = m.index + m[0].indexOf('>') + 1, bodyEnd = bodyStart + m[2].length;
-      var t = /\btype\s*=\s*["']?([^"'\s>]+)/i.exec(attrs), type = t ? t[1].toLowerCase() : '';
-      var js = !/\bsrc\s*=/i.test(attrs) && (!type || type === 'module' || /^(text|application)\/(javascript|ecmascript|x-javascript)$/.test(type));
-      blocks.push({ start: m.index, end: m.index + m[0].length, bodyStart: bodyStart, bodyEnd: bodyEnd, js: js, module: type === 'module' });
-    }
-    return blocks;
+  function scriptletCode(text, segs) {
+    var out = blankKeepLines(text).split('');
+    segs.forEach(function (s) {
+      for (var k = s.codeStart; k < s.codeEnd; k++) out[k] = text[k];
+      if (s.kind) {
+        for (var e = s.codeEnd - 1; e >= s.codeStart && /[\s;]/.test(text[e]); e--) if (text[e] === ';') out[e] = ' ';
+        out[s.codeStart - 2] = ';'; out[s.codeStart - 1] = '('; out[s.end - 2] = ')'; out[s.end - 1] = ';';
+      } else { out[s.start] = ';'; out[s.end - 1] = ';'; }
+    });
+    return out.join('');
+  }
+  function parseScriptlets(text, segs) {
+    if (!segs.length) return { programs: [], unread: [] };
+    var joint = parseJs(scriptletCode(text, segs), { loose: true });
+    if (!joint.error) return { programs: [joint], unread: [] };
+    var programs = [], unread = [];
+    segs.forEach(function (s) { var p = parseJs(scriptletCode(text, [s]), { loose: true }); if (p.error) unread.push(s); else programs.push(p); });
+    return { programs: programs, unread: unread };
   }
 
+  /* ---------- estrutura de um HTML, na ordem em que o navegador lê ---------- */
+  var OPEN_COMMENT = '\x3c!--', CLOSE_SCRIPT = '\x3c/script';
+  function htmlStructure(text, hide) {
+    var t = blankRanges(text, hide || []), low = t.toLowerCase(), comments = [], scripts = [], i = 0;
+    var scriptRe = /\x3cscript(?=[\s>\/])/g;
+    while (i < t.length) {
+      var c = low.indexOf(OPEN_COMMENT, i);
+      scriptRe.lastIndex = i;
+      var sm = scriptRe.exec(low), s = sm ? sm.index : -1;
+      if (c === -1 && s === -1) break;
+      if (c !== -1 && (s === -1 || c < s)) {
+        var ce = low.indexOf('--\x3e', c + 4), cend = ce === -1 ? t.length : ce + 3;
+        comments.push([c, cend]); i = cend; continue;
+      }
+      var gt = t.indexOf('>', s);
+      if (gt === -1) break;
+      var attrs = t.slice(s + 7, gt);
+      var close = low.indexOf(CLOSE_SCRIPT, gt + 1), bodyEnd = close === -1 ? t.length : close;
+      var closeEnd = close === -1 ? t.length : (t.indexOf('>', close) === -1 ? t.length : t.indexOf('>', close) + 1);
+      var tm = /\btype\s*=\s*["']?([^"'\s>]+)/i.exec(attrs), type = tm ? tm[1].toLowerCase() : '';
+      var js = !/\bsrc\s*=/i.test(attrs) && (!type || type === 'module' || /^(text|application)\/(javascript|ecmascript|x-javascript)$/.test(type));
+      scripts.push({ start: s, end: closeEnd, bodyStart: gt + 1, bodyEnd: bodyEnd, js: js, module: type === 'module' });
+      i = closeEnd;
+    }
+    return { comments: comments, scripts: scripts };
+  }
+  var HANDLER_RE = /\son[a-z]+\s*=\s*(?:"([^"]*)"|'([^']*)')/gi;
+
+  /* ---------- análise do projeto ---------- */
   function analyze(files) {
-    var report = { blockers: [], fixes: [], problems: [], checks: [], notes: [], files: [], version: null, markersIn: [] };
-    var server = [], clientDecls = new Set(), clientUnresolved = [], scriptletCalls = [], runs = [], runUnknown = [], topInits = [];
-    var inert = new Map();   // arquivo -> trechos que não executam (comentários)
-    var stringRanges = new Map();
-    var scriptletRanges = new Map();
-    var clientRanges = new Map();
-    var parsed = new Map();
+    var report = { blockers: [], fixes: [], problems: [], checks: [], notes: [], files: [], version: null, markersIn: [], stats: {} };
+    var server = [], pages = [], scriptletUses = [], runs = [], runUnknown = [], topInits = [];
+    var shared = { aliases: Object.create(null), fnAliases: Object.create(null), pending: [] };
+    var meta = new Map(); // arquivo -> trechos (comentários, textos, mensagens, <? ?>, \x3cscript>)
+
+    /* Código dentro de um texto (HTML montado no .gs, por exemplo): as linhas apontam para o ponto exato no arquivo. */
+    function addEmbedded(value, f, s, e, tpl) {
+      var hasRun = RUN_TEXT.test(value), hasLet = value.indexOf('<?') !== -1;
+      if (!hasRun && !hasLet) return;
+      var file = f.name, rawStart = tpl ? s : s + 1, raw = f.text.slice(rawStart, tpl ? e : e - 1), map = null;
+      function abs(i) { if (!map) map = cookedMap(raw); return rawStart + (i < map.length ? map[i] : raw.length); }
+      function lineFor(i) { return lineAt(f.starts, abs(i)); }
+      if (hasLet) {
+        var segs = scriptletSegments(value);
+        parseScriptlets(value, segs).programs.forEach(function (p) {
+          analyzeProgram(p.ast, { mapPos: abs, starts: f.starts }).unresolved.forEach(function (r) { if (!r.guarded && !r.write && (r.called || watchedName(r.name))) scriptletUses.push({ name: r.name, file: file, line: r.line, called: r.called }); });
+        });
+      }
+      if (!hasRun) return;
+      var local = { aliases: Object.create(null), fnAliases: Object.create(null), pending: [] };
+      var sink = function (target, line) { runs.push({ target: target, file: file, line: line || lineFor(0), embedded: true }); };
+      var unknown = function (line) { runUnknown.push({ file: file, line: line || lineFor(0) }); };
+      function textScan(text, base, back) { runTargetsInText(text).forEach(function (r) { var ln = lineFor(base + (back ? back(r.index) : r.index)); if (r.target) sink(r.target, ln); else unknown(ln); }); }
+      if (/<[a-zA-Z!\/]/.test(value)) {
+        var segs2 = scriptletSegments(value), hide = segs2.map(function (sg) { return [sg.start, sg.end]; });
+        var st = htmlStructure(value, hide);
+        st.scripts.forEach(function (b) {
+          if (!b.js) return;
+          var body = value.slice(b.bodyStart, b.bodyEnd);
+          if (!RUN_TEXT.test(body)) return;
+          var inner = hide.filter(function (r) { return r[1] > b.bodyStart && r[0] < b.bodyEnd; }).map(function (r) { return [Math.max(0, r[0] - b.bodyStart), Math.min(body.length, r[1] - b.bodyStart)]; });
+          var p = parseJs(blankRanges(body, inner), { loose: true });
+          if (p.error) { textScan(body, b.bodyStart, null); return; }
+          var res = analyzeProgram(p.ast, { shared: local, onRun: sink, mapPos: function (x) { return abs(b.bodyStart + x); }, starts: f.starts, embedded: true });
+          res.runUnconsumed.forEach(function (rb) { unknown(rb.line); });
+        });
+        var outside = blankRanges(value, st.scripts.map(function (b) { return [b.start, b.end]; }).concat(st.comments).concat(hide));
+        if (RUN_TEXT.test(outside)) { var um = htmlUnescapeMap(outside); textScan(um.text, 0, um.back); }
+      } else {
+        var pj = parseJs(value, { loose: true });
+        if (pj.error) { textScan(value, 0, null); return; }
+        var rj = analyzeProgram(pj.ast, { shared: local, onRun: sink, mapPos: abs, starts: f.starts, embedded: true });
+        rj.runUnconsumed.forEach(function (rb) { unknown(rb.line); });
+      }
+      local.pending.forEach(function (pd) { if (pd.kind === 'alias' ? local.aliases[pd.name] : local.fnAliases[pd.name]) sink(pd.target, pd.line); });
+    }
 
     files.forEach(function (f) {
       var info = { name: f.name, kind: f.kind, ok: true, error: null, primary: !!f.primary };
       report.files.push(info);
       f.starts = lineStarts(f.text);
+      var m = { readable: true, jsComments: [], strings: [], messages: [], scriptlets: [], scriptletComments: [], htmlComments: [], clientRanges: [] };
+      meta.set(f.name, m);
       if (f.kind === 'gs') {
-        var p = parseJs(f.text, false, false);
-        if (p.error) { info.ok = false; info.error = p.error; return; }
-        inert.set(f.name, { js: sortRanges(p.comments), html: [] });
+        var p = parseJs(f.text, {});
+        if (p.error) { info.ok = false; info.error = fileError(p.error, f.starts, 0); m.readable = false; return; }
         var res = analyzeProgram(p.ast, {
-          onString: function (value, node) {
-            if (value.indexOf('google') !== -1 && /google\s*\.\s*script\s*\.\s*run/.test(value)) {
-              runTargetsInText(value).forEach(function (r) {
-                if (r.target) runs.push({ target: r.target, file: f.name, line: node.loc.start.line, embedded: true });
-                else runUnknown.push({ file: f.name, line: node.loc.start.line });
-              });
-            }
-            if (value.indexOf('<?') !== -1) {
-              var sp = scriptletProgram(value);
-              if (sp.ranges.length) {
-                var pp = parseJs(sp.code, true, false);
-                if (pp.error) report.checks.push({ code: 'SCRIPTLET_TEXTO_NAO_LIDO', file: f.name, lines: [node.loc.start.line], text: 'Há trechos <? ?> dentro de um texto que a página não conseguiu ler. Eles não foram conferidos.' });
-                else analyzeProgram(pp.ast, {}).unresolved.forEach(function (r) { if (r.called && !r.guarded) scriptletCalls.push({ name: r.name, file: f.name, line: node.loc.start.line + r.line - 1 }); });
-              }
-            }
-          },
+          starts: f.starts,
+          onString: function (value, s, e, tpl, isMessage) { if (!isMessage) addEmbedded(value, f, s, e, tpl); },
           onTopInit: function (name, init) { if (name === 'FIN_BRIDGE_VERSION_') topInits.push({ file: f.name, init: init }); }
         });
-        stringRanges.set(f.name, sortRanges(res.strings.map(function (s) { return [s.start, s.end]; })));
+        m.jsComments = sortRanges(p.comments);
+        m.strings = sortRanges(res.strings.map(function (s) { return [s.start, s.end]; }));
+        m.messages = sortRanges(res.strings.filter(function (s) { return s.message; }).map(function (s) { return [s.start, s.end]; }));
         server.push({ file: f, res: res });
-        parsed.set(f.name, res);
-      } else {
-        var text = f.text, comments = [], htmlComments = [];
-        var sp = scriptletProgram(text);
-        scriptletRanges.set(f.name, sortRanges(sp.ranges));
-        if (sp.ranges.length) {
-          var pp = parseJs(sp.code, true, false);
-          if (pp.error) { info.ok = false; info.error = { message: 'trechos <? ?>: ' + pp.error.message, line: pp.error.line }; }
-          else {
-            comments = comments.concat(pp.comments);
-            analyzeProgram(pp.ast, {}).unresolved.forEach(function (r) { if (r.called && !r.guarded) scriptletCalls.push({ name: r.name, file: f.name, line: r.line }); });
-          }
-        }
-        var blocks = scriptBlocks(text), cranges = [];
-        blocks.forEach(function (b) {
-          cranges.push([b.bodyStart, b.bodyEnd]);
-          if (!b.js) return;
-          var body = text.slice(b.bodyStart, b.bodyEnd).split('');
-          sp.ranges.forEach(function (r) {
-            if (r[1] <= b.bodyStart || r[0] >= b.bodyEnd) return;
-            var s = Math.max(r[0], b.bodyStart), e = Math.min(r[1], b.bodyEnd);
-            for (var k = s; k < e; k++) if (body[k - b.bodyStart] !== '\n') body[k - b.bodyStart] = ' ';
-            body[s - b.bodyStart] = '0';
-          });
-          var code = blankKeepLines(text.slice(0, b.bodyStart)) + body.join('');
-          var cp = parseJs(code, false, b.module);
-          if (cp.error) { info.ok = false; info.error = { message: '\x3cscript>: ' + cp.error.message, line: cp.error.line }; return; }
-          comments = comments.concat(cp.comments);
-          var cr = analyzeProgram(cp.ast, {
-            onRun: function (target, line) { runs.push({ target: target, file: f.name, line: line }); },
-            onRunUnknown: function (line) { runUnknown.push({ file: f.name, line: line }); },
-            onString: function (value, node) {
-              if (/google\s*\.\s*script\s*\.\s*run/.test(value)) runTargetsInText(value).forEach(function (r) {
-                if (r.target) runs.push({ target: r.target, file: f.name, line: node.loc.start.line, embedded: true }); else runUnknown.push({ file: f.name, line: node.loc.start.line });
-              });
-            }
-          });
-          cr.topDecls.forEach(function (v, k) { clientDecls.add(k); });
-          cr.unresolved.forEach(function (r) { if (r.write) clientDecls.add(r.name); else if (r.called && !r.guarded) clientUnresolved.push({ name: r.name, file: f.name, line: r.line }); });
-        });
-        cranges = sortRanges(cranges);
-        clientRanges.set(f.name, cranges);
-        // Comentários HTML fora de \x3cscript> não executam, exceto trechos <? ?> dentro deles.
-        var m; HTML_COMMENT_RE.lastIndex = 0;
-        while ((m = HTML_COMMENT_RE.exec(text))) { if (!inRanges(cranges, m.index)) htmlComments.push([m.index, m.index + m[0].length]); }
-        inert.set(f.name, { js: sortRanges(comments), html: sortRanges(htmlComments) });
-        // Atributos como onclick="google.script.run..." fora de \x3cscript>.
-        var outside = text.split('');
-        cranges.forEach(function (r) { for (var k = r[0]; k < r[1]; k++) if (outside[k] !== '\n') outside[k] = ' '; });
-        htmlComments.forEach(function (r) { for (var k = r[0]; k < r[1]; k++) if (outside[k] !== '\n') outside[k] = ' '; });
-        var outsideText = outside.join('');
-        if (/google\s*\.\s*script\s*\.\s*run/.test(outsideText)) runTargetsInText(outsideText).forEach(function (r) {
-          var line = lineAt(f.starts, r.index);
-          if (r.target) runs.push({ target: r.target, file: f.name, line: line, embedded: true }); else runUnknown.push({ file: f.name, line: line });
-        });
+        return;
       }
+      /* .html: trechos <? ?> rodam no servidor; \x3cscript> roda no navegador. */
+      var text = f.text, page = { file: f.name, decls: new Set(), lexical: new Map(), unresolved: [], includes: new Set() };
+      pages.push(page);
+      var segs = scriptletSegments(text), segRanges = segs.map(function (s) { return [s.start, s.end]; });
+      m.scriptlets = sortRanges(segRanges);
+      var sp = parseScriptlets(text, segs), msgs = [];
+      sp.programs.forEach(function (prog) {
+        m.scriptletComments = m.scriptletComments.concat(prog.comments);
+        var res = analyzeProgram(prog.ast, { starts: f.starts, onCallWithString: function (callee, value) { page.includes.add(nfc(value)); } });
+        res.strings.forEach(function (s) { if (s.message) msgs.push([s.start, s.end]); });
+        res.unresolved.forEach(function (r) { if (!r.guarded && !r.write && (r.called || watchedName(r.name))) scriptletUses.push({ name: r.name, file: f.name, line: r.line, called: r.called }); });
+      });
+      m.scriptletComments = sortRanges(m.scriptletComments);
+      if (sp.unread.length) report.checks.push({ code: 'SCRIPTLET_NAO_LIDO', name: f.name, text: 'Alguns trechos <? ?> deste arquivo não puderam ser lidos e não foram conferidos.', lines: sp.unread.map(function (s) { return f.name + ', linha ' + lineAt(f.starts, s.start); }) });
+      var st = htmlStructure(text, segRanges);
+      m.htmlComments = sortRanges(st.comments);
+      m.clientRanges = sortRanges(st.scripts.map(function (b) { return [b.bodyStart, b.bodyEnd]; }));
+      var clientComments = [];
+      function clientCtx(extra) {
+        var c = {
+          shared: shared, file: f.name, starts: f.starts,
+          onRun: function (target, line) { runs.push({ target: target, file: f.name, line: line }); },
+          onString: function (value, s, e, tpl, isMessage) { if (!isMessage) addEmbedded(value, f, s, e, tpl); }
+        };
+        for (var k in extra) c[k] = extra[k];
+        return c;
+      }
+      function collectClient(res) {
+        res.topDecls.forEach(function (list, name) {
+          page.decls.add(name);
+          list.forEach(function (d) { if (d.kind === 'let' || d.kind === 'const' || d.kind === 'class') { var l = page.lexical.get(name); if (!l) page.lexical.set(name, l = []); l.push(d.line); } });
+        });
+        res.globalWrites.forEach(function (n) { page.decls.add(n); });
+        res.unresolved.forEach(function (r) {
+          if (r.write) { page.decls.add(r.name); return; }
+          if (r.guarded) return;
+          if (r.called || watchedName(r.name)) page.unresolved.push({ name: r.name, line: r.line, called: r.called });
+        });
+        res.strings.forEach(function (s) { if (s.message) msgs.push([s.start, s.end]); });
+        res.runUnconsumed.forEach(function (b) { runUnknown.push({ file: f.name, line: b.line }); });
+      }
+      /* Cada \x3cscript> é lido sozinho; as posições são somadas ao ponto onde ele começa no arquivo. */
+      st.scripts.forEach(function (b) {
+        if (!b.js) return;
+        var body = text.slice(b.bodyStart, b.bodyEnd).split('');
+        segRanges.forEach(function (r) {
+          if (r[1] <= b.bodyStart || r[0] >= b.bodyEnd) return;
+          var s = Math.max(r[0], b.bodyStart), e = Math.min(r[1], b.bodyEnd);
+          for (var k = s; k < e; k++) if (body[k - b.bodyStart] !== '\n') body[k - b.bodyStart] = ' ';
+          body[s - b.bodyStart] = '0';
+        });
+        var cp = parseJs(body.join(''), { module: b.module });
+        if (cp.error) { if (info.ok) { var fe = fileError(cp.error, f.starts, b.bodyStart); info.ok = false; info.error = { message: '\x3cscript>: ' + fe.message, line: fe.line, column: fe.column }; } return; }
+        cp.comments.forEach(function (c) { clientComments.push([c[0] + b.bodyStart, c[1] + b.bodyStart]); });
+        collectClient(analyzeProgram(cp.ast, clientCtx({ offset: b.bodyStart })));
+      });
+      m.jsComments = sortRanges(clientComments);
+      /* Atributos on...="..." fora de \x3cscript>. */
+      var outside = blankRanges(text, st.scripts.map(function (b) { return [b.start, b.end]; }).concat(st.comments).concat(segRanges));
+      var handlerRanges = [], hm;
+      HANDLER_RE.lastIndex = 0;
+      while ((hm = HANDLER_RE.exec(outside))) {
+        var val = hm[1] !== undefined ? hm[1] : hm[2], vStart = hm.index + hm[0].length - val.length - 1;
+        handlerRanges.push([vStart, vStart + val.length]);
+        var hu = htmlUnescapeMap(val);
+        var hp = parseJs(hu.text, { loose: true });
+        if (hp.error) { if (RUN_TEXT.test(hu.text)) runTargetsInText(hu.text).forEach(function (r) { var ln = lineAt(f.starts, vStart + hu.back(r.index)); if (r.target) runs.push({ target: r.target, file: f.name, line: ln }); else runUnknown.push({ file: f.name, line: ln }); }); continue; }
+        collectClient(analyzeProgram(hp.ast, clientCtx({ mapPos: (function (v0, back) { return function (x) { return v0 + back(x); }; })(vStart, hu.back) })));
+      }
+      var rest = blankRanges(outside, handlerRanges);
+      if (RUN_TEXT.test(rest)) { var ru = htmlUnescapeMap(rest); runTargetsInText(ru.text).forEach(function (r) { var ln = lineAt(f.starts, ru.back(r.index)); if (r.target) runs.push({ target: r.target, file: f.name, line: ln, embedded: true }); else runUnknown.push({ file: f.name, line: ln }); }); }
+      m.messages = sortRanges(msgs);
     });
 
+    /* Cadeias google.script.run guardadas em variáveis ou funções de outro \x3cscript> ou outro .html. */
+    shared.pending.forEach(function (pd) { if (pd.kind === 'alias' ? shared.aliases[pd.name] === true : shared.fnAliases[pd.name] === true) runs.push({ target: pd.target, file: pd.file, line: pd.line }); });
+
     /* Nomes globais do servidor (todos os .gs juntos, como no Apps Script). */
-    var serverTop = new Map(), implicit = new Set();
+    var serverTop = new Map(), implicit = new Set(), serverRefNames = new Set();
     server.forEach(function (s) {
       s.res.topDecls.forEach(function (arr, name) {
         var list = serverTop.get(name); if (!list) serverTop.set(name, list = []);
         arr.forEach(function (d) { list.push({ kind: d.kind, start: d.start, line: d.line, file: s.file.name }); });
       });
       s.res.unresolved.forEach(function (r) { if (r.write) implicit.add(r.name); });
+      s.res.globalWrites.forEach(function (n) { implicit.add(n); });
+      s.res.refNames.forEach(function (n) { serverRefNames.add(n); });
     });
+    scriptletUses.forEach(function (u) { serverRefNames.add(u.name); });
     function serverHas(name) { return serverTop.has(name) || implicit.has(name); }
     function serverFn(name) { var l = serverTop.get(name); return !!l && l.some(function (d) { return d.kind === 'function'; }); }
     function where(list) { return list.map(function (x) { return x.file + ', linha ' + x.line; }); }
@@ -7213,7 +7615,8 @@ THE SOFTWARE.
     /* Marcadores do pacote 2.11. */
     files.forEach(function (f) { if (f.kind === 'gs' && MARKERS.every(function (t) { return f.text.indexOf(t) !== -1; })) report.markersIn.push(f.name); });
     var partial = files.some(function (f) { return f.kind === 'gs' && MARKERS.some(function (t) { return f.text.indexOf(t) !== -1; }); });
-    if (!report.markersIn.length) report.blockers.push({ code: partial ? 'PACOTE_INCOMPLETO' : 'SEM_PACOTE', text: partial ? 'Só um dos dois marcadores da Programação 2.11 foi encontrado. O texto parece cortado.' : 'Os marcadores da Programação 2.11 (INICIO_PROGRAMACAO_FINANCEIRA_2_11 e FIM_PROGRAMACAO_PACOTE_2_11) não foram encontrados em nenhum arquivo enviado.', lines: [] });
+    if (!report.markersIn.length) report.blockers.push({ code: partial ? 'PACOTE_INCOMPLETO' : 'SEM_PACOTE', text: partial ? 'Só um dos dois marcadores da Programação 2.11 foi encontrado. O texto parece cortado.' : 'Os marcadores da Programação 2.11 (INICIO_PROGRAMACAO_FINANCEIRA_2_11 e FIM_PROGRAMACAO_PACOTE_2_11) não foram encontrados em nenhum arquivo .gs enviado.', lines: [] });
+    else if (report.markersIn.indexOf(files[0].name) === -1) report.notes.push('Os marcadores da Programação 2.11 estão em ' + report.markersIn.join(', ') + ', e não no Código.gs.');
 
     /* Versão da base (informativa). */
     var versions = new Set();
@@ -7230,122 +7633,170 @@ THE SOFTWARE.
       if (list.length < 2) return;
       var lexical = list.some(function (d) { return d.kind === 'let' || d.kind === 'const' || d.kind === 'class'; });
       var fns = list.filter(function (d) { return d.kind === 'function'; });
-      if (lexical) report.problems.push({ code: 'DECLARACAO_REPETIDA', name: name, text: 'O nome é declarado mais de uma vez, e pelo menos uma vez com let, const ou class. O Apps Script recusa carregar o projeto ("has already been declared").', lines: where(list) });
-      else if (fns.length > 1) report.checks.push({ code: 'FUNCAO_REPETIDA', name: name, text: 'A função é declarada ' + fns.length + ' vezes. Vale a última carregada, o que depende da ordem dos arquivos.', lines: where(fns) });
+      if (lexical) report.problems.push({ code: 'DECLARACAO_REPETIDA', name: name, text: 'O nome é declarado mais de uma vez nos arquivos .gs, e pelo menos uma vez com let, const ou class. O Apps Script recusa carregar o projeto ("has already been declared"). Se um desses arquivos for só uma cópia de segurança, ele não deve estar dentro do projeto.', lines: where(list) });
+      else if (fns.length > 1) report.checks.push({ code: 'FUNCAO_REPETIDA', name: name, text: 'A função é declarada ' + fns.length + ' vezes nos arquivos .gs. Vale a última carregada, o que depende da ordem dos arquivos.', lines: where(fns) });
     });
 
-    /* Referências sem declaração no servidor. */
-    var missing = new Map(), guardedNames = new Set();
-    server.forEach(function (s) {
-      s.res.unresolved.forEach(function (r) {
-        if (r.guarded) { guardedNames.add(r.name); return; }
-        if (r.write || serverHas(r.name) || ES_GLOBALS.has(r.name) || GAS_GLOBALS.has(r.name)) return;
-        var e = missing.get(r.name); if (!e) missing.set(r.name, e = { name: r.name, uses: [], called: false });
-        e.uses.push({ file: s.file.name, line: r.line }); if (r.called) e.called = true;
-      });
-    });
-    scriptletCalls.forEach(function (c) {
-      if (serverHas(c.name) || ES_GLOBALS.has(c.name) || GAS_GLOBALS.has(c.name)) return;
-      var e = missing.get(c.name); if (!e) missing.set(c.name, e = { name: c.name, uses: [], called: true, scriptlet: true });
-      e.uses.push({ file: c.file, line: c.line, scriptlet: true });
-    });
-
-    function occurrenceContext(file, pos) {
-      var f = files.filter(function (x) { return x.name === file; })[0];
-      if (f.kind === 'html') {
-        if (inRanges(scriptletRanges.get(file) || [], pos)) return 'num trecho <? ?> do .html';
-        if (inRanges(clientRanges.get(file) || [], pos)) return 'no \x3cscript> da tela';
-        return 'no HTML';
-      }
-      if (inRanges(stringRanges.get(file) || [], pos)) return 'entre aspas (pode ser menu, acionador ou tela)';
-      var t = f.text, a = pos - 1; while (a >= 0 && /\s/.test(t[a])) a--;
-      if (t[a] === '.') return 'depois de um ponto';
-      var b = pos; while (b < t.length && acorn.isIdentifierChar(t.codePointAt(b), true)) b++; while (b < t.length && /\s/.test(t[b])) b++;
-      return t[b] === '(' ? 'chamada' : 'uso sem parênteses';
-    }
-    function liveOccurrences(word, skipStart, skipFile) {
+    /* Onde um nome aparece em todos os arquivos, e o que cada ocorrência é. */
+    function occurrences(word, skipFile, skipStart) {
       var out = [];
       files.forEach(function (f) {
-        var unreadable = !inert.has(f.name);
+        var m = meta.get(f.name);
         wordOccurrences(f.text, word).forEach(function (pos) {
           if (f.name === skipFile && pos === skipStart) return;
-          var ranges = inert.get(f.name) || { js: [], html: [] };
-          if (!unreadable && inRanges(ranges.js, pos)) return;
-          if (!unreadable && inRanges(ranges.html, pos) && !inRanges(scriptletRanges.get(f.name) || [], pos)) return;
-          out.push({ file: f.name, line: lineAt(f.starts, pos), context: unreadable ? 'arquivo que a página não conseguiu ler' : occurrenceContext(f.name, pos) });
+          var o = { file: f.name, pos: pos, line: lineAt(f.starts, pos) };
+          if (!m.readable) { o.kind = 'unreadable'; o.context = 'arquivo que a página não conseguiu ler'; out.push(o); return; }
+          if (f.kind === 'gs') {
+            if (inRanges(m.jsComments, pos)) return;
+            if (inRanges(m.messages, pos)) { o.kind = 'message'; o.context = 'numa mensagem de texto'; out.push(o); return; }
+            if (inRanges(m.strings, pos)) { o.kind = 'string'; o.context = 'entre aspas (pode ser menu, acionador ou tela)'; out.push(o); return; }
+            var t = f.text, a = pos - 1; while (a >= 0 && /\s/.test(t[a])) a--;
+            var b = pos + word.length; while (b < t.length && /\s/.test(t[b])) b++;
+            o.kind = 'code';
+            o.context = t[a] === '.' ? 'depois de um ponto' : /typeof\s*$/.test(t.slice(Math.max(0, a - 6), a + 1)) ? 'typeof' : t[b] === '(' ? 'chamada' : 'uso sem parênteses';
+            out.push(o); return;
+          }
+          if (inRanges(m.scriptlets, pos)) {
+            if (inRanges(m.scriptletComments, pos)) return;
+            if (inRanges(m.messages, pos)) { o.kind = 'message'; o.context = 'numa mensagem de texto'; out.push(o); return; }
+            o.kind = 'scriptlet'; o.context = 'num trecho <? ?> do .html'; out.push(o); return;
+          }
+          if (inRanges(m.htmlComments, pos) || inRanges(m.jsComments, pos)) return;
+          if (inRanges(m.messages, pos)) { o.kind = 'message'; o.context = 'numa mensagem de texto'; out.push(o); return; }
+          o.kind = 'html'; o.context = inRanges(m.clientRanges, pos) ? 'no \x3cscript> da tela' : 'no HTML';
+          out.push(o);
         });
       });
       return out;
     }
     function fmtOcc(o) { return o.file + ', linha ' + o.line + ' (' + o.context + ')'; }
+    function blocking(list) { return list.filter(function (o) { return o.kind !== 'message'; }); }
+    function messageNotes(list, base) { list.filter(function (o) { return o.kind === 'message'; }).forEach(function (o) { report.notes.push('O nome "' + base + '" aparece numa mensagem de texto (' + o.file + ', linha ' + o.line + '). Isso não impede a correção.'); }); }
 
-    var handled = new Set();
+    /* Usos sem declaração no servidor (código .gs e trechos <? ?>). */
+    var missing = new Map(), guardedNames = new Set();
+    function addMissing(name, use, called, scriptlet) {
+      var e = missing.get(name); if (!e) missing.set(name, e = { name: name, uses: [], called: false, scriptlet: false });
+      e.uses.push(use); if (called) e.called = true; if (scriptlet) e.scriptlet = true;
+    }
+    server.forEach(function (s) {
+      s.res.unresolved.forEach(function (r) {
+        if (r.guarded) { guardedNames.add(r.name); return; }
+        if (r.write || serverHas(r.name) || ES_GLOBALS.has(r.name) || GAS_GLOBALS.has(r.name)) return;
+        addMissing(r.name, { file: s.file.name, line: r.line }, r.called, false);
+      });
+    });
+    scriptletUses.forEach(function (u) {
+      if (serverHas(u.name) || ES_GLOBALS.has(u.name) || GAS_GLOBALS.has(u.name)) return;
+      addMissing(u.name, { file: u.file, line: u.line, scriptlet: true }, u.called, true);
+    });
+
+    var handled = new Set([TARGET]), unknownNames = [];
     missing.forEach(function (e, name) {
+      if (name === TARGET) return; // tratado na conferência da função principal, abaixo
       if (/_$/.test(name)) {
         var base = name.slice(0, -1), decls = serverTop.get(base) || [];
         var fnDecls = decls.filter(function (d) { return d.kind === 'function'; });
         if (decls.length && fnDecls.length === decls.length) {
           handled.add(name); handled.add(base);
-          if (fnDecls.length > 1) { report.blockers.push({ code: 'NOME_AMBIGUO', name: name, text: '"' + base + '" é declarada ' + fnDecls.length + ' vezes. Não dá para saber qual delas renomear.', lines: where(fnDecls).concat(where(e.uses).map(function (w) { return w + ' (chamada com _)'; })) }); return; }
-          var d = fnDecls[0], others = liveOccurrences(base, d.start, d.file);
-          if (others.length) { report.blockers.push({ code: 'NOME_AMBIGUO', name: name, text: 'O código chama "' + name + '", que não existe, e a função se chama "' + base + '". Mas o nome antigo "' + base + '" também aparece em outros pontos. Acrescentar o _ na declaração quebraria esses pontos.', lines: ['declaração: ' + d.file + ', linha ' + d.line].concat(others.map(fmtOcc)).concat(where(e.uses).map(function (w) { return w + ' (chamada com _)'; })) }); return; }
+          var callsWith = where(e.uses).map(function (w) { return w + ' (chamada com _)'; });
+          if (fnDecls.length > 1) { report.blockers.push({ code: 'NOME_AMBIGUO', name: name, text: '"' + base + '" é declarada ' + fnDecls.length + ' vezes nos arquivos .gs. Não dá para saber qual delas renomear.', lines: where(fnDecls).concat(callsWith) }); return; }
+          var d = fnDecls[0], occ = occurrences(base, d.file, d.start), stop = blocking(occ);
+          messageNotes(occ, base);
+          if (stop.length) { report.blockers.push({ code: 'NOME_AMBIGUO', name: name, text: 'O código chama "' + name + '", que não existe, e a função se chama "' + base + '". Mas o nome antigo "' + base + '" também é usado nos pontos abaixo. Acrescentar o _ só na declaração faria esses pontos pararem de funcionar.', lines: ['declaração: ' + d.file + ', linha ' + d.line].concat(stop.map(fmtOcc)).concat(callsWith) }); return; }
           var fix = { from: base, to: name, file: d.file, line: d.line, start: d.start, uses: where(e.uses) };
           if (d.file !== files[0].name) report.blockers.push({ code: 'DECLARACAO_EM_OUTRO_ARQUIVO', name: name, text: 'A correção é acrescentar o _ na declaração "' + base + '", que está em ' + d.file + ', linha ' + d.line + '. A página só gera o Código.gs; faça essa edição no editor, no arquivo ' + d.file + '.', lines: ['declaração: ' + d.file + ', linha ' + d.line].concat(fix.uses) });
           else report.fixes.push(fix);
           return;
         }
       }
-      if (serverTop.has(name + '_')) return; // tratado como nome antigo, abaixo
-      var watched = /_$/.test(name) || /^p2\d\d/i.test(name) || /^(fin|FIN)[A-Z_]/.test(name);
-      if (watched && guardedNames.has(name)) report.checks.push({ code: 'CHAMADA_CONDICIONAL', name: name, text: 'O código usa "' + name + '", que não foi encontrada, mas também testa "typeof ' + name + '". Se o uso só acontece quando a função existe, não é erro; confira.', lines: where(e.uses) });
-      else if (watched) report.problems.push({ code: 'NAO_DECLARADA', name: name, text: (e.scriptlet ? 'Um trecho <? ?> chama' : 'O código usa') + ' "' + name + '", que não foi encontrada em nenhum arquivo .gs enviado. Se ela estiver num arquivo que você não enviou, adicione-o e repita.', lines: where(e.uses) });
-      else if (e.called) report.checks.push({ code: 'CHAMADA_DESCONHECIDA', name: name, text: (e.scriptlet ? 'Um trecho <? ?> chama "' + name + '", que não foi encontrada nos arquivos .gs enviados. Pode ser algo entregue ao modelo (template.' + name + ' = ...); confira.' : 'O código chama "' + name + '", que não foi encontrada nos arquivos enviados nem entre os serviços conhecidos. Pode ser de uma biblioteca; confira.'), lines: where(e.uses) });
+      if (serverTop.has(name + '_')) {
+        handled.add(name);
+        report.problems.push({ code: 'NOME_ANTIGO', name: name, text: 'A função se chama "' + name + '_", mas o código ainda usa "' + name + '", que não existe. Num .gs, acrescente o _ também nesses pontos (é o mesmo tipo de correção). Num trecho <? ?>, envie o relatório.', lines: where(e.uses).map(function (w, i) { return w + (e.uses[i].scriptlet ? ' (trecho <? ?>)' : ''); }) });
+        return;
+      }
+      if (watchedName(name)) {
+        if (guardedNames.has(name)) report.checks.push({ code: 'CHAMADA_CONDICIONAL', name: name, text: 'O código usa "' + name + '", que não foi encontrada, mas também testa "typeof ' + name + '". Se o uso só acontece quando a função existe, não é erro; confira.', lines: where(e.uses) });
+        else report.problems.push({ code: 'NAO_DECLARADA', name: name, text: (e.scriptlet ? 'Um trecho <? ?> usa' : 'O código usa') + ' "' + name + '", que não foi encontrada em nenhum arquivo .gs enviado. Se ela estiver num arquivo que você não enviou, adicione-o e repita.', lines: where(e.uses) });
+        return;
+      }
+      unknownNames.push({ name: name, use: e.uses[0], count: e.uses.length, scriptlet: e.scriptlet });
     });
+    if (unknownNames.length) {
+      unknownNames.sort(function (a, b) { return a.name.localeCompare(b.name); });
+      report.checks.push({ code: 'NOMES_DESCONHECIDOS', name: '', text: 'Nomes usados no servidor que não foram encontrados nos arquivos enviados nem entre os serviços conhecidos. Se estiverem em arquivos .gs que você não enviou, numa biblioteca ou forem passados a um modelo (template.nome = ...), não são erro.', lines: unknownNames.slice(0, 40).map(function (u) { return u.name + ': ' + u.use.file + ', linha ' + u.use.line + (u.count > 1 ? ' (e mais ' + (u.count - 1) + ')' : ''); }).concat(unknownNames.length > 40 ? ['(e mais ' + (unknownNames.length - 40) + ' nomes)'] : []) });
+    }
 
-    /* Textos que são exatamente um nome (como os de menus e acionadores), indexados uma vez. */
-    var stringIndex = new Map();
-    server.forEach(function (s) {
-      s.res.strings.forEach(function (st) {
-        if (st.value.length < 6 || st.value.length > 120 || !/^[\p{ID_Start}$_][\p{ID_Continue}$\u200c\u200d]*$/u.test(st.value)) return;
-        var l = stringIndex.get(st.value); if (!l) stringIndex.set(st.value, l = []);
-        l.push(s.file.name + ', linha ' + st.line);
-      });
-    });
-    /* Nome antigo que ficou depois de uma correção já feita (por exemplo, pela R1). */
-    serverTop.forEach(function (list, name) {
-      if (!/_$/.test(name) || handled.has(name)) return;
-      var base = name.slice(0, -1);
-      if (!base || serverHas(base) || handled.has(base)) return;
-      var code = [], quoted = [];
-      var e = missing.get(base);
-      if (e) e.uses.forEach(function (u) { code.push(u.file + ', linha ' + u.line + (u.scriptlet ? ' (trecho <? ?>)' : '')); });
-      if (base.length >= 6 && /[A-Z_]/.test(base)) (stringIndex.get(base) || []).forEach(function (w) { quoted.push(w); });
-      if (code.length) report.problems.push({ code: 'NOME_ANTIGO', name: base, text: 'A função se chama "' + name + '", mas o código ainda usa o nome antigo "' + base + '", que não existe. Num .gs, acrescente o _ também nesses pontos (é o mesmo tipo de correção). Num trecho <? ?>, envie o relatório.', lines: code });
-      if (quoted.length) report.checks.push({ code: 'NOME_ANTIGO_ENTRE_ASPAS', name: base, text: 'O nome antigo "' + base + '" aparece entre aspas. Se for o nome de um item de menu ou de um acionador, ele deixou de funcionar quando a função ganhou o _. Não altere; envie o relatório.', lines: quoted });
-    });
+    /* A função desta correção: p211Base_getInteressesSnapshot. */
+    var dT = serverTop.get(TARGET) || [], dT_ = serverTop.get(TARGET_) || [];
+    var usesT_ = serverRefNames.has(TARGET_) || runs.some(function (r) { return r.target === TARGET_; });
+    report.targetState = dT_.length && !dT.length ? 'corrigido' : dT.length && !dT_.length ? 'sem_' : dT.length ? 'duas' : 'ausente';
+    if (!dT.length && !dT_.length) {
+      if (!report.blockers.some(function (b) { return b.code === 'SEM_PACOTE' || b.code === 'PACOTE_INCOMPLETO'; }))
+        report.blockers.push({ code: 'NOME_NAO_ENCONTRADO', name: TARGET, text: 'A declaração de ' + TARGET + ' não foi encontrada nos arquivos .gs enviados, nem com nem sem o _. Ela deve estar em outro arquivo .gs do projeto.', lines: usesT_ ? where(missing.has(TARGET_) ? missing.get(TARGET_).uses : []).map(function (w) { return w + ' (chamada com _)'; }) : [] });
+      if (missing.has(TARGET_)) report.problems = report.problems.filter(function (p) { return p.name !== TARGET_; });
+    } else if (dT.length && !dT_.length && !usesT_) {
+      var inUnread = [];
+      files.forEach(function (f, k) { if (!report.files[k].ok) wordOccurrences(f.text, TARGET_).forEach(function (pos) { inUnread.push(f.name + ', linha ' + lineAt(f.starts, pos) + ' (arquivo que a página não conseguiu ler)'); }); });
+      report.blockers.push({ code: 'CHAMADA_NAO_ENVIADA', name: TARGET, text: inUnread.length
+        ? 'A declaração ainda está sem o _, e a chamada ' + TARGET_ + ' parece estar num arquivo que a página não conseguiu ler. Faça a correção manual (passo 2).'
+        : 'A declaração ainda está sem o _, mas a chamada ' + TARGET_ + ' não aparece nos arquivos enviados. Ela deve estar em outro arquivo .gs do projeto.', lines: where(dT).map(function (w) { return 'declaração: ' + w; }).concat(inUnread) });
+    } else if (dT_.length && !dT.length) {
+      var occT = occurrences(TARGET, null, -1);
+      messageNotes(occT, TARGET);
+      var codeT = occT.filter(function (o) { return o.kind === 'code'; });
+      var otherT = occT.filter(function (o) { return o.kind !== 'code' && o.kind !== 'message'; });
+      if (codeT.length) report.problems.push({ code: 'NOME_ANTIGO', name: TARGET, text: 'A função já se chama ' + TARGET_ + ', mas o código ainda usa o nome antigo, sem o _, nos pontos abaixo. Acrescente o _ também neles (é a mesma correção de um caractere), salve e diagnostique de novo.', lines: codeT.map(fmtOcc) });
+      if (otherT.length) report.problems.push({ code: 'NOME_ANTIGO_TEXTO', name: TARGET, text: 'O nome antigo, sem o _, ainda aparece nos pontos abaixo (entre aspas, num .html ou num trecho <? ?>). Se for um menu, um acionador ou uma chamada da tela, esse ponto deixou de funcionar. Não altere; envie o relatório.', lines: otherT.map(fmtOcc) });
+    } else if (dT.length && dT_.length) {
+      report.checks.push({ code: 'DUAS_FORMAS', name: TARGET, text: 'Existem as duas declarações, com e sem o _. A chamada com _ funciona; confira se a declaração antiga ainda é necessária.', lines: where(dT).concat(where(dT_)) });
+    }
 
     /* Chamadas da tela ao servidor. */
-    var runCount = runs.length;
     runs.forEach(function (r) {
       var loc = r.file + ', linha ' + r.line + (r.embedded ? ' (dentro de um texto)' : '');
       if (/_$/.test(r.target)) report.problems.push({ code: 'RUN_PRIVADA', name: r.target, text: 'A tela chama "' + r.target + '" por google.script.run. Funções terminadas em _ não podem ser chamadas assim; esse botão ou ação falha no aplicativo.', lines: [loc] });
       else if (serverFn(r.target)) return;
-      else if (serverTop.has(r.target + '_')) report.problems.push({ code: 'RUN_NOME_ANTIGO', name: r.target, text: 'A tela chama "' + r.target + '", mas no servidor a função se chama "' + r.target + '_" (privada). Não altere nada; envie o relatório.', lines: [loc] });
+      else if (serverTop.has(r.target + '_')) { if (r.target !== TARGET) report.problems.push({ code: 'RUN_NOME_ANTIGO', name: r.target, text: 'A tela chama "' + r.target + '", mas no servidor a função se chama "' + r.target + '_" (privada). Não altere nada; envie o relatório.', lines: [loc] }); }
       else if (serverTop.has(r.target)) report.checks.push({ code: 'RUN_NAO_FUNCTION', name: r.target, text: 'A tela chama "' + r.target + '", que no servidor não é declarada com function. Confira se google.script.run consegue chamá-la.', lines: [loc] });
       else report.checks.push({ code: 'RUN_NAO_ENCONTRADA', name: r.target, text: 'A tela chama "' + r.target + '", que não foi encontrada nos arquivos .gs enviados. Pode estar num arquivo que você não enviou.', lines: [loc] });
     });
-    runUnknown.forEach(function (u) { report.checks.push({ code: 'RUN_NAO_ANALISADA', name: 'google.script.run', text: 'Há uma chamada google.script.run escrita de um jeito que a página não consegue seguir. Ela não foi conferida.', lines: [u.file + ', linha ' + u.line] }); });
+    runUnknown.forEach(function (u) { report.checks.push({ code: 'RUN_NAO_ANALISADA', name: 'google.script.run', text: 'Há um uso de google.script.run que a página não consegue seguir (por exemplo, guardado de um jeito incomum). Ele não foi conferido.', lines: [u.file + ', linha ' + u.line] }); });
 
-    /* Tela chamando direto uma função que só existe no servidor. */
-    var seenClient = new Set();
-    clientUnresolved.forEach(function (c) {
-      if (clientDecls.has(c.name) || BROWSER_GLOBALS.has(c.name) || ES_GLOBALS.has(c.name)) return;
-      var key = c.name + '@' + c.file + ':' + c.line; if (seenClient.has(key)) return; seenClient.add(key);
-      if (serverHas(c.name)) report.problems.push({ code: 'TELA_CHAMA_SERVIDOR', name: c.name, text: 'O \x3cscript> da tela chama "' + c.name + '" diretamente, mas essa função só existe no servidor. Na tela, isso dá "is not defined"; a chamada precisa passar por google.script.run.', lines: [c.file + ', linha ' + c.line] });
-      else if (/_$/.test(c.name) || /^p2\d\d/i.test(c.name)) report.checks.push({ code: 'TELA_NAO_ENCONTRADA', name: c.name, text: 'O \x3cscript> da tela chama "' + c.name + '", que não foi encontrada nos arquivos .html enviados.', lines: [c.file + ', linha ' + c.line] });
+    /* Telas: cada página com as páginas que ela inclui (ou que a incluem). */
+    var byBase = new Map();
+    pages.forEach(function (p) { byBase.set(baseName(p.file), p); });
+    var parent = new Map();
+    function findRoot(x) { while (parent.get(x) !== x) { parent.set(x, parent.get(parent.get(x))); x = parent.get(x); } return x; }
+    pages.forEach(function (p) { parent.set(p.file, p.file); });
+    pages.forEach(function (p) { p.includes.forEach(function (inc) { var q = byBase.get(baseName(inc)); if (q && q !== p) parent.set(findRoot(p.file), findRoot(q.file)); }); });
+    var groupDecls = new Map(), allClientDecls = new Map();
+    pages.forEach(function (p) {
+      var g = findRoot(p.file), set = groupDecls.get(g); if (!set) groupDecls.set(g, set = new Set());
+      p.decls.forEach(function (n) { set.add(n); var l = allClientDecls.get(n); if (!l) allClientDecls.set(n, l = []); l.push(p.file); });
     });
+    var clientUnknown = new Map();
+    pages.forEach(function (p) {
+      p.lexical.forEach(function (lines, name) { if (lines.length > 1) report.checks.push({ code: 'TELA_DECLARACAO_REPETIDA', name: name, text: 'Na mesma página, o nome é declarado mais de uma vez com let, const ou class em blocos \x3cscript> diferentes. O navegador recusa o segundo bloco.', lines: lines.map(function (l) { return p.file + ', linha ' + l; }) }); });
+      var seen = new Set(), decls = groupDecls.get(findRoot(p.file));
+      p.unresolved.forEach(function (c) {
+        if (decls.has(c.name) || BROWSER_GLOBALS.has(c.name) || ES_GLOBALS.has(c.name)) return;
+        var key = c.name + ':' + c.line; if (seen.has(key)) return; seen.add(key);
+        var loc = p.file + ', linha ' + c.line;
+        if (allClientDecls.has(c.name)) report.checks.push({ code: 'TELA_OUTRA_PAGINA', name: c.name, text: 'A tela usa "' + c.name + '", que existe em ' + allClientDecls.get(c.name).join(', ') + ', mas esta página não parece incluir esse arquivo. Confira.', lines: [loc] });
+        else if (serverHas(c.name)) report.checks.push({ code: 'TELA_CHAMA_SERVIDOR', name: c.name, text: 'A tela usa "' + c.name + '", que não foi encontrada nos arquivos .html enviados e existe no servidor (.gs). Se ela estiver em outro .html incluído na página, envie-o. Se só existir no servidor, a tela precisa chamá-la por google.script.run.', lines: [loc] });
+        else { var u = clientUnknown.get(c.name); if (!u) clientUnknown.set(c.name, u = { name: c.name, loc: loc, count: 0 }); u.count++; }
+      });
+    });
+    if (clientUnknown.size) {
+      var cu = Array.from(clientUnknown.values()).sort(function (a, b) { return a.name.localeCompare(b.name); });
+      report.checks.push({ code: 'TELA_NAO_ENCONTRADA', name: '', text: 'Nomes usados nas telas (.html) que não foram encontrados nos arquivos .html enviados. Se vierem de uma biblioteca carregada pela página ou de um .html que você não enviou, não são erro.', lines: cu.slice(0, 40).map(function (u) { return u.name + ': ' + u.loc + (u.count > 1 ? ' (e mais ' + (u.count - 1) + ')' : ''); }).concat(cu.length > 40 ? ['(e mais ' + (cu.length - 40) + ' nomes)'] : []) });
+    }
 
-    report.stats = { serverFunctions: Array.from(serverTop.values()).filter(function (l) { return l.some(function (d) { return d.kind === 'function'; }); }).length, runCalls: runCount };
+    report.stats = {
+      serverFunctions: Array.from(serverTop.values()).filter(function (l) { return l.some(function (d) { return d.kind === 'function'; }); }).length,
+      runCalls: runs.length
+    };
     return report;
   }
 
@@ -7355,32 +7806,48 @@ THE SOFTWARE.
     if (primaryText.length > MAX_CHARS) throw new UserError('GRANDE', 'O código tem ' + primaryText.length.toLocaleString('pt-BR') + ' caracteres; o limite desta página é 6 milhões. Use a correção manual (passos 1 a 6).');
     if (/^\s*(?:<!doctype|<html)/i.test(primaryText)) throw new UserError('HTML', 'O campo do Código.gs recebeu um arquivo HTML. Cole ali só o Código.gs; os arquivos .html vão em "Outros arquivos do projeto".');
     var notes = [], files = [{ name: 'Código.gs', text: primaryText, kind: 'gs', primary: true }];
+    var primaryNames, kept = [];
+    function getPrimaryNames() { if (primaryNames === undefined) primaryNames = topNameList(primaryText); return primaryNames; }
     extras.forEach(function (x) {
-      if (isPrimaryName(x.name) || sameText(x.text, primaryText)) { notes.push('O arquivo "' + x.name + '" é o próprio Código.gs e foi ignorado em "Outros arquivos".'); return; }
-      if (files.some(function (f) { return f.name === x.name; })) { notes.push('O arquivo "' + x.name + '" foi escolhido duas vezes; a segunda cópia foi ignorada.'); return; }
-      files.push({ name: x.name, text: x.text, kind: classify(x.name, x.text), primary: false });
+      var name = nfc(x.name), kind = classify(name, x.text);
+      if (isPrimaryName(name) || sameText(x.text, primaryText)) { notes.push('O arquivo "' + name + '" é o próprio Código.gs e foi ignorado em "Outros arquivos".'); return; }
+      if (files.some(function (f) { return f.name === name; })) { notes.push('O arquivo "' + name + '" foi escolhido duas vezes; a segunda cópia foi ignorada.'); return; }
+      if (kind === 'gs') {
+        var names = topNameList(x.text);
+        if (looksLikeCopy(getPrimaryNames(), names)) { notes.push('O arquivo "' + name + '" parece uma cópia do Código.gs (quase todas as declarações são iguais) e foi ignorado. Se ele estiver dentro do projeto do Apps Script, apague-o: duas cópias no mesmo projeto fazem o Apps Script recusar o código.'); return; }
+        var twin = kept.filter(function (k) { return k.kind === 'gs' && (sameText(k.text, x.text) || looksLikeCopy(k.names, names)); })[0];
+        if (twin) { notes.push('O arquivo "' + name + '" parece uma cópia de "' + twin.name + '" e foi ignorado.'); return; }
+        kept.push({ name: name, text: x.text, kind: kind, names: names });
+      } else {
+        var twinH = kept.filter(function (k) { return k.kind === 'html' && sameText(k.text, x.text); })[0];
+        if (twinH) { notes.push('O arquivo "' + name + '" é igual a "' + twinH.name + '" e foi ignorado.'); return; }
+        kept.push({ name: name, text: x.text, kind: kind });
+      }
+      files.push({ name: name, text: x.text, kind: kind, primary: false });
     });
     var report = analyze(files);
     report.notes = notes.concat(report.notes);
     var primaryInfo = report.files[0];
     if (!primaryInfo.ok) throw new UserError('SINTAXE', 'A página não conseguiu ler o Código.gs' + (primaryInfo.error.line ? ' (linha ' + primaryInfo.error.line + (primaryInfo.error.column ? ', coluna ' + primaryInfo.error.column : '') + ')' : '') + ': ' + primaryInfo.error.message + '.', primaryInfo.error);
-    report.files.slice(1).forEach(function (fi) { if (!fi.ok) report.checks.push({ code: 'ARQUIVO_NAO_LIDO', name: fi.name, text: 'A página não conseguiu ler este arquivo' + (fi.error && fi.error.line ? ' (linha ' + fi.error.line + ')' : '') + ': ' + (fi.error ? fi.error.message : '') + '. Ele foi conferido só como texto, para procurar o nome antigo.', lines: [fi.name] }); });
+    report.files.slice(1).forEach(function (fi) { if (!fi.ok) report.checks.push({ code: 'ARQUIVO_NAO_LIDO', name: fi.name, text: 'A página não conseguiu ler este arquivo' + (fi.error && fi.error.line ? ' (linha ' + fi.error.line + ')' : '') + ': ' + (fi.error ? fi.error.message : '') + '. Ele foi conferido só como texto, para procurar o nome desta correção.', lines: [fi.name] }); });
 
     report.code = null;
     if (!report.blockers.length && report.fixes.length) {
       var code = primaryText;
       report.fixes.slice().sort(function (a, b) { return b.start - a.start; }).forEach(function (fx) {
         var at = fx.start + fx.from.length;
-        if (code.slice(fx.start, at) !== fx.from) throw new UserError('INTERNO', 'Falha interna ao localizar a declaração de ' + fx.from + '. Nada foi gerado.');
+        if (code.slice(fx.start, at) !== fx.from) throw new UserError('INTERNO', 'Falha interna ao localizar a declaração de ' + fx.from + '.');
         code = code.slice(0, at) + '_' + code.slice(at);
       });
-      if (code.length !== primaryText.length + report.fixes.length) throw new UserError('INTERNO', 'Falha interna: a alteração passou do número de caracteres previsto. Nada foi gerado.');
+      if (code.length !== primaryText.length + report.fixes.length) throw new UserError('INTERNO', 'Falha interna: a alteração passou do número de caracteres previsto.');
       var again = analyze([{ name: 'Código.gs', text: code, kind: 'gs', primary: true }].concat(files.slice(1)));
-      if (!again.files[0].ok) throw new UserError('INTERNO', 'O código corrigido não pôde ser lido de novo. Nada foi gerado.');
-      var stillMissing = again.fixes.length || again.blockers.some(function (b) { return b.code === 'NOME_AMBIGUO' || b.code === 'DECLARACAO_EM_OUTRO_ARQUIVO'; });
-      if (stillMissing) throw new UserError('INTERNO', 'A conferência depois da correção não confirmou a ligação. Nada foi gerado.');
+      if (!again.files[0].ok) throw new UserError('INTERNO', 'O código corrigido não pôde ser lido de novo.');
+      var still = new Set();
+      again.fixes.forEach(function (x) { still.add(x.to); });
+      again.blockers.forEach(function (b) { if (b.name) still.add(b.name); });
+      again.problems.forEach(function (p) { if (p.code === 'NAO_DECLARADA' || p.code === 'NOME_ANTIGO') still.add(p.name); });
+      if (report.fixes.some(function (fx) { return still.has(fx.to) || still.has(fx.from); })) throw new UserError('INTERNO', 'A conferência depois da correção não confirmou a ligação.');
       report.code = code;
-      report.after = again;
     }
     return report;
   }
@@ -7389,21 +7856,24 @@ THE SOFTWARE.
   UserError.prototype = Object.create(Error.prototype);
   UserError.prototype.name = 'UserError';
 
-  root.P211R3 = { analyzeProject: analyzeProject, analyze: analyze, runTargetsInText: runTargetsInText, wordOccurrences: wordOccurrences, classify: classify, MAX_CHARS: MAX_CHARS, UserError: UserError };
+  root.P211R3 = { analyzeProject: analyzeProject, analyze: analyze, runTargetsInText: runTargetsInText, wordOccurrences: wordOccurrences, classify: classify, MAX_CHARS: MAX_CHARS, TARGET: TARGET, UserError: UserError };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 </script>
 <script id="ui">(function () {
   'use strict';
   if (typeof document === 'undefined') return;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { extras: [], result: null, loadedName: null };
+  var state = { extras: [], result: null, loadedName: null, reading: 0, busy: false, lastEnd: 0 };
   var MAX_BYTES = 24000000;
   var ready = !!(window.acorn && window.P211R3);
   var MAX = ready ? window.P211R3.MAX_CHARS : 6000000;
+  var TARGET = 'p211Base_getInteressesSnapshot';
   var IS_MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '');
   var COPY_KEY = IS_MAC ? '⌘C' : 'Ctrl+C';
+  var SEND_TO = 'para quem está ajudando você com a Central Financeira (por exemplo, na conversa em que você recebeu este guia)';
 
   function fmt(n) { return Number(n).toLocaleString('pt-BR'); }
+  function now() { return window.performance && performance.now ? performance.now() : Date.now(); }
   function el(tag, attrs, children) {
     var e = document.createElement(tag);
     if (attrs) Object.keys(attrs).forEach(function (k) { if (k === 'text') e.textContent = attrs[k]; else if (k === 'className') e.className = attrs[k]; else e.setAttribute(k, attrs[k]); });
@@ -7431,8 +7901,26 @@ THE SOFTWARE.
     $('sourceInfo').textContent = n ? (state.loadedName ? 'Carregado de “' + state.loadedName + '”: ' : 'Código colado: ') + fmt(n) + ' caracteres. Fica só na memória desta página.' : 'Nenhum código fornecido.';
   }
   function extraInfo() {
-    $('extraInfo').textContent = state.extras.length ? state.extras.length + ' arquivo(s) para consulta: ' + state.extras.map(function (x) { return x.name; }).join(', ') + '.' : 'Nenhum arquivo adicional.';
-    $('clearExtras').hidden = !state.extras.length;
+    var box = $('extraInfo'), list = $('extraList');
+    box.textContent = state.extras.length ? state.extras.length + ' arquivo(s) para consulta. Para acrescentar outro, escolha de novo: os anteriores continuam na lista.' : 'Nenhum arquivo adicional.';
+    list.textContent = '';
+    state.extras.forEach(function (x, i) {
+      var rm = el('button', { type: 'button', className: 'link', text: 'Remover', 'aria-label': 'Remover ' + x.name });
+      rm.addEventListener('click', function () {
+        state.extras.splice(i, 1); extraInfo(); clearResult();
+        var next = list.querySelectorAll('button')[Math.min(i, state.extras.length - 1)];
+        (next || $('extraFiles')).focus();
+      });
+      list.appendChild(el('li', null, [el('span', { className: 'fname', text: x.name }), ' ', rm]));
+    });
+    list.hidden = !state.extras.length;
+    $('clearExtras').hidden = state.extras.length < 2;
+  }
+  /* O botão não é desativado de verdade (o foco do teclado ficaria perdido); cliques durante a análise são ignorados. */
+  function updateButton() {
+    var b = $('generate'), wait = state.busy || state.reading > 0;
+    b.setAttribute('aria-disabled', wait ? 'true' : 'false');
+    b.textContent = state.busy ? 'Analisando…' : state.reading > 0 ? 'Lendo o arquivo…' : 'Diagnosticar e corrigir';
   }
   function resetAll() {
     $('source').value = '';
@@ -7442,61 +7930,101 @@ THE SOFTWARE.
     clearResult(); sourceInfo(); extraInfo();
   }
 
-  /* Leitura de arquivos: UTF-8 estrito (ou UTF-16 com marca), mesmo limite do texto colado. */
-  function readFile(file) {
-    if (file.size > MAX_BYTES) return Promise.reject(new Error('O arquivo “' + file.name + '” é grande demais para esta página (limite de 6 milhões de caracteres). Use a correção manual.'));
-    return file.arrayBuffer().then(function (buf) {
+  /* Leitura de arquivos: UTF-8 estrito (ou UTF-16 com marca); quebras de linha do Windows contam como uma só. */
+  function bytesOf(file) {
+    if (file.arrayBuffer) return file.arrayBuffer();
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(r.result); };
+      r.onerror = function () { reject(new Error('Não foi possível ler o arquivo “' + file.name + '”.')); };
+      r.readAsArrayBuffer(file);
+    });
+  }
+  function readFile(file, extra) {
+    return Promise.resolve().then(function () {
+      if (file.size > MAX_BYTES) throw new Error('O arquivo “' + file.name + '” é grande demais para esta página (limite de 6 milhões de caracteres). Use a correção manual.');
+      return bytesOf(file);
+    }).then(function (buf) {
       var b = new Uint8Array(buf), text;
       if (b.length >= 2 && b[0] === 0xFF && b[1] === 0xFE) text = new TextDecoder('utf-16le').decode(buf);
       else if (b.length >= 2 && b[0] === 0xFE && b[1] === 0xFF) text = new TextDecoder('utf-16be').decode(buf);
       else {
         try { text = new TextDecoder('utf-8', { fatal: true }).decode(buf); }
-        catch (e) { throw new Error('O arquivo “' + file.name + '” não está em UTF-8 (provavelmente foi salvo como ANSI). Para não estragar os acentos, nada foi carregado. Cole o código direto do editor na caixa, ou salve a cópia de novo escolhendo a codificação UTF-8.'); }
+        catch (e) {
+          throw new Error(extra
+            ? 'O arquivo “' + file.name + '” não está em UTF-8 (provavelmente foi salvo como ANSI) e não foi carregado. Abra essa cópia, salve de novo escolhendo a codificação UTF-8 (no Bloco de Notas: Salvar como → Codificação: UTF-8) e escolha o arquivo outra vez. Não cole esse arquivo na caixa do Código.gs.'
+            : 'O arquivo “' + file.name + '” não está em UTF-8 (provavelmente foi salvo como ANSI). Para não estragar os acentos, nada foi carregado. Cole o código direto do editor na caixa, ou salve a cópia de novo escolhendo a codificação UTF-8.');
+        }
       }
+      text = text.replace(/\r\n?/g, '\n');
       if (text.length > MAX) throw new Error('O arquivo “' + file.name + '” tem ' + fmt(text.length) + ' caracteres; o limite desta página é 6 milhões. Use a correção manual.');
       return text;
     });
   }
+  function startReading() { state.reading++; clearResult(); updateButton(); setStatus('Lendo o arquivo…'); }
+  function endReading() { state.reading = Math.max(0, state.reading - 1); updateButton(); }
 
   $('source').addEventListener('input', function () { state.loadedName = null; clearResult(); sourceInfo(); });
   $('sourceFile').addEventListener('change', function () {
     var input = this, f = input.files && input.files[0];
     if (!f) return;
-    clearResult();
-    readFile(f).then(function (text) {
-      $('source').value = text; state.loadedName = f.name; sourceInfo();
+    startReading();
+    readFile(f, false).then(function (text) {
+      $('source').value = text; state.loadedName = f.name; sourceInfo(); clearResult();
     }).catch(function (e) {
       sourceInfo();
       setStatus('Nada foi carregado. ' + e.message + ($('source').value ? '\nA caixa continua com o código que já estava nela.' : ''), true);
-    }).then(function () { input.value = ''; });
+    }).then(function () { input.value = ''; endReading(); });
   });
+  /* Cada escolha soma arquivos à lista; um arquivo com o mesmo nome substitui o anterior. Um arquivo recusado não descarta os outros. */
+  function sameName(a, b) { try { return a.normalize('NFC') === b.normalize('NFC'); } catch (e) { return a === b; } }
   $('extraFiles').addEventListener('change', function () {
     var input = this, list = Array.prototype.slice.call(input.files || []);
     if (!list.length) return;
-    clearResult();
-    Promise.all(list.map(function (f) { return readFile(f).then(function (text) { return { name: f.name, text: text }; }); }))
-      .then(function (files) { state.extras = files; extraInfo(); })
-      .catch(function (e) { state.extras = []; extraInfo(); setStatus('Nenhum arquivo adicional foi carregado. ' + e.message, true); })
-      .then(function () { input.value = ''; });
+    startReading();
+    Promise.all(list.map(function (f) {
+      return readFile(f, true).then(function (text) { return { ok: true, name: f.name, text: text }; }, function (e) { return { ok: false, name: f.name, error: e && e.message ? e.message : String(e) }; });
+    })).then(function (results) {
+      var replaced = [], refused = [];
+      results.forEach(function (x) {
+        if (!x.ok) { refused.push(x.error); return; }
+        var at = -1;
+        state.extras.forEach(function (y, i) { if (sameName(y.name, x.name)) at = i; });
+        if (at >= 0) { state.extras[at] = { name: x.name, text: x.text }; replaced.push(x.name); }
+        else state.extras.push({ name: x.name, text: x.text });
+      });
+      extraInfo(); clearResult();
+      var msg = refused.concat(replaced.length ? ['Substituído pela versão escolhida agora: ' + replaced.join(', ') + '.'] : []);
+      if (msg.length) setStatus(msg.join('\n'), refused.length > 0);
+    }).then(function () { input.value = ''; endReading(); });
   });
-  $('clearExtras').addEventListener('click', function () { state.extras = []; extraInfo(); clearResult(); });
+  $('clearExtras').addEventListener('click', function () { state.extras = []; extraInfo(); clearResult(); $('extraFiles').focus(); });
   $('clear').addEventListener('click', function () { resetAll(); $('source').focus(); });
 
   /* Relatório. */
   var NEXT = {
-    SEM_PACOTE: 'Copie de novo o Código.gs inteiro (clique no código, Ctrl+A e Ctrl+C; no Mac, ⌘A e ⌘C) e cole aqui. Se a Programação 2.11 estiver em outro arquivo .gs, adicione-o em “Outros arquivos do projeto”.',
-    PACOTE_INCOMPLETO: 'Copie de novo o Código.gs inteiro, do início ao fim (clique no código, Ctrl+A e Ctrl+C; no Mac, ⌘A e ⌘C), e tente outra vez.',
-    NOME_AMBIGUO: 'Não altere nada e não publique. A correção manual também não serve neste caso, pelo mesmo motivo. Clique em “Copiar relatório” e envie o texto: ele só tem nomes de funções e números de linha, sem dados financeiros.',
-    DECLARACAO_EM_OUTRO_ARQUIVO: 'Faça a correção manual (passo 2) no arquivo indicado: acrescente o _ na declaração da linha mostrada. Depois siga os passos 3 a 6.'
+    SEM_PACOTE: 'Copie de novo o Código.gs inteiro (clique no código, Ctrl+A e Ctrl+C; no Mac, ⌘A e ⌘C) e cole aqui. Se a Programação 2.11 estiver em outro arquivo .gs, adicione-o em “Outros arquivos do projeto”. Se continuar, faça a correção manual (passo 2).',
+    PACOTE_INCOMPLETO: 'Copie de novo o Código.gs inteiro, do início ao fim (clique no código, Ctrl+A e Ctrl+C; no Mac, ⌘A e ⌘C), e tente outra vez. Se continuar, faça a correção manual (passo 2).',
+    NOME_AMBIGUO: 'Não altere nada e não publique: os pontos listados usam o nome antigo, e acrescentar o _ só na declaração faria esses pontos pararem de funcionar. A correção manual (passo 2) também manda parar neste caso. Clique em “Copiar relatório” e envie o texto ' + SEND_TO + '.',
+    DECLARACAO_EM_OUTRO_ARQUIVO: 'Faça a correção manual (passo 2) no arquivo indicado: acrescente o _ na declaração da linha mostrada. Depois siga os passos 3 a 6.',
+    NOME_NAO_ENCONTRADO: 'Adicione os outros arquivos .gs do projeto em “Outros arquivos do projeto” e diagnostique de novo, ou faça a correção manual (passo 2), que procura em todos os arquivos.',
+    CHAMADA_NAO_ENVIADA: 'Adicione os outros arquivos .gs do projeto em “Outros arquivos do projeto” e diagnostique de novo, ou faça a correção manual (passo 2).'
   };
+  /* Nomes longos só quebram depois de _ ou antes de uma letra maiúscula, nunca no meio de uma palavra. */
+  function nameCode(name) {
+    var c = el('code', { className: 'name' }), parts = String(name).replace(/(_)(?=.)/g, '$1\u0000').replace(/([a-zà-ÿ0-9])(?=[A-ZÀ-Ý])/g, '$1\u0000').replace(/ → /g, ' →\u0000').split('\u0000');
+    parts.forEach(function (part, i) { if (i) c.appendChild(document.createElement('wbr')); c.appendChild(document.createTextNode(part)); });
+    return c;
+  }
   function itemList(title, items, chipClass, chipText) {
     if (!items.length) return null;
     return el('div', null, [el('h3', { text: title }), el('ul', { className: 'findings' }, items.map(function (it) {
-      return el('li', null, [el('span', { className: 'chip ' + chipClass, text: chipText }), it.name ? el('code', { text: it.name }) : null, el('br'), it.text, it.lines && it.lines.length ? el('ul', null, it.lines.map(function (l) { return el('li', { text: l }); })) : null]);
+      return el('li', null, [el('span', { className: 'chip ' + chipClass, text: chipText }), it.name ? nameCode(it.name) : null, el('br'), it.text, it.lines && it.lines.length ? el('ul', null, it.lines.map(function (l) { return el('li', { text: l }); })) : null]);
     }))]);
   }
+  function filesText(r) { return r.files.map(function (f) { return f.name + (f.ok ? '' : ' (não pôde ser lido)'); }).join(', '); }
   function reportText(r, verdict) {
-    var out = ['Central Financeira · diagnóstico P211-CONEXAO-R3', verdict, 'Arquivos: ' + r.files.map(function (f) { return f.name + (f.ok ? '' : ' (não lido)'); }).join(', '), 'Versão da base: ' + r.version];
+    var out = ['Central Financeira · diagnóstico P211-CONEXAO-R4', verdict, 'Arquivos conferidos: ' + filesText(r), 'Versão da base: ' + r.version];
     function add(title, list) { if (!list.length) return; out.push('', title); list.forEach(function (it) { out.push('- ' + (it.name ? it.name + ': ' : '') + it.text); (it.lines || []).forEach(function (l) { out.push('    ' + l); }); }); }
     add('Impede a correção:', r.blockers);
     add('Correção gerada:', r.code ? r.fixes.map(function (f) { return { name: f.from, text: 'acrescentado _ na declaração (' + f.file + ', linha ' + f.line + ').' }; }) : []);
@@ -7508,6 +8036,7 @@ THE SOFTWARE.
   function render(r, ms) {
     state.result = r;
     var outcome = r.blockers.length ? 'bloqueado' : r.code ? 'corrigido' : r.problems.length ? 'problemas' : 'ok';
+    var onlyPrimary = r.files.length === 1;
     var box, verdict;
     if (outcome === 'bloqueado') {
       verdict = 'Nada foi gerado: há um motivo que impede a correção automática.';
@@ -7515,30 +8044,45 @@ THE SOFTWARE.
       box = el('div', { className: 'box bad' }, [el('strong', { text: verdict }), el('ul', null, steps.map(function (s) { return el('li', { text: s }); }))]);
     } else if (outcome === 'corrigido') {
       verdict = 'Correção gerada: ' + r.fixes.length + ' caractere(s) acrescentado(s).';
-      box = el('div', { className: 'box good' }, [el('strong', { text: verdict }), 'Substitua todo o conteúdo do Código.gs pelo código gerado (abaixo), salve e siga os passos 3 a 6.' + (r.problems.length ? ' Os problemas listados abaixo não impedem esta correção, mas podem causar outros erros: se os verificadores dos passos 3 e 4 falharem, envie o relatório.' : '')]);
+      box = el('div', { className: 'box good' }, [el('strong', { text: verdict }), el('ol', null, [
+        el('li', { text: 'Substitua todo o conteúdo do Código.gs pelo código gerado (abaixo) e salve.' }),
+        el('li', { text: 'Foram conferidos só estes arquivos: ' + filesText(r) + '. Antes de publicar, procure ' + TARGET + ' (Ctrl+F; no Mac, ⌘F) nos arquivos .gs e .html que você não enviou e abra a página Acionadores. Se o nome aparecer sem o _ fora da declaração, não publique' + (onlyPrimary ? ' (como só o Código.gs foi enviado, essa busca é obrigatória).' : '.') }),
+        el('li', { text: 'Siga os passos 3 a 6.' + (r.problems.length ? ' Os problemas listados abaixo não impedem esta correção, mas podem causar outros erros: se os verificadores dos passos 3 e 4 falharem, envie o relatório.' : '') })
+      ])]);
     } else if (outcome === 'problemas') {
-      verdict = 'Nenhuma correção automática foi gerada, mas há problemas prováveis.';
-      var hasOld = r.problems.some(function (p) { return p.code === 'NOME_ANTIGO'; });
-      box = el('div', { className: 'box alert' }, [el('strong', { text: verdict }), 'Não publique ainda. ' + (hasOld ? 'Se o nome antigo aparece em código num arquivo .gs, acrescente o _ nesses pontos (é a mesma correção de um caractere), salve e diagnostique de novo. ' : '') + 'Se não souber o que fazer, clique em “Copiar relatório” e envie o texto (só tem nomes de funções e números de linha).']);
+      var related = r.problems.filter(function (p) { return p.name === TARGET || p.name === TARGET + '_'; });
+      if (r.targetState === 'corrigido' && !related.length) {
+        outcome = 'ja_corrigido';
+        verdict = 'A correção desta conexão já está no código.';
+        box = el('div', { className: 'box good' }, [el('strong', { text: verdict }), 'A declaração já está com o _ e o nome antigo não aparece nos arquivos enviados (' + filesText(r) + '). Não substitua nada. Os problemas listados abaixo são de outras partes do projeto e não impedem publicar esta correção. ' + (onlyPrimary ? 'Como só o Código.gs foi enviado, faça a busca do passo 2 nos outros arquivos e na página Acionadores antes de publicar. ' : '') + 'Siga os passos 3 a 6. Para tratar os outros problemas depois, clique em “Copiar relatório” e envie o texto ' + SEND_TO + '.']);
+      } else {
+        verdict = 'Nenhuma correção automática foi gerada, e há problemas prováveis ligados a esta correção.';
+        var hasOld = related.some(function (p) { return p.code === 'NOME_ANTIGO'; }), hasText = related.some(function (p) { return p.code === 'NOME_ANTIGO_TEXTO'; });
+        box = el('div', { className: 'box alert' }, [el('strong', { text: verdict }), 'Não publique ainda. ' + (hasOld ? 'Onde o nome antigo aparece em código num arquivo .gs, acrescente o _ (é a mesma correção de um caractere), salve e diagnostique de novo. ' : '') + (hasText ? 'Onde ele aparece entre aspas, num .html ou num trecho <? ?>, não altere nada. ' : '') + 'Se não souber o que fazer, clique em “Copiar relatório” e envie o texto ' + SEND_TO + '. Ele só tem nomes de funções e números de linha.']);
+      }
     } else {
       verdict = 'Nenhuma alteração necessária.';
-      box = el('div', { className: 'box good' }, [el('strong', { text: verdict }), 'O nome está correto e não foi encontrado nenhum problema provável nos arquivos enviados. Não substitua nada. Siga os passos 3 a 6 (verificar e publicar).']);
+      box = el('div', { className: 'box good' }, [el('strong', { text: verdict }), 'A declaração já está com o _ e nenhum problema provável foi encontrado nos arquivos enviados (' + filesText(r) + '). Não substitua nada. ' + (onlyPrimary ? 'Como só o Código.gs foi enviado, faça a busca do passo 2 nos outros arquivos e na página Acionadores antes de publicar. ' : '') + 'Siga os passos 3 a 6.']);
     }
     var fixesList = r.code ? r.fixes.map(function (f) { return { name: f.from + ' → ' + f.to, text: 'Acrescentado _ na declaração.', lines: ['declaração: ' + f.file + ', linha ' + f.line].concat(f.uses.map(function (u) { return u + ' (chamada com _)'; })) }; }) : [];
-    var checked = el('p', { className: 'small', text: 'Conferido: ' + r.files.map(function (f) { return f.name + (f.ok ? '' : ' (não pôde ser lido)'); }).join(', ') + ' · versão da base (informativa): ' + r.version + ' · ' + r.stats.serverFunctions + ' funções no servidor · ' + r.stats.runCalls + ' chamadas google.script.run · ' + (ms / 1000).toFixed(1).replace('.', ',') + ' s.' });
+    var checked = el('p', { className: 'small', text: 'Conferido: ' + filesText(r) + ' · marcadores do pacote 2.11: ' + (r.markersIn.length ? r.markersIn.join(', ') : 'não encontrados') + ' · versão da base (informativa): ' + r.version + ' · ' + r.stats.serverFunctions + ' funções no servidor · ' + r.stats.runCalls + ' chamadas google.script.run · ' + (ms / 1000).toFixed(1).replace('.', ',') + ' s.' });
     var copyBtn = el('button', { type: 'button', className: 'secondary', text: 'Copiar relatório' });
     var copyMsg = el('p', { className: 'small', role: 'status' });
-    copyBtn.addEventListener('click', function () { copyText(reportText(r, verdict)).then(function (ok) { copyMsg.textContent = ok ? 'Relatório copiado. Ele só tem nomes de funções e números de linha.' : 'Não foi possível copiar automaticamente.'; }); });
+    copyBtn.addEventListener('click', function () { copyText(reportText(r, verdict)).then(function (ok) { copyMsg.textContent = ok ? 'Relatório copiado. Ele só tem nomes de funções e números de linha.' : 'A cópia automática foi bloqueada. Selecione o relatório acima e copie com ' + COPY_KEY + '.'; }); });
+    var probTitle = outcome === 'problemas' ? 'Problemas prováveis' : 'Problemas prováveis (não impedem esta correção)';
     var parts = [box, checked,
       itemList('Impede a correção', r.blockers, 'err', 'Impede'),
       itemList('Correção gerada', fixesList, 'ok', 'Corrigido'),
-      itemList('Problemas prováveis (não impedem a correção)', r.problems, 'warn', 'Problema'),
+      itemList(probTitle, r.problems, 'warn', 'Problema'),
       itemList('Para conferir (podem não ser erro)', r.checks, 'info', 'Conferir'),
       r.notes.length ? el('div', null, [el('h3', { text: 'Observações' }), el('ul', null, r.notes.map(function (n) { return el('li', { text: n }); }))]) : null,
       el('div', { className: 'buttons' }, [copyBtn]), copyMsg];
     var rep = $('report'); rep.textContent = '';
     parts.forEach(function (p) { if (p) rep.appendChild(p); });
     setStatus(verdict, outcome === 'bloqueado');
+    /* Leva o foco ao veredito, para quem usa teclado ou leitor de tela. */
+    var head = box.querySelector('strong');
+    if (head) { head.setAttribute('tabindex', '-1'); head.focus(); }
     if (r.code) {
       $('outputInfo').textContent = r.fixes.map(function (f) { return 'Código.gs, linha ' + f.line + ': “function ' + f.from + '(” passou a ser “function ' + f.to + '(”.'; }).join(' ') + ' O restante do texto é idêntico ao que você forneceu (' + fmt(r.code.length) + ' caracteres).';
       $('outputBlock').hidden = false;
@@ -7548,21 +8092,26 @@ THE SOFTWARE.
     var known = e && e.name === 'UserError';
     var extra = '';
     if (known && e.code === 'SINTAXE') extra = '\nCausas possíveis: (1) a cópia está incompleta: copie de novo com Ctrl+A e Ctrl+C (no Mac, ⌘A e ⌘C); (2) o arquivo foi salvo com outra codificação: cole o texto na caixa em vez de escolher o arquivo. Se nada disso resolver, siga a correção manual (passos 1 a 6), que não depende desta página.';
+    else if (known && e.code === 'INTERNO') extra = '\nUse a correção manual (passos 1 a 6). Se quiser avisar, envie esta mensagem ' + SEND_TO + '.';
     else if (!known) extra = '\nUse a correção manual (passos 1 a 6). Detalhe técnico: ' + (e && e.message ? e.message : String(e));
     setStatus('Nada foi gerado. ' + (known ? e.message : 'Falha interna da página.') + extra, true);
   }
-  $('generate').addEventListener('click', function () {
-    var btn = this;
-    if (btn.disabled) return;
+  $('generate').addEventListener('click', function (ev) {
+    if (state.busy || state.reading > 0) return;
+    if (ev && ev.timeStamp && ev.timeStamp < state.lastEnd) return;
     if (!ready) { setStatus('Este navegador não conseguiu carregar a ferramenta (provavelmente é antigo). Use a correção manual (passos 1 a 6) ou abra esta página num Chrome, Edge, Firefox ou Safari atual.', true); return; }
     clearResult();
-    btn.disabled = true; btn.textContent = 'Analisando…';
+    state.busy = true; updateButton();
     setStatus('Analisando o código… Em arquivos grandes isso pode levar alguns segundos.');
     setTimeout(function () {
-      var t0 = (window.performance || Date).now();
-      try { render(window.P211R3.analyzeProject($('source').value, state.extras), (window.performance || Date).now() - t0); }
+      var t0 = now();
+      try { render(window.P211R3.analyzeProject($('source').value, state.extras), now() - t0); }
       catch (e) { renderError(e); }
-      finally { btn.disabled = false; btn.textContent = 'Diagnosticar e corrigir'; }
+      finally {
+        state.lastEnd = now();
+        /* Cliques feitos durante a análise ficam na fila do navegador; o botão só volta depois que eles passam. */
+        setTimeout(function () { state.busy = false; updateButton(); }, 300);
+      }
     }, 80);
   });
 
@@ -7579,8 +8128,9 @@ THE SOFTWARE.
     if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return fallback(); });
     return Promise.resolve(fallback());
   }
+  function gone() { $('copyStatus').textContent = 'O resultado foi apagado. Cole o código de novo e clique em “Diagnosticar e corrigir”.'; }
   $('copy').addEventListener('click', function () {
-    if (!state.result || !state.result.code) { $('copyStatus').textContent = 'O resultado foi apagado. Cole o código de novo e clique em “Diagnosticar e corrigir”.'; return; }
+    if (!state.result || !state.result.code) { gone(); return; }
     copyText(state.result.code).then(function (ok) {
       if (ok) { $('copyStatus').textContent = 'Código COMPLETO copiado. Substitua todo o conteúdo do Código.gs.'; return; }
       $('showCode').open = true; fillOutput(); $('output').focus(); $('output').select();
@@ -7588,12 +8138,12 @@ THE SOFTWARE.
     });
   });
   $('download').addEventListener('click', function () {
-    if (!state.result || !state.result.code) { $('copyStatus').textContent = 'O resultado foi apagado. Cole o código de novo e clique em “Diagnosticar e corrigir”.'; return; }
+    if (!state.result || !state.result.code) { gone(); return; }
     var url = URL.createObjectURL(new Blob([state.result.code], { type: 'text/plain;charset=utf-8' }));
-    var a = document.createElement('a'); a.href = url; a.download = 'Codigo_corrigido_P211_R3.gs.txt';
+    var a = document.createElement('a'); a.href = url; a.download = 'Codigo_corrigido_P211_R4.gs.txt';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
-    $('copyStatus').textContent = 'Arquivo baixado: Codigo_corrigido_P211_R3.gs.txt.';
+    $('copyStatus').textContent = 'Arquivo baixado: Codigo_corrigido_P211_R4.gs.txt.';
   });
   function fillOutput() { if (state.result && state.result.code && $('output').value !== state.result.code) $('output').value = state.result.code; }
   $('showCode').addEventListener('toggle', function () { if (this.open) fillOutput(); });
@@ -7627,7 +8177,7 @@ THE SOFTWARE.
   window.addEventListener('pageshow', function (e) { if (e.persisted) resetAll(); progress(); });
 
   if (!ready) setStatus('Este navegador não conseguiu carregar a ferramenta (provavelmente é antigo). Use a correção manual (passos 1 a 6) ou abra esta página num navegador atual.', true);
-  sourceInfo(); extraInfo(); progress();
+  sourceInfo(); extraInfo(); progress(); updateButton();
 })();
 </script>
 </body></html>
