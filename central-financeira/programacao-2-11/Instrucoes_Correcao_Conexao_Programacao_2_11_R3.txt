@@ -1,0 +1,592 @@
+CENTRAL FINANCEIRA — CORREÇÃO DA CONEXÃO DA PROGRAMAÇÃO 2.11
+Revisão do guia: P211-CONEXAO-R3 • 04/11/2026 • substitui a R1 e a R2
+
+ERRO IDENTIFICADO
+ReferenceError: p211Base_getInteressesSnapshot_ is not defined
+O gerador da Programação 2.11 declarou a função p211Base_getInteressesSnapshot
+sem o sublinhado final, mas o código chama p211Base_getInteressesSnapshot_.
+O erro veio do gerador, não dos dados que você preencheu. A correção é
+acrescentar um _ na declaração. Ela não muda lançamentos, impostos,
+permissões, fórmulas, cálculos, telas nem o Manifest, e não ativa acionadores.
+
+JÁ APLICOU A CORREÇÃO DA R1 OU DA R2?
+Siga os passos mesmo assim. O passo 2 mostra como reconhecer uma correção já
+feita e como conferir se ficou algum ponto com o nome antigo.
+
+CORREÇÃO MANUAL NO EDITOR (CAMINHO PRINCIPAL)
+Aplique a correção no código que já está instalado; não reinstale a
+programação. Os passos são os mesmos do HTML.
+
+1. Guarde uma cópia de segurança no computador.
+   No editor do Apps Script, abra o Código.gs e clique em qualquer linha do
+   código. Aperte Ctrl+A e depois Ctrl+C (no Mac, ⌘A e ⌘C). Abra o Bloco de
+   Notas (no Mac, o TextEdit, e escolha Formatar > Converter em Texto Simples),
+   cole com Ctrl+V (⌘V) e salve no computador como Codigo_backup.txt, com a
+   codificação UTF-8. Confira se o arquivo termina com a última linha do
+   código. O botão Salvar do editor não faz esta cópia: ele só grava o projeto
+   na sua conta. Não crie a cópia como outro arquivo dentro do projeto.
+
+2. Procure o nome e acrescente o _.
+   Clique em qualquer linha do código (o cursor deve piscar dentro dele) e
+   aperte Ctrl+F (no Mac, ⌘F). Uma caixa de busca aparece no alto, à direita
+   da área de código. Se abrir a busca do navegador, feche-a, clique dentro do
+   código e tente de novo. Procure o nome da linha abaixo, sem o parêntese.
+   Copie só o nome, sem espaços antes ou depois, ou digite-o:
+
+p211Base_getInteressesSnapshot
+
+   Use as setas da caixa de busca para passar por todos os resultados. Em cada
+   um, veja o que vem logo depois do nome:
+   a) "function p211Base_getInteressesSnapshot(" — é a declaração que precisa
+      do _. Clique logo antes do parêntese e digite _. Deve ficar
+      "function p211Base_getInteressesSnapshot_(". Não mexa nos parâmetros nem
+      no corpo da função.
+   b) "function p211Base_getInteressesSnapshot_(" — a correção já foi feita
+      (por exemplo, pela R1). Não acrescente outro _.
+   c) "p211Base_getInteressesSnapshot_(" em outro ponto — é a chamada correta.
+      Não altere.
+   d) O nome SEM _ em qualquer outro ponto: seguido de ")", "," ou ".", entre
+      aspas, ou depois de "google.script.run." — PARE. Não altere nada e veja
+      "ATENÇÃO: QUANDO PARAR", abaixo.
+   Repita a busca em cada arquivo .gs e .html do projeto (lista de arquivos, à
+   esquerda). Depois abra a página Acionadores (ícone de relógio, na barra à
+   esquerda) e confira se a coluna Função não mostra esse nome. Se mostrar,
+   pare.
+   Se a busca não achar nada no Código.gs, confira se o cursor está dentro do
+   código e se não foram copiados espaços junto com o nome. Se ainda assim não
+   achar, procure nos outros arquivos .gs. Se não achar em nenhum, pare.
+
+3. Salve e rode o verificador principal.
+   Salve o projeto com Ctrl+S (no Mac, ⌘S) ou pelo ícone de disquete. Na lista
+   de funções ao lado do botão Executar, escolha verificarSistemaFinanceiro e
+   clique em Executar. O resultado aparece no Registro de execução, abaixo do
+   código. Procure VERIFICACAO_FINANCEIRO com ok: true. Esse verificador
+   percorre getNavigationSnapshot, o caminho onde o erro apareceu.
+
+4. Rode o verificador da programação.
+   Do mesmo jeito, execute verificarProgramacaoFinanceira e procure
+   PROGRAMACAO_FINANCEIRA com ok: true e programacao: "2.11". Não execute
+   FIN_PROGRAMACAO_MENSAL pelo editor. Se quiser uma conferência extra, use o
+   verificador opcional (abaixo) agora e apague o arquivo dele antes do passo 5.
+
+5. Publique uma nova versão na implantação que você já usa.
+   Clique em Implantar > Gerenciar implantações. Não use "Nova implantação":
+   ela cria outro endereço. Na lista à esquerda, clique em cada implantação
+   ativa até achar aquela cujo URL do app da Web é o endereço /exec que você
+   usa. Anote o número da versão que aparece nela: ele serve para desfazer, se
+   for preciso. Clique no lápis (Editar), escolha "Nova versão" no campo
+   Versão e clique em Implantar. Não mude "Executar como" nem "Quem pode
+   acessar".
+
+6. Teste e, se precisar, desfaça.
+   Feche as abas antigas do aplicativo e abra o mesmo endereço /exec numa aba
+   nova. A base pode continuar como 2.10.2 e a programação como 2.11: esta
+   correção não muda esses rótulos. Se o erro continuar, confira se você
+   atualizou a implantação que tem esse mesmo endereço. Para desfazer:
+   Implantar > Gerenciar implantações > a mesma implantação > lápis > no campo
+   Versão, escolha a versão anotada no passo 5 > Implantar. O endereço não
+   muda.
+
+ATENÇÃO: QUANDO PARAR
+- Não apague a planilha, não crie outro projeto, não reimporte faturas e não
+  cole funções novas no Código.gs.
+- Pare e não publique se: o nome aparecer sem _ fora da declaração (passo 2);
+  a declaração não for encontrada; um acionador usar o nome; ou um verificador
+  não der ok: true.
+- O que enviar está em "SE HOUVER OUTRO ERRO", no fim deste arquivo.
+
+ALTERNATIVA — CORREÇÃO AUTOMÁTICA PELO HTML
+Use no lugar do passo 2, e não junto com ele.
+Abra Corrigir_Conexao_Programacao_2_11_R3.html num navegador atual e clique
+em "Correção automática" no índice do topo (a ferramenta abre sozinha).
+- No campo "1. Código.gs", escolha a cópia do passo 1 (em UTF-8) ou cole o
+  código.
+- Opcional: no campo "2. Outros arquivos do projeto", escolha os outros
+  arquivos .gs e .html, salvos com o mesmo nome e a mesma terminação do editor
+  (também serve Index.html.txt). Não inclua o Código.gs ali.
+- Clique em "Diagnosticar e corrigir".
+A página lê o código com o acorn (um leitor de JavaScript incluído nela), não
+executa nada e não usa a rede. Ela só gera código quando a correção é segura
+nos arquivos enviados: o nome antigo não pode aparecer em mais nenhum ponto,
+nem entre aspas, nem nos trechos <? ?>, nem nos .html. Problemas encontrados
+fora desta correção aparecem como aviso e não impedem a correção.
+Resultados possíveis:
+- "Correção gerada": copie ou baixe o código COMPLETO, substitua todo o
+  conteúdo do Código.gs (Ctrl+A e Ctrl+V; no Mac, ⌘A e ⌘V) e siga os passos
+  3 a 6. Não cole no final.
+- "Nenhuma alteração necessária": não substitua nada; siga os passos 3 a 6.
+- "Nada foi gerado" ou "problemas prováveis": siga o próximo passo que a
+  página mostra. Se não souber o que fazer, clique em "Copiar relatório" e
+  envie o texto (só tem nomes de funções e números de linha).
+
+VERIFICADOR DE INTEGRAÇÃO (OPCIONAL)
+Uma conferência extra, feita dentro do Apps Script. Ele lê o código das
+funções do projeto e lista cada nome terminado em _ que é usado mas não existe,
+além de nomes antigos que ficaram depois de uma correção. Só faz leitura: não
+abre a planilha, não grava dados e não cria acionadores.
+O que ele não lê: arquivos .html, chamadas google.script.run e o corpo de
+funções criadas com const, let ou class (essas ele só consulta para saber se
+existem).
+Como instalar e usar:
+1. No editor, clique em Arquivos > + > Script e dê o nome VerificadorIntegracao.
+2. O arquivo novo vem com um exemplo (function myFunction() { }). Clique dentro
+   dele e apague tudo: Ctrl+A e Delete (no Mac, ⌘A e Delete).
+3. Cole o código do ANEXO (no fim deste arquivo) ou use o botão Copiar da
+   seção "Verificador de integração" do HTML. Salve.
+4. Com esse arquivo aberto, escolha verificarIntegracaoFinanceira na lista ao
+   lado de Executar e clique em Executar. Se o nome não aparecer na lista, o
+   código foi colado dentro do exemplo: apague tudo e cole de novo.
+5. Leia o Registro de execução:
+   - INTEGRACAO_FINANCEIRO ok: true quer dizer que nada foi encontrado nas
+     partes que ele lê;
+   - "problemas": provável erro real. Siga a sugestão de cada item. Se ela
+     disser "Não renomeie", não altere nada e envie a saída;
+   - "avisos": podem não ser erro (por exemplo, um nome usado só depois de um
+     teste typeof). Confira, mas sozinhos eles não impedem a publicação;
+   - se funcoesAnalisadas for 0, o resultado não vale como aprovação.
+6. APAGUE o arquivo VerificadorIntegracao antes do passo 5 (menu de três
+   pontos ao lado do nome > Excluir). A função dele tem nome público e, se o
+   arquivo ficar, vai junto na versão publicada.
+
+MANIFEST (appsscript.json)
+Para esta correção, não é preciso alterar o Manifest. Ele é o arquivo
+appsscript.json do projeto. No editor, ele fica oculto: para vê-lo, clique em
+Configurações do projeto (ícone de engrenagem, à esquerda) e marque "Mostrar
+arquivo de manifesto appsscript.json no editor".
+O arquivo appsscript_referencia_correcao_2_11_r3.json serve só para comparar.
+Não substitua o seu por ele: o seu pode ter campos que o modelo não tem.
+Comparação com o modelo da R1:
+- timeZone America/Recife, runtime V8, registro de erros e Drive API v3:
+  iguais.
+- webapp: o modelo da R1 não tinha, de propósito (era um modelo mínimo). O da
+  R3 traz o bloco só como referência. Quem acessa o aplicativo é definido em
+  Implantar > Gerenciar implantações, no campo "Quem pode acessar".
+- oauthScopes: ausente nos dois. Fixar permissões sem ver o código completo
+  pode quebrar o aplicativo.
+ATENÇÃO: não copie o bloco webapp se outras pessoas usam o aplicativo. Com
+"access": "MYSELF", só você consegue abri-lo a partir da próxima versão. O
+bloco, exatamente como está no JSON (se for usá-lo, ponha uma vírgula entre
+ele e o campo vizinho):
+
+"webapp": {
+  "executeAs": "USER_DEPLOYING",
+  "access": "MYSELF"
+}
+
+Numa revisão separada, com o código completo em mãos: em Visão geral do
+projeto, veja os escopos OAuth. Se aparecer acesso a todo o Drive e o código
+só criar e ler os próprios arquivos, dá para avaliar trocar por drive.file.
+
+O QUE ESTA REVISÃO CORRIGE
+Uma auditoria com revisores independentes conferiu a R1 (o guia anterior) e a
+R2 (a primeira revisão). Cada problema foi reproduzido antes de entrar na
+lista: 27 na R1 e 68 na R2. A R3 corrige os 68 da R2 e os 27 da R1, nos pontos
+que continuam valendo. Principais mudanças:
+- A ferramenta automática usa um leitor de JavaScript de verdade (acorn), em
+  vez de padrões de texto. Isso elimina os alarmes falsos com comentários,
+  textos, expressões regulares, métodos, parâmetros e nomes com acento.
+- Antes de corrigir, ela procura o nome antigo em todos os arquivos enviados,
+  inclusive entre aspas (menus e acionadores), nos trechos <? ?> e nos .html.
+- Problemas fora desta correção aparecem como aviso e não bloqueiam; cada
+  bloqueio diz o próximo passo.
+- Exige o pacote 2.11 completo; avisa quando o código já está certo, sem pedir
+  para substituir nada; recusa arquivos em ANSI em vez de estragar os acentos;
+  lê 6 milhões de caracteres em poucos segundos.
+- O passo a passo ensina a fazer a cópia de segurança, a reconhecer uma
+  correção já feita, a procurar o nome antigo em todos os arquivos e
+  acionadores, a escolher a implantação certa e a desfazer a publicação.
+- O verificador opcional separa código de comentários e textos, reconhece
+  parâmetros, métodos e funções criadas com const, divide o resultado em
+  problemas e avisos e não manda renomear quando o nome antigo é usado em
+  outro lugar.
+
+Problemas encontrados na R1 (27):
+1. A correção automática diz “Corrigido” mesmo quando o nome antigo continua
+   em uso sem parênteses (lista.map(nome), nome.call(...), typeof nome, nome
+   entre aspas). O código entregue quebra em outro ponto.
+2. O caminho manual não manda procurar outros usos do nome antigo, caso que o
+   próprio modo automático bloqueia.
+3. Se a declaração já tem o “_”, a ferramenta diz “já está corrigido” sem
+   procurar chamadas quebradas.
+4. Arquivo salvo em ANSI perde os acentos (viram “�”), e a página diz que o
+   resto ficou idêntico.
+5. Escolher de novo o mesmo arquivo, depois de alterado, não recarrega o
+   código.
+6. Com o código já correto, a página diz que não há nada a mudar, mas mostra
+   “Seu código completo corrigido” e manda substituir o Código.gs.
+7. O passo 1 pede uma cópia de segurança sem dizer como nem onde.
+8. Um comentário que cita o nome antigo seguido de “(” faz a ferramenta
+   recusar a correção.
+9. As proibições e a ordem de parar ficam numa caixa verde (cor de “tudo
+   certo”); o laranja de alerta foi usado no pedido de desculpas.
+10. Os mesmos passos têm numeração diferente (4 no HTML, 7 no TXT), e “passos
+    3 e 4” / “passos 4 a 7” não batem.
+11. A publicação não diz qual implantação editar nem avisa para evitar “Nova
+    implantação”, e não ensina a desfazer.
+12. Só cita Ctrl+F; no Mac o atalho é ⌘F.
+13. A ferramenta diz “função ausente” quando a declaração está num formato
+    incomum (async function, algo antes na mesma linha, quebra de linha depois
+    de function).
+14. O limite de 6 MB é medido em bytes no arquivo e em caracteres no texto
+    colado: o mesmo código é recusado como arquivo e aceito colado.
+15. A versão da base exibida pode sair errada (lida de um comentário) ou “não
+    identificada”.
+16. Erro de sintaxe aparece sem motivo nem linha; num navegador antigo, código
+    válido é chamado de “incompleto”.
+17. O nome de arquivo na tela pode não ser o do código que será corrigido
+    (arquivo recusado ou depois de Voltar).
+18. Ao voltar à página, aparece “Corrigido” com a caixa vazia, e Copiar e
+    Baixar não fazem nada.
+19. Código perto de 6 milhões de caracteres congela a página por 4 a 7
+    segundos sem aviso; um segundo clique repete tudo.
+20. O aviso sobre módulos “ok” não diz onde esse “ok” aparece e se confunde
+    com o “ok: true” do passo 3.
+21. Ao bloquear, a ferramenta não diz o próximo passo (copiar de novo, usar o
+    caminho manual ou parar).
+22. Termos técnicos sem explicação; não diz que “Manifest” é o appsscript.json
+    nem o que fazer com o JSON (o “não substitua” só está no TXT).
+23. Os trechos do passo 2 saem em letra miúda (12 px; 10,4 px no celular) e o
+    “_” que muda não é destacado.
+24. No celular, nomes de funções quebram no meio, às vezes logo antes do “_”.
+25. A área de resultado fica oculta quando vazia; o leitor de tela pode não
+    anunciar o resultado.
+26. A correção automática não é um título; quem navega por títulos com leitor
+    de tela passa direto por ela.
+27. Os passos não são uma lista numerada para leitores de tela.
+
+Problemas encontrados na R2 (68), todos corrigidos nesta versão:
+1. O diagnóstico não via uma chamada logo após “if (” ou dentro de outra
+   chamada, e dizia que não havia erro.
+2. A correção se dizia segura, mas podia quebrar menu, acionador ou arquivo
+   que usasse o nome antigo entre aspas.
+3. Função ausente usada sem parênteses (por exemplo, num callback) não era
+   detectada.
+4. Não percebia a chamada a uma função que só existe dentro de outra função.
+5. O código entre <? e ?> dos .html não era conferido.
+6. Deixava passar algumas chamadas da tela ao servidor e podia gerar correção
+   que as quebrava.
+7. Código sem o pacote 2.11 recebia “Nenhuma correção necessária” em caixa
+   verde.
+8. Quem já tinha aplicado a R1 não achava a função no passo 2, e o guia
+   mandava parar sem motivo.
+9. Dizia que a correção fechava uma exposição de dados, o que não procede.
+10. Acusava “função não declarada” em código correto e bloqueava a correção.
+11. Uma expressão regular depois de return ou case enganava o diagnóstico.
+12. Um google.script.run dentro de comentário gerava um erro falso.
+13. Apontava duplicatas falsas entre .html, Código.gs e laços for.
+14. O Código.gs escolhido também em “Outros arquivos” gerava duplicação falsa.
+15. Com código grande, a página travava por muito tempo, sem aviso.
+16. Verificador: dava ok: true quando a função ausente era chamada dentro de
+    outra chamada.
+17. Verificador: dava ok: true para função inexistente usada sem parênteses.
+18. Verificador: ignorava funções criadas com const, let ou class (falso ok e
+    falso erro).
+19. Verificador: mandava renomear sem checar outros usos do nome.
+20. Verificador: dava falha falsa com nome_( em comentário, texto ou expressão
+    regular.
+21. Verificador: reprovava código correto com parâmetros ou métodos terminados
+    em _.
+22. Verificador: dava ok: false em código correto; o guia chamava isso de
+    “aviso” e também mandava não publicar.
+23. O TXT proibia publicar se o verificador reprovasse, sem avisar que ele
+    podia reprovar código certo.
+24. O verificador dizia conferir todos os arquivos, mas pulava os .html e as
+    chamadas da tela.
+25. No tema claro, o contorno laranja do foco do teclado tinha pouco
+    contraste.
+26. O aviso “Avalie torná-la privada” incentivava uma mudança que podia
+    quebrar botões e menus.
+27. Tratava o código da tela e o do servidor como um só.
+28. Mandava pôr os outros arquivos no “segundo campo”, que era a caixa do
+    Código.gs.
+29. A correção manual não mandava checar outros usos do nome antigo.
+30. Ao bloquear, não dizia o próximo passo.
+31. Arquivo em ANSI trocava os acentos por “�”.
+32. O passo de publicação não dizia qual implantação atualizar nem como voltar
+    à versão anterior.
+33. Quem já tinha aplicado a R1 podia ter uma referência quebrada que a R2 não
+    apontava.
+34. Prometia conferir “todas as ligações”, mas conferia só uma parte.
+35. Nome de função com acento gerava erro falso e bloqueava.
+36. Uma função chamada toString ou valueOf derrubava a ferramenta.
+37. Verificador: nome com acento gerava falha falsa, com o nome cortado.
+38. Verificador: reprovava código que só chama a função se ela existir.
+39. O verificador ficava publicado no aplicativo; o guia não mandava apagá-lo.
+40. O TXT pedia só “a linha” do resultado, que não mostrava o problema.
+41. No erro de “nome ambíguo”, não mostrava onde estavam os outros usos.
+42. Sem nada para corrigir, o título ainda era “Diagnóstico antes da
+    correção”.
+43. Depois de Voltar, dizia que havia arquivos extras, mas não os usava.
+44. Depois de Voltar, as caixas continuavam marcadas e o contador voltava para
+    “0 de 6”.
+45. No modo escuro, o texto de exemplo da caixa de código ficava apagado
+    demais.
+46. No celular, a tabela do Manifest ficava cortada e os nomes saíam partidos.
+47. O link do índice levava à seção fechada, que também não era um título.
+48. O TXT apontava “foco visível” como falha da R1, mas a R1 já tinha.
+49. Dizia que qualquer comentário com o nome travava a R1; só travava com “(”
+    logo depois.
+50. O HTML e o TXT listavam testes diferentes.
+51. No TXT, o bloco webapp estava sem aspas e dava erro se colado.
+52. Apontava como defeito da R1 a falta do bloco webapp, omitido de propósito.
+53. Pedia para comparar o Manifest sem dizer que ele fica oculto nem como
+    exibi-lo.
+54. No TXT, “estas instruções” apontava para o TXT novo, não para o da R1.
+55. Só citava Ctrl+F e Ctrl+C; no Mac os atalhos são ⌘F e ⌘C.
+56. Depois de Voltar, mostrava “Corrigido” com a caixa vazia.
+57. O leitor de tela podia não anunciar o resultado.
+58. Os passos não eram uma lista para leitores de tela.
+59. Depois de um arquivo recusado ou escolhido de novo, analisava código
+    diferente do mostrado.
+60. O passo 1 não ensinava a fazer a cópia de segurança.
+61. As proibições ficavam na mesma caixa verde usada para “nenhum problema”.
+62. Limite de tamanho diferente para arquivo e texto colado.
+63. A versão da base podia sair errada.
+64. Erro de sintaxe sem motivo, mandando copiar de novo mesmo com a cópia
+    certa.
+65. Os trechos do passo 2 saíam em letra miúda e o “_” não era destacado.
+66. No celular, nomes de funções saíam partidos no meio.
+67. Não mandava apagar o exemplo do arquivo novo antes de colar o verificador.
+68. No TXT, o trecho a procurar começava com espaços; copiado assim, a busca
+    falhava.
+
+ESCOPO E LIMITES
+- O Código.gs real não foi visto. A ferramenta foi testada com 48 casos
+  fictícios (todos os da auditoria e arquivos de até 6 milhões de caracteres)
+  e o verificador, com 18. O verificador foi testado num ambiente que
+  imita o Apps Script (Node.js), não no próprio Apps Script.
+- A ferramenta confere só os arquivos enviados. Nomes usados em arquivos não
+  enviados, menus e acionadores criados fora do código não são vistos. Por
+  isso o passo 2 pede a busca em todos os arquivos e na página Acionadores.
+- Os itens "para conferir" podem ser alarmes falsos. Os "problemas prováveis"
+  têm mais chance de ser erros reais, mas também devem ser confirmados.
+- Esta correção não resolve um ReadTimeout (tempo esgotado) independente nem
+  valida a leitura (OCR) real das faturas. Se o ReadTimeout voltar, os pontos
+  a revisar no Código.gs são: leitura em bloco com getValues(), cache do mês
+  com CacheService e LockService nas gravações. Isso só pode ser confirmado
+  com o código completo.
+
+SE HOUVER OUTRO ERRO
+Não publique. Envie apenas:
+- a mensagem de erro;
+- as linhas VERIFICACAO_FINANCEIRO e PROGRAMACAO_FINANCEIRA;
+- se usou o verificador opcional, as duas linhas que ele escreve (a que começa
+  com INTEGRACAO_FINANCEIRO e a que começa com {"tipo");
+- se usou a correção automática, o texto do botão "Copiar relatório".
+Esses textos só têm nomes de funções e números de linha. Não envie faturas,
+saldos nem identificadores privados.
+
+REFERÊNCIAS OFICIAIS
+https://developers.google.com/apps-script/concepts/deployments
+https://developers.google.com/apps-script/guides/html/reference/run
+https://developers.google.com/apps-script/manifest
+
+ANEXO — CÓDIGO DO VERIFICADOR DE INTEGRAÇÃO (copie da linha "/**" até a última "}")
+
+/**
+ * Central Financeira · verificador de integração R3 (somente leitura).
+ * Execute verificarIntegracaoFinanceira pelo editor. Depois, APAGUE este arquivo antes de publicar.
+ * Não abre a planilha, não grava dados, não cria acionadores.
+ */
+function verificarIntegracaoFinanceira() {
+  var g = globalThis;
+  var PALAVRAS = {};
+  ('break case catch class const continue debugger default delete do else export extends finally for function if import in instanceof new return super switch this throw try typeof var void while with yield let static await of async get set true false null undefined arguments').split(' ').forEach(function (p) { PALAVRAS[p] = true; });
+  var ANTES_DE_REGEX = { 'return': 1, 'typeof': 1, 'case': 1, 'do': 1, 'else': 1, 'in': 1, 'of': 1, 'instanceof': 1, 'new': 1, 'delete': 1, 'void': 1, 'throw': 1, 'yield': 1, 'await': 1 };
+  var INICIO_ID = /[\p{ID_Start}$_]/u, PARTE_ID = /[\p{ID_Continue}$‌‍]/u, NATIVO = /\{\s*\[native code\]\s*\}\s*$/;
+  function temProp(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+
+  /* Separa o código de comentários, textos e expressões regulares. */
+  function tokenizar(src) {
+    var t = [], textos = [], i = 0, n = src.length, pilha = [], prof = 0, quebra = false;
+    function ultimo() { return t.length ? t[t.length - 1] : null; }
+    function add(tok) { tok.nl = quebra; quebra = false; t.push(tok); }
+    function regexPermitida() {
+      var p = ultimo();
+      if (!p) return true;
+      if (p.t === 'id') return !!ANTES_DE_REGEX[p.v] && !p.ponto;
+      if (p.t !== 'p') return false;
+      return p.v !== ')' && p.v !== ']' && p.v !== '++' && p.v !== '--';
+    }
+    function lerModelo() {
+      var ini = i;
+      while (i < n) {
+        var c = src[i];
+        if (c === '\\') { i += 2; continue; }
+        if (c === '`') { textos.push(src.slice(ini, i)); i++; add({ t: 'str' }); return; }
+        if (c === '$' && src[i + 1] === '{') { i += 2; pilha.push(prof); prof++; add({ t: 'p', v: '${' }); return; }
+        i++;
+      }
+    }
+    while (i < n) {
+      var c = src[i], d = src[i + 1];
+      if (c === '\n') { quebra = true; i++; continue; }
+      if (/\s/.test(c)) { i++; continue; }
+      if (c === '/' && d === '/') { while (i < n && src[i] !== '\n') i++; continue; }
+      if (c === '/' && d === '*') { var e = src.indexOf('*/', i + 2); if (e < 0) e = n; if (src.slice(i, e).indexOf('\n') >= 0) quebra = true; i = e + 2; continue; }
+      if (c === '"' || c === "'") {
+        var j = i + 1, s = '';
+        while (j < n && src[j] !== c && src[j] !== '\n') { if (src[j] === '\\') { s += src[j + 1] || ''; j += 2; continue; } s += src[j]; j++; }
+        textos.push(s); add({ t: 'str', v: s }); i = j + 1; continue;
+      }
+      if (c === '`') { i++; lerModelo(); continue; }
+      if (c === '}' && pilha.length && pilha[pilha.length - 1] === prof - 1) { prof--; pilha.pop(); i++; lerModelo(); continue; }
+      if (c === '/' && regexPermitida()) {
+        var k = i + 1, classe = false;
+        while (k < n && src[k] !== '\n') { if (src[k] === '\\') { k += 2; continue; } if (src[k] === '[') classe = true; else if (src[k] === ']') classe = false; else if (src[k] === '/' && !classe) break; k++; }
+        i = k + 1; while (i < n && PARTE_ID.test(src[i])) i++;
+        add({ t: 're' }); continue;
+      }
+      if (INICIO_ID.test(c)) {
+        var a = i; i++;
+        while (i < n && PARTE_ID.test(src[i])) i++;
+        var p = ultimo();
+        add({ t: 'id', v: src.slice(a, i), ponto: !!(p && p.t === 'p' && (p.v === '.' || p.v === '?.')) });
+        continue;
+      }
+      if (/[0-9]/.test(c) || (c === '.' && /[0-9]/.test(d))) { i++; while (i < n && /[\w.]/.test(src[i])) i++; add({ t: 'num' }); continue; }
+      var tres = src.substr(i, 3), dois = src.substr(i, 2);
+      if (['...', '===', '!==', '**=', '<<=', '>>=', '>>>', '&&=', '||=', '??='].indexOf(tres) >= 0) { add({ t: 'p', v: tres }); i += 3; continue; }
+      if (['=>', '?.', '++', '--', '&&', '||', '??', '==', '!=', '<=', '>=', '+=', '-=', '*=', '/=', '%=', '**', '<<', '>>', '&=', '|=', '^='].indexOf(dois) >= 0 && !(dois === '?.' && /[0-9]/.test(src[i + 2] || ''))) { add({ t: 'p', v: dois }); i += 2; continue; }
+      if (c === '{') prof++; else if (c === '}') prof--;
+      add({ t: 'p', v: c }); i++;
+    }
+    return { t: t, textos: textos };
+  }
+
+  function analisarFonte(src) {
+    var r = tokenizar(src), t = r.t, locais = {}, usos = [], refs = {}, guardados = {};
+    function eh(k, v) { return t[k] && t[k].t === 'p' && t[k].v === v; }
+    function par(k, abre, fecha, passo) { var d = 0; for (var x = k; x >= 0 && x < t.length; x += passo) { if (eh(x, abre)) d++; else if (eh(x, fecha)) { d--; if (d === 0) return x; } } return -1; }
+    function nomesDoPadrao(a, b) {
+      for (var x = a; x <= b; x++) {
+        if (t[x].t !== 'id' || PALAVRAS[t[x].v] || t[x].ponto) continue;
+        if (eh(x + 1, ':') && (eh(x - 1, '{') || eh(x - 1, ','))) continue;
+        locais[t[x].v] = true;
+      }
+    }
+    function declaracao(k) {
+      var x = k + 1;
+      while (x < t.length) {
+        if (t[x].t === 'id' && !PALAVRAS[t[x].v]) { locais[t[x].v] = true; x++; }
+        else if (eh(x, '{') || eh(x, '[')) { var f = par(x, t[x].v, t[x].v === '{' ? '}' : ']', 1); if (f < 0) return; nomesDoPadrao(x, f); x = f + 1; }
+        else return;
+        var d = 0;
+        for (; x < t.length; x++) {
+          var tk = t[x];
+          if (tk.t === 'p' && (tk.v === '(' || tk.v === '[' || tk.v === '{' || tk.v === '${')) d++;
+          else if (tk.t === 'p' && (tk.v === ')' || tk.v === ']' || tk.v === '}')) { d--; if (d < 0) return; }
+          else if (d === 0 && tk.t === 'p' && tk.v === ';') return;
+          else if (d === 0 && tk.t === 'p' && tk.v === ',') { x++; break; }
+          else if (d === 0 && tk.nl && x > k + 1 && (tk.t === 'id' || tk.t === 'num' || tk.t === 'str') && !(t[x - 1].t === 'p' && t[x - 1].v !== ')' && t[x - 1].v !== ']' && t[x - 1].v !== '}')) return;
+        }
+        if (x >= t.length) return;
+      }
+    }
+    for (var k = 0; k < t.length; k++) {
+      var tk = t[k];
+      if (tk.t !== 'id' || tk.ponto) continue;
+      if (tk.v === 'function') {
+        var x = k + 1; if (eh(x, '*')) x++;
+        if (t[x] && t[x].t === 'id') { locais[t[x].v] = true; x++; }
+        if (eh(x, '(')) { var f = par(x, '(', ')', 1); if (f > 0) nomesDoPadrao(x, f); }
+        continue;
+      }
+      if (tk.v === 'class' && t[k + 1] && t[k + 1].t === 'id' && !PALAVRAS[t[k + 1].v]) { locais[t[k + 1].v] = true; continue; }
+      if (tk.v === 'catch' && eh(k + 1, '(')) { var fc = par(k + 1, '(', ')', 1); if (fc > 0) nomesDoPadrao(k + 1, fc); continue; }
+      if (tk.v === 'var' || tk.v === 'let' || tk.v === 'const') { declaracao(k); continue; }
+    }
+    for (var m = 0; m < t.length; m++) {
+      if (!eh(m, '=>')) continue;
+      if (eh(m - 1, ')')) { var ab = par(m - 1, ')', '(', -1); if (ab >= 0) nomesDoPadrao(ab, m - 1); }
+      else if (t[m - 1] && t[m - 1].t === 'id') locais[t[m - 1].v] = true;
+    }
+    for (var q = 0; q < t.length; q++) {
+      var tq = t[q];
+      if (tq.t !== 'id' || tq.ponto || PALAVRAS[tq.v]) continue;
+      var ant = t[q - 1];
+      if (ant && ant.t === 'id' && (ant.v === 'function' || ant.v === 'class')) continue;
+      if (eh(q + 1, ':') && (eh(q - 1, '{') || eh(q - 1, ','))) continue;
+      if (eh(q + 1, '(')) {
+        var fp = par(q + 1, '(', ')', 1);
+        var antOk = !ant || eh(q - 1, '{') || eh(q - 1, ',') || eh(q - 1, '}') || eh(q - 1, ';') || eh(q - 1, '*') || (ant.t === 'id' && /^(get|set|static|async)$/.test(ant.v));
+        if (fp > 0 && eh(fp + 1, '{') && antOk) { nomesDoPadrao(q + 1, fp); continue; }
+      }
+      if (ant && ant.t === 'id' && ant.v === 'typeof') { guardados[tq.v] = true; continue; }
+      refs[tq.v] = true;
+      if (/_$/.test(tq.v)) usos.push(tq.v);
+    }
+    return { locais: locais, usos: usos, refs: refs, guardados: guardados, textos: r.textos };
+  }
+
+  var nomes = [];
+  try { nomes = Object.getOwnPropertyNames(g); } catch (e) { nomes = []; }
+  var fontes = {};
+  function fonteDe(f) { try { var s = Function.prototype.toString.call(f); return NATIVO.test(s) ? null : s; } catch (e) { return null; } }
+  nomes.forEach(function (n) {
+    var v; try { v = g[n]; } catch (e) { return; }
+    if (typeof v === 'function') { var s = fonteDe(v); if (s) fontes[n] = s; return; }
+    if (!v || typeof v !== 'object') return;
+    var proto; try { proto = Object.getPrototypeOf(v); } catch (e) { return; }
+    if (proto !== Object.prototype) return;
+    var chaves; try { chaves = Object.getOwnPropertyNames(v); } catch (e) { return; }
+    chaves.forEach(function (c) { var f; try { f = v[c]; } catch (e) { return; } if (typeof f === 'function') { var s2 = fonteDe(f); if (s2) fontes[n + '.' + c] = s2; } });
+  });
+  function existe(nome) {
+    if (temProp(fontes, nome)) return true;
+    try { if (nome in g) return true; } catch (e) { /* segue */ }
+    try { return (0, eval)('typeof ' + nome) !== 'undefined'; } catch (e) { return null; }
+  }
+  function ehDoProjeto(nome) { return temProp(fontes, nome); }
+
+  var analisadas = 0, usosPorNome = {}, refsPorNome = {}, textosPorValor = {}, avisos = [], problemas = [];
+  Object.keys(fontes).forEach(function (fn) {
+    var a;
+    try { a = analisarFonte(fontes[fn]); } catch (e) { avisos.push({ nome: fn, motivo: 'O código desta função não pôde ser lido.' }); return; }
+    analisadas++;
+    a.usos.forEach(function (u) {
+      if (a.locais[u]) return;
+      var e = usosPorNome[u] || (usosPorNome[u] = { em: [], guardado: false });
+      if (e.em.indexOf(fn) < 0) e.em.push(fn);
+      if (a.guardados[u]) e.guardado = true;
+    });
+    Object.keys(a.refs).forEach(function (n) { if (!a.locais[n]) { var l = refsPorNome[n] || (refsPorNome[n] = []); if (l.indexOf(fn) < 0) l.push(fn); } });
+    a.textos.forEach(function (s) { if (/^[\p{ID_Start}$_][\p{ID_Continue}$]*$/u.test(s)) { var l = textosPorValor[s] || (textosPorValor[s] = []); if (l.indexOf(fn) < 0) l.push(fn); } });
+  });
+
+  Object.keys(usosPorNome).sort().forEach(function (nome) {
+    var info = usosPorNome[nome], ex = existe(nome);
+    if (ex === true) return;
+    var item = { nome: nome, usadoEm: info.em };
+    if (ex === null) { item.motivo = 'Não foi possível confirmar se este nome existe. Confira com Ctrl+F.'; avisos.push(item); return; }
+    if (info.guardado) { item.motivo = 'Só é usado junto com um teste typeof. Se o uso só acontece quando a função existe, não é erro.'; avisos.push(item); return; }
+    var base = nome.replace(/_+$/, '');
+    if (base && ehDoProjeto(base)) {
+      var outros = (refsPorNome[base] || []).concat((textosPorValor[base] || []).map(function (f) { return f + ' (entre aspas)'; }));
+      item.sugestao = outros.length
+        ? 'Existe "' + base + '" sem o _, mas esse nome também é usado em: ' + outros.join(', ') + '. Não renomeie; envie esta saída.'
+        : 'Existe "' + base + '" sem o _. Procure "' + base + '" com Ctrl+F (no Mac, ⌘F) em todos os arquivos .gs e .html e veja a página Acionadores. Se ele só aparecer na própria declaração, acrescente o _ nela.';
+    } else {
+      item.sugestao = 'Nenhuma função com esse nome foi encontrada.';
+    }
+    problemas.push(item);
+  });
+  Object.keys(fontes).forEach(function (fn) {
+    if (fn.indexOf('.') >= 0 || !/_$/.test(fn)) return;
+    var base = fn.replace(/_+$/, '');
+    if (!base || existe(base) !== false) return;
+    var usos = refsPorNome[base] || [], textos = textosPorValor[base] || [];
+    if (usos.length) problemas.push({ nome: base, usadoEm: usos, sugestao: 'A função se chama "' + fn + '", mas estes pontos ainda usam o nome antigo "' + base + '". Acrescente o _ também neles (só em arquivos .gs).' });
+    if (textos.length) avisos.push({ nome: base, usadoEm: textos, motivo: 'O nome antigo aparece entre aspas. Se for um menu ou acionador, ele deixou de funcionar. Não altere; envie esta saída.' });
+  });
+
+  if (!analisadas) avisos.push({ nome: '-', motivo: 'Nenhuma função foi listada; o verificador não conseguiu avaliar o projeto.' });
+  var ok = analisadas > 0 && problemas.length === 0;
+  var resultado = {
+    tipo: 'INTEGRACAO_FINANCEIRO', ok: ok, funcoesAnalisadas: analisadas, problemas: problemas, avisos: avisos,
+    limites: 'Lê funções declaradas com function e funções dentro de objetos criados com var. Não lê arquivos .html, chamadas google.script.run, nem o corpo de funções criadas com const, let ou class.'
+  };
+  console.log('INTEGRACAO_FINANCEIRO ok: ' + ok + ' · funções analisadas: ' + analisadas + ' · problemas: ' + problemas.length + ' · avisos: ' + avisos.length);
+  console.log(JSON.stringify(resultado));
+  return resultado;
+}
